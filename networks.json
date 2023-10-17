@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "GCC": {
+      "address": "0x0Bc405a6994D320ee785eD49d0aDf190834Caf1e",
+      "startBlock": 9882506
+    }
+  }
+}

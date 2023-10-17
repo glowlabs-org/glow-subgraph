@@ -1,0 +1,36 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GCC
+    network: goerli
+    source:
+      address: "0x0Bc405a6994D320ee785eD49d0aDf190834Caf1e"
+      abi: GCC
+      startBlock: 9882506
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - EIP712DomainChanged
+        - GCCRetired
+        - RetireGCCAllowance
+        - Transfer
+      abis:
+        - name: GCC
+          file: ./abis/GCC.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: EIP712DomainChanged()
+          handler: handleEIP712DomainChanged
+        - event: GCCRetired(indexed address,indexed address,uint256)
+          handler: handleGCCRetired
+        - event: RetireGCCAllowance(indexed address,indexed address,uint256)
+          handler: handleRetireGCCAllowance
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/gcc.ts
