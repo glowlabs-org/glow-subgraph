@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: GCC
@@ -18,8 +18,8 @@ dataSources:
         - User
       abis:
         - name: GCC
-          file: ./abis/GCC.json
+          file: GCC/abis/GCC.json
       eventHandlers:
         - event: GCCRetired(indexed address,indexed address,uint256)
           handler: handleGCCRetired
-      file: ./src/gcc.ts
+      file: GCC/GCC.wasm
