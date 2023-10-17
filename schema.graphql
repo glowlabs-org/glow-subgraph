@@ -1,25 +1,8 @@
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type EIP712DomainChanged @entity(immutable: true) {
-  id: Bytes!
-
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
 
 type GCCRetired @entity(immutable: true) {
   id: Bytes!
-  account: Bytes! # address
-  rewardAddress: Bytes! # address
+  account:  User!
+  rewardAddress: User! # address
   amount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -36,12 +19,114 @@ type RetireGCCAllowance @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Transfer @entity(immutable: true) {
-  id: Bytes!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+type User @entity {
+  id: ID!
+  gccRetired: [GCCRetired!]! @derivedFrom(field: "account")
+
 }
+
+# # /* -------------------------------------------------------------------------- */
+# # /*                                    user                                    */
+# # /* -------------------------------------------------------------------------- */
+# type User @entity {
+#   id: ID!
+#   baycs: [BAYC!]! @derivedFrom(field: "owner")
+#   maycs: [MAYC!]! @derivedFrom(field: "owner")
+#   paraspaceBAYCs: [ParaspaceBAYC!]! @derivedFrom(field: "owner")
+#   paraspaceMAYCs: [ParaspaceMAYC!]! @derivedFrom(field: "owner")
+#   benddaoBoundBAYCs: [BendDAOBoundBAYC!]! @derivedFrom(field: "owner")
+#   benddaoBoundMAYCs: [BendDAOBoundMAYC!]! @derivedFrom(field: "owner")
+#   benddaoStakedBAYCs: [BendDAOStakedBAYC!]! @derivedFrom(field: "owner")
+#   benddaoStakedMAYCs: [BendDAOStakedMAYC!]! @derivedFrom(field: "owner")
+#   benddaoBoundStakedBAYCs: [BendDAOBoundStakedBAYC!]!
+#     @derivedFrom(field: "owner")
+#   benddaoBoundStakedMAYCs: [BendDAOBoundStakedMAYC!]!
+#     @derivedFrom(field: "owner")
+
+#   delegateCashDelegates: [DelegateCashDelegate!]! @derivedFrom(field: "vault")
+#   warmWallets: [WarmWallet!]! @derivedFrom(field: "coldWallet")
+
+#   associatedDelegateCashDelegates: [DelegateCashDelegate!]!
+#     @derivedFrom(field: "user")
+#   associatedWarmWallet: [WarmWallet!]! @derivedFrom(field: "user")
+# }
+
+# # /* -------------------------------------------------------------------------- */
+# # /*                                  delegate                                  */
+# # /* -------------------------------------------------------------------------- */
+# enum DelegateCashDelegateType {
+#   Full
+#   Contract
+#   Token
+# }
+
+# type DelegateCashDelegate @entity {
+#   id: ID!
+#   vault: User!
+#   user: User!
+
+#   type: DelegateCashDelegateType!
+#   contractAddress: Bytes # address
+#   tokenId: BigInt # uint256
+# }
+
+# type WarmWallet @entity {
+#   id: ID!
+#   coldWallet: User!
+#   user: User!
+#   expirationTimestamp: BigInt! # uint256
+# }
+
+# # /* -------------------------------------------------------------------------- */
+# # /*                                    nfts                                    */
+# # /* -------------------------------------------------------------------------- */
+# type BAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type MAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type ParaspaceBAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type ParaspaceMAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOBoundBAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOBoundMAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOStakedBAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOStakedMAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOBoundStakedBAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
+
+# type BendDAOBoundStakedMAYC @entity {
+#   id: ID!
+#   owner: User!
+# }
