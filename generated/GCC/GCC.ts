@@ -71,8 +71,16 @@ export class GCCRetired__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get amount(): BigInt {
+  get gccAmount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+
+  get usdcEffect(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get referralAddress(): Address {
+    return this._event.parameters[4].value.toAddress();
   }
 }
 
@@ -125,6 +133,36 @@ export class Transfer__Params {
 
   get value(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class USDCRetired extends ethereum.Event {
+  get params(): USDCRetired__Params {
+    return new USDCRetired__Params(this);
+  }
+}
+
+export class USDCRetired__Params {
+  _event: USDCRetired;
+
+  constructor(event: USDCRetired) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get referralAddress(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 }
 
@@ -298,6 +336,55 @@ export class GCC extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
+  SWAPPER(): Address {
+    let result = super.call("SWAPPER", "SWAPPER():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_SWAPPER(): ethereum.CallResult<Address> {
+    let result = super.tryCall("SWAPPER", "SWAPPER():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  UNISWAP_ROUTER(): Address {
+    let result = super.call("UNISWAP_ROUTER", "UNISWAP_ROUTER():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_UNISWAP_ROUTER(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "UNISWAP_ROUTER",
+      "UNISWAP_ROUTER():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  USDC(): Address {
+    let result = super.call("USDC", "USDC():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_USDC(): ethereum.CallResult<Address> {
+    let result = super.tryCall("USDC", "USDC():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   allowance(owner: Address, spender: Address): BigInt {
@@ -731,6 +818,14 @@ export class ConstructorCall__Inputs {
   get _glowToken(): Address {
     return this._call.inputValues[2].value.toAddress();
   }
+
+  get _usdc(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get _uniswapRouter(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
 }
 
 export class ConstructorCall__Outputs {
@@ -1059,6 +1154,44 @@ export class RetireGCCCall__Outputs {
   }
 }
 
+export class RetireGCC1Call extends ethereum.Call {
+  get inputs(): RetireGCC1Call__Inputs {
+    return new RetireGCC1Call__Inputs(this);
+  }
+
+  get outputs(): RetireGCC1Call__Outputs {
+    return new RetireGCC1Call__Outputs(this);
+  }
+}
+
+export class RetireGCC1Call__Inputs {
+  _call: RetireGCC1Call;
+
+  constructor(call: RetireGCC1Call) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class RetireGCC1Call__Outputs {
+  _call: RetireGCC1Call;
+
+  constructor(call: RetireGCC1Call) {
+    this._call = call;
+  }
+}
+
 export class RetireGCCForCall extends ethereum.Call {
   get inputs(): RetireGCCForCall__Inputs {
     return new RetireGCCForCall__Inputs(this);
@@ -1093,6 +1226,48 @@ export class RetireGCCForCall__Outputs {
   _call: RetireGCCForCall;
 
   constructor(call: RetireGCCForCall) {
+    this._call = call;
+  }
+}
+
+export class RetireGCCFor1Call extends ethereum.Call {
+  get inputs(): RetireGCCFor1Call__Inputs {
+    return new RetireGCCFor1Call__Inputs(this);
+  }
+
+  get outputs(): RetireGCCFor1Call__Outputs {
+    return new RetireGCCFor1Call__Outputs(this);
+  }
+}
+
+export class RetireGCCFor1Call__Inputs {
+  _call: RetireGCCFor1Call;
+
+  constructor(call: RetireGCCFor1Call) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+}
+
+export class RetireGCCFor1Call__Outputs {
+  _call: RetireGCCFor1Call;
+
+  constructor(call: RetireGCCFor1Call) {
     this._call = call;
   }
 }
@@ -1139,6 +1314,182 @@ export class RetireGCCForAuthorizedCall__Outputs {
   _call: RetireGCCForAuthorizedCall;
 
   constructor(call: RetireGCCForAuthorizedCall) {
+    this._call = call;
+  }
+}
+
+export class RetireGCCForAuthorized1Call extends ethereum.Call {
+  get inputs(): RetireGCCForAuthorized1Call__Inputs {
+    return new RetireGCCForAuthorized1Call__Inputs(this);
+  }
+
+  get outputs(): RetireGCCForAuthorized1Call__Outputs {
+    return new RetireGCCForAuthorized1Call__Outputs(this);
+  }
+}
+
+export class RetireGCCForAuthorized1Call__Inputs {
+  _call: RetireGCCForAuthorized1Call;
+
+  constructor(call: RetireGCCForAuthorized1Call) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get deadline(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get signature(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[5].value.toAddress();
+  }
+}
+
+export class RetireGCCForAuthorized1Call__Outputs {
+  _call: RetireGCCForAuthorized1Call;
+
+  constructor(call: RetireGCCForAuthorized1Call) {
+    this._call = call;
+  }
+}
+
+export class RetireUSDCCall extends ethereum.Call {
+  get inputs(): RetireUSDCCall__Inputs {
+    return new RetireUSDCCall__Inputs(this);
+  }
+
+  get outputs(): RetireUSDCCall__Outputs {
+    return new RetireUSDCCall__Outputs(this);
+  }
+}
+
+export class RetireUSDCCall__Inputs {
+  _call: RetireUSDCCall;
+
+  constructor(call: RetireUSDCCall) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class RetireUSDCCall__Outputs {
+  _call: RetireUSDCCall;
+
+  constructor(call: RetireUSDCCall) {
+    this._call = call;
+  }
+}
+
+export class RetireUSDC1Call extends ethereum.Call {
+  get inputs(): RetireUSDC1Call__Inputs {
+    return new RetireUSDC1Call__Inputs(this);
+  }
+
+  get outputs(): RetireUSDC1Call__Outputs {
+    return new RetireUSDC1Call__Outputs(this);
+  }
+}
+
+export class RetireUSDC1Call__Inputs {
+  _call: RetireUSDC1Call;
+
+  constructor(call: RetireUSDC1Call) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class RetireUSDC1Call__Outputs {
+  _call: RetireUSDC1Call;
+
+  constructor(call: RetireUSDC1Call) {
+    this._call = call;
+  }
+}
+
+export class RetireUSDCSignatureCall extends ethereum.Call {
+  get inputs(): RetireUSDCSignatureCall__Inputs {
+    return new RetireUSDCSignatureCall__Inputs(this);
+  }
+
+  get outputs(): RetireUSDCSignatureCall__Outputs {
+    return new RetireUSDCSignatureCall__Outputs(this);
+  }
+}
+
+export class RetireUSDCSignatureCall__Inputs {
+  _call: RetireUSDCSignatureCall;
+
+  constructor(call: RetireUSDCSignatureCall) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get deadline(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get v(): i32 {
+    return this._call.inputValues[4].value.toI32();
+  }
+
+  get r(): Bytes {
+    return this._call.inputValues[5].value.toBytes();
+  }
+
+  get s(): Bytes {
+    return this._call.inputValues[6].value.toBytes();
+  }
+}
+
+export class RetireUSDCSignatureCall__Outputs {
+  _call: RetireUSDCSignatureCall;
+
+  constructor(call: RetireUSDCSignatureCall) {
     this._call = call;
   }
 }

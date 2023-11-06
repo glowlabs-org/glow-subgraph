@@ -6,9 +6,9 @@ dataSources:
     name: GCC
     network: goerli
     source:
-      address: "0x26Dd88E3E6E0b1870F1C68463a512cA25d13cD37"
+      address: "0x19412770e652eB77CFd6Cc8a88B2F28D95A19a3f"
       abi: GCC
-      startBlock: 9882755
+      startBlock: 9995232
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -20,6 +20,42 @@ dataSources:
         - name: GCC
           file: GCC/abis/GCC.json
       eventHandlers:
-        - event: GCCRetired(indexed address,indexed address,uint256)
+        - event: GCCRetired(indexed address,indexed address,uint256,uint256,address)
           handler: handleGCCRetired
+        - event: USDCRetired(indexed address,indexed address,uint256,address)
+          handler: handleUSDCRetired
       file: GCC/GCC.wasm
+  - kind: ethereum
+    name: Governance
+    network: goerli
+    source:
+      address: "0x6BBd2e63d87218B4b20B0FC2EaeC3e9B34A77f9F"
+      abi: Governance
+      startBlock: 9995232
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Governance
+      abis:
+        - name: Governance
+          file: Governance/abis/Governance.json
+      eventHandlers:
+        - event: VetoCouncilElectionOrSlash(indexed uint256,indexed
+            address,address,address,bool,uint256)
+          handler: vetoCouncilElectionOrSlashHandler
+        - event: GCACouncilElectionOrSlashCreation(indexed uint256,indexed
+            address,address[],address[],uint256,uint256)
+          handler: gcaCouncilElectionOrSlashCreationHandler
+        - event: RFCProposalCreation(indexed uint256,indexed address,bytes32,uint256)
+          handler: rfcProposalCreationHandler
+        - event: GrantsProposalCreation(indexed uint256,indexed
+            address,address,uint256,bytes32,uint256)
+          handler: grantsProposalCreationHandler
+        - event: ChangeGCARequirementsProposalCreation(indexed uint256,indexed
+            address,bytes32,uint256)
+          handler: changeGCARequirementsProposalCreationHandler
+        - event: NominationsUsedOnProposal(indexed uint256,indexed address,uint256)
+          handler: nominationsUsedOnProposalHandler
+      file: Governance/Governance.wasm

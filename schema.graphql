@@ -1,12 +1,104 @@
-
 type GCCRetired @entity(immutable: true) {
   id: Bytes!
-  account:  User!
+  account: User!
   rewardAddress: User! # address
-  amount: BigInt! # uint256
+  amountGCCRetired: BigInt! # uint256
+  usdcEffect: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+type USDCRetired @entity(immutable: true) {
+  id: Bytes!
+  account: User!
+  rewardAddress: User! # address
+  usdcEffect: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+enum ProposalType {
+  VetoCouncilElectionOrSlash
+  Grants
+  RequestForComment
+  GCAElectionOrSlash
+  ChangeGCARequirements
+}
+
+interface Proposal @entity {
+  id: ID!
+  proposer: User! # Address of the proposer
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  proposalType: ProposalType!
+  nominationsUsed: NominationsUsed!
+}
+
+type VetoCouncilElectionOrSlashProposal implements Proposal @entity {
+  id: ID!
+  proposer: User!
+  oldAgent: User!
+  newAgent: User!
+  slashOldAgent: Boolean!
+  proposalType: ProposalType!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  nominationsUsed: NominationsUsed!
+}
+
+type GCAElectionOrSlashProposal implements Proposal @entity {
+  id: ID!
+  proposer: User!
+  agentsToSlash: [User!]!
+  newGCAs: [User!]!
+  proposalType: ProposalType!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  nominationsUsed: NominationsUsed!
+}
+
+type RFCProposal implements Proposal @entity {
+  id: ID!
+  proposer: User!
+  proposalType: ProposalType!
+  hash: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  nominationsUsed: NominationsUsed!
+  # Other specific fields for RFCProposal
+}
+
+type GrantsProposal implements Proposal @entity {
+  id: ID!
+  proposer: User!
+  proposalType: ProposalType!
+  hash: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  nominationsUsed: NominationsUsed!
+  recipient: User!
+  amount: BigInt!
+
+  #   event GrantsProposalCreation(
+  #     uint256 indexed proposalId,
+  #     address indexed proposer,
+  #     address recipient,
+  #     uint256 amount,
+  #     bytes32 hash,
+  #     uint256 nominationsUsed
+  # );
+  # Other specific fields for GrantsProposal
+}
+
+type ChangeGCARequirementsHashProposal implements Proposal @entity {
+  id: ID!
+  proposer: User!
+  proposalType: ProposalType!
+  hash: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  nominationsUsed: NominationsUsed!
 }
 
 type RetireGCCAllowance @entity(immutable: true) {
@@ -19,114 +111,26 @@ type RetireGCCAllowance @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type NominationsUsed @entity {
+  id: ID!
+  proposal: Proposal!
+  nominationsUsed: BigInt!
+  nominationBreakdown: [NominationSpend!]! @derivedFrom(field: "nominationsUsed")
+}
+
+type NominationSpend @entity(immutable: true) {
+  id: ID!
+  user: User!
+  amount: BigInt!
+  proposal: Proposal!
+  nominationsUsed: NominationsUsed!
+  transactionHash: Bytes!
+}
 
 type User @entity {
   id: ID!
   gccRetired: [GCCRetired!]! @derivedFrom(field: "account")
-
+  usdcRetired: [USDCRetired!]! @derivedFrom(field: "account")
+  totalUSDCEffect: BigInt!
+  nominationSpendCounter: BigInt!
 }
-
-# # /* -------------------------------------------------------------------------- */
-# # /*                                    user                                    */
-# # /* -------------------------------------------------------------------------- */
-# type User @entity {
-#   id: ID!
-#   baycs: [BAYC!]! @derivedFrom(field: "owner")
-#   maycs: [MAYC!]! @derivedFrom(field: "owner")
-#   paraspaceBAYCs: [ParaspaceBAYC!]! @derivedFrom(field: "owner")
-#   paraspaceMAYCs: [ParaspaceMAYC!]! @derivedFrom(field: "owner")
-#   benddaoBoundBAYCs: [BendDAOBoundBAYC!]! @derivedFrom(field: "owner")
-#   benddaoBoundMAYCs: [BendDAOBoundMAYC!]! @derivedFrom(field: "owner")
-#   benddaoStakedBAYCs: [BendDAOStakedBAYC!]! @derivedFrom(field: "owner")
-#   benddaoStakedMAYCs: [BendDAOStakedMAYC!]! @derivedFrom(field: "owner")
-#   benddaoBoundStakedBAYCs: [BendDAOBoundStakedBAYC!]!
-#     @derivedFrom(field: "owner")
-#   benddaoBoundStakedMAYCs: [BendDAOBoundStakedMAYC!]!
-#     @derivedFrom(field: "owner")
-
-#   delegateCashDelegates: [DelegateCashDelegate!]! @derivedFrom(field: "vault")
-#   warmWallets: [WarmWallet!]! @derivedFrom(field: "coldWallet")
-
-#   associatedDelegateCashDelegates: [DelegateCashDelegate!]!
-#     @derivedFrom(field: "user")
-#   associatedWarmWallet: [WarmWallet!]! @derivedFrom(field: "user")
-# }
-
-# # /* -------------------------------------------------------------------------- */
-# # /*                                  delegate                                  */
-# # /* -------------------------------------------------------------------------- */
-# enum DelegateCashDelegateType {
-#   Full
-#   Contract
-#   Token
-# }
-
-# type DelegateCashDelegate @entity {
-#   id: ID!
-#   vault: User!
-#   user: User!
-
-#   type: DelegateCashDelegateType!
-#   contractAddress: Bytes # address
-#   tokenId: BigInt # uint256
-# }
-
-# type WarmWallet @entity {
-#   id: ID!
-#   coldWallet: User!
-#   user: User!
-#   expirationTimestamp: BigInt! # uint256
-# }
-
-# # /* -------------------------------------------------------------------------- */
-# # /*                                    nfts                                    */
-# # /* -------------------------------------------------------------------------- */
-# type BAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type MAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type ParaspaceBAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type ParaspaceMAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOBoundBAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOBoundMAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOStakedBAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOStakedMAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOBoundStakedBAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
-
-# type BendDAOBoundStakedMAYC @entity {
-#   id: ID!
-#   owner: User!
-# }
