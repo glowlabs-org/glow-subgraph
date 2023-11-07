@@ -130,6 +130,28 @@ export class GrantsProposalCreation__Params {
   }
 }
 
+export class MostPopularProposalSet extends ethereum.Event {
+  get params(): MostPopularProposalSet__Params {
+    return new MostPopularProposalSet__Params(this);
+  }
+}
+
+export class MostPopularProposalSet__Params {
+  _event: MostPopularProposalSet;
+
+  constructor(event: MostPopularProposalSet) {
+    this._event = event;
+  }
+
+  get weekId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get proposalId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class NominationsUsedOnProposal extends ethereum.Event {
   get params(): NominationsUsedOnProposal__Params {
     return new NominationsUsedOnProposal__Params(this);
@@ -231,6 +253,58 @@ export class RFCProposalExecuted__Params {
 
   get requirementsHash(): Bytes {
     return this._event.parameters[1].value.toBytes();
+  }
+}
+
+export class RatifyCast extends ethereum.Event {
+  get params(): RatifyCast__Params {
+    return new RatifyCast__Params(this);
+  }
+}
+
+export class RatifyCast__Params {
+  _event: RatifyCast;
+
+  constructor(event: RatifyCast) {
+    this._event = event;
+  }
+
+  get proposalId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get voter(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get numVotes(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class RejectCast extends ethereum.Event {
+  get params(): RejectCast__Params {
+    return new RejectCast__Params(this);
+  }
+}
+
+export class RejectCast__Params {
+  _event: RejectCast;
+
+  constructor(event: RejectCast) {
+    this._event = event;
+  }
+
+  get proposalId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get voter(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get numVotes(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 

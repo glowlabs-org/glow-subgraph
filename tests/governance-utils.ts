@@ -2,7 +2,10 @@ import { newMockEvent } from "matchstick-as";
 import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts";
 import {VetoCouncilElectionOrSlash as VetoCouncilElectionOrSlashEvent} from "../generated/Governance/Governance";
 import { GCACouncilElectionOrSlashCreation } from "../generated/Governance/Governance";
-
+import { RatifyCast as RatifyCastEvent } from "../generated/Governance/Governance";
+import { RejectCast as RejectCastProposal } from "../generated/Governance/Governance";
+import { MostPopularProposal } from "../generated/schema";
+import { MostPopularProposalSet as MostPopularProposalSetEvent} from "../generated/Governance/Governance";
 export function createVetoCouncilElectionOrSlashEvent(
     proposer: Address,
     oldAgent: Address,
@@ -97,3 +100,77 @@ export function createVetoCouncilElectionOrSlashEvent(
         return mockEvent;
     
         }
+
+export function createRatifyCastEvent(
+    proposalId: BigInt,
+    voter: Address,
+    numVotes: BigInt): RatifyCastEvent {
+
+    
+    let mockEvent =   changetype<RatifyCastEvent>(newMockEvent());
+    mockEvent.parameters = new Array();
+    let proposalEthereumValue = ethereum.Value.fromUnsignedBigInt(proposalId);
+
+    mockEvent.parameters.push(
+        new ethereum.EventParam("proposalId", proposalEthereumValue),
+    );
+
+    mockEvent.parameters.push(
+        new ethereum.EventParam("voter", ethereum.Value.fromAddress(voter)),
+    );
+    mockEvent.parameters.push(
+        new ethereum.EventParam("numVotes", ethereum.Value.fromUnsignedBigInt(numVotes)),
+    );
+
+  
+    return mockEvent;
+
+    }
+
+    export function createRejectCastEvent(
+        proposalId: BigInt,
+        voter: Address,
+        numVotes: BigInt): RejectCastProposal {
+    
+            
+            let mockEvent =   changetype<RejectCastProposal>(newMockEvent());
+            mockEvent.parameters = new Array();
+            let proposalEthereumValue = ethereum.Value.fromUnsignedBigInt(proposalId);
+        
+            mockEvent.parameters.push(
+                new ethereum.EventParam("proposalId", proposalEthereumValue),
+            );
+        
+            mockEvent.parameters.push(
+                new ethereum.EventParam("voter", ethereum.Value.fromAddress(voter)),
+            );
+            mockEvent.parameters.push(
+                new ethereum.EventParam("numVotes", ethereum.Value.fromUnsignedBigInt(numVotes)),
+            );
+        
+          
+            return mockEvent;
+        
+            }
+
+export function createMostPopularProposalSetEvent(
+    weekId: BigInt,
+    proposalId: BigInt): MostPopularProposalSetEvent {
+
+    
+    let mockEvent =   changetype<MostPopularProposalSetEvent>(newMockEvent());
+    mockEvent.parameters = new Array();
+    let proposalEthereumValue = ethereum.Value.fromUnsignedBigInt(proposalId);
+
+    mockEvent.parameters.push(
+        new ethereum.EventParam("weekId", proposalEthereumValue),
+    );
+
+    mockEvent.parameters.push(
+        new ethereum.EventParam("proposalId", ethereum.Value.fromUnsignedBigInt(proposalId)),
+    );
+
+  
+    return mockEvent;
+
+    }

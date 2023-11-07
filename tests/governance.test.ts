@@ -9,11 +9,14 @@ import {
   import { Address, BigInt, JSONValue } from "@graphprotocol/graph-ts";
   import { Approval as ApprovalEvent } from "../generated/GCC/GCC";
   import { createVetoCouncilElectionOrSlashEvent } from "./governance-utils";
-  import { changeGCARequirementsProposalCreationHandler, getNominationSpendId, vetoCouncilElectionOrSlashHandler } from "../src/governance";
-  import { NominationSpend, NominationsUsed, User, VetoCouncilElectionOrSlashProposal } from "../generated/schema";
+  import { changeGCARequirementsProposalCreationHandler, getMostPopularProposalId, getNominationSpendId, mostPopularProposalSetHandler, ratifyCastHandler, rejectCastHandler, vetoCouncilElectionOrSlashHandler } from "../src/governance";
+  import { MostPopularProposal, NominationSpend, NominationsUsed, RatificationVoteBreakdown, RejectionVoteBreakdown, User, VetoCouncilElectionOrSlashProposal } from "../generated/schema";
   import { log } from '@graphprotocol/graph-ts'
 import { createGCAElectionOrSlashProposalEvent } from "./governance-utils";
 import {gcaCouncilElectionOrSlashCreationHandler} from "../src/governance";
+import { createRejectCastEvent } from "./governance-utils";
+import { createRatifyCastEvent } from "./governance-utils";
+import { createMostPopularProposalSetEvent } from "./governance-utils";
   // Tests structure (matchstick-as >=0.5.0)
   // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
   
@@ -106,7 +109,7 @@ import {gcaCouncilElectionOrSlashCreationHandler} from "../src/governance";
     if(!userAfterSecondNominationSpend){
         throw new Error("UserAfterSecondNominationSpend not found");
     }
-    assert.bigIntEquals(userAfterSecondNominationSpend.nominationSpendCounter, BigInt.fromI32(2));
+    assert.bigIntEquals(userAfterSecondNominationSpend.nonceSeperator, BigInt.fromI32(2));
 
     let secondSpendId = getNominationSpendId(
         proposalId.toString(),
@@ -178,5 +181,64 @@ import {gcaCouncilElectionOrSlashCreationHandler} from "../src/governance";
     gcaCouncilElectionOrSlashCreationHandler(event);
     });
     
+    test("Create Ratify Proposal", () => { 
+        let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
+        let proposalId = BigInt.fromU32(1);
+        let numVotes = BigInt.fromI32(20);
+        let event = createRatifyCastEvent(
+            proposalId,
+            proposer,
+            numVotes,
+        );
+
+        ratifyCastHandler(event);
+    }
+    );
+
+    test("Create Reject Proposal", () => { 
+        let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
+        let proposalId = BigInt.fromU32(1);
+        let numVotes = BigInt.fromI32(20);
+        let event = createRejectCastEvent(
+            proposalId,
+            proposer,
+            numVotes,
+        );
+
+        rejectCastHandler(event);
+    }
+    );
+
+    test("Create Most Popular Proposal Set", () => { 
+        const weekId = BigInt.fromI32(0);
+        let proposalId = BigInt.fromU32(1);
+        let event = createMostPopularProposalSetEvent(
+            weekId,
+            proposalId,
+        );
+
+        mostPopularProposalSetHandler(event);
+
+        let mppId =  getMostPopularProposalId(proposalId);
+        let mostPopularEntity = MostPopularProposal.load(mppId);
+        if(!mostPopularEntity){
+            throw new Error("MostPopularEntity not found");
+        }
+
+        // if(mostPopularEntity.isVetoed == true) throw new Error("MostPopularEntity isVetoed should be false");
+        // if(mostPopularEntity.proposal != "1") throw new Error("MostPopularEntity isRatified should be false");
+        // let ratificationBreakdown = RatificationVoteBreakdown.load(mostPopularEntity.ratificationVoteBreakdown);
+        // if(!ratificationBreakdown){
+        //     throw new Error("RatificationBreakdown not found");
+        // }
+        // let rejectionBreakdown = RejectionVoteBreakdown.load(mostPopularEntity.rejectionVoteBreakdown);
+        // if(!rejectionBreakdown){
+        //     throw new Error("RejectionBreakdown not found");
+        // }
+
+        
+
+    }
+    );
   });
   

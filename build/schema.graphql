@@ -27,13 +27,72 @@ enum ProposalType {
 }
 
 interface Proposal @entity {
-  id: ID!
+  id: ID! 
   proposer: User! # Address of the proposer
   blockTimestamp: BigInt!
   transactionHash: Bytes!
   proposalType: ProposalType!
   nominationsUsed: NominationsUsed!
+
 }
+
+type MostPopularProposal @entity {
+  id: ID! #Let's make this the week number
+  proposal: Proposal!
+  isVetoed: Boolean!
+  vetoer: User
+  voteBreakdown: MostPopularProposalVoteBreakdown!
+}
+
+type MostPopularProposalVoteBreakdown @entity {
+  id: ID! #mpp-bk-proposalId
+  mostPopularProposal: MostPopularProposal!
+  ratificationVoteBreakdown: RatificationVoteBreakdown!
+  rejectionVoteBreakdown: RejectionVoteBreakdown!
+}
+
+
+type RatificationVoteBreakdown @entity {
+  id: ID!
+  mostPopularProposalVoteBreakdown: MostPopularProposalVoteBreakdown!
+  totalRatificationVotes: BigInt!
+  ratificationVotes: [RatificationVote!]! @derivedFrom(field: "ratificationVoteBreakdown")
+
+}
+
+type RejectionVoteBreakdown @entity {
+  id: ID!
+  mostPopularProposalVoteBreakdown: MostPopularProposalVoteBreakdown!
+  totalRejectionVotes: BigInt!
+  rejectionVotes: [RejectionVote!]! @derivedFrom(field: "rejectionVoteBreakdown")
+
+}
+type RatificationVote @entity(immutable: true) {
+  id: ID!
+  ratificationVoteBreakdown: RatificationVoteBreakdown!
+  user: User!
+  transactionHash: Bytes!
+  numberOfVotes: BigInt!
+  blockTimestamp: BigInt!
+}
+
+type RejectionVote @entity(immutable: true) {
+  id: ID!
+  rejectionVoteBreakdown: RejectionVoteBreakdown!
+  user: User!
+  transactionHash: Bytes!
+  numberOfVotes: BigInt!
+  blockTimestamp: BigInt!
+
+}
+
+# type RatificationVoteSingular @entity(immutable:true) {
+#   id: ID!
+#   user: User!
+#   proposal: Proposal!
+#   transactionHash: Bytes!
+#   numberOfVotes: BigInt!
+# }
 
 type VetoCouncilElectionOrSlashProposal implements Proposal @entity {
   id: ID!
@@ -80,16 +139,9 @@ type GrantsProposal implements Proposal @entity {
   recipient: User!
   amount: BigInt!
 
-  #   event GrantsProposalCreation(
-  #     uint256 indexed proposalId,
-  #     address indexed proposer,
-  #     address recipient,
-  #     uint256 amount,
-  #     bytes32 hash,
-  #     uint256 nominationsUsed
-  # );
-  # Other specific fields for GrantsProposal
 }
+
+
 
 type ChangeGCARequirementsHashProposal implements Proposal @entity {
   id: ID!
@@ -131,6 +183,9 @@ type User @entity {
   id: ID!
   gccRetired: [GCCRetired!]! @derivedFrom(field: "account")
   usdcRetired: [USDCRetired!]! @derivedFrom(field: "account")
+  nominationsUsed: [NominationSpend!]! @derivedFrom(field: "user")
+  ratificationVotes: [RatificationVote!]! @derivedFrom(field: "user")
+  rejectionVotes: [RejectionVote!]! @derivedFrom(field: "user")
   totalUSDCEffect: BigInt!
-  nominationSpendCounter: BigInt!
+  nonceSeperator: BigInt!
 }

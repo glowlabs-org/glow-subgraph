@@ -6,7 +6,7 @@ export function getOrCreateUser(id: Address): User {
   if (!user) {
     user = new User(id.toHexString());
     user.totalUSDCEffect = BigInt.fromI32(0);
-    user.nominationSpendCounter = BigInt.fromI32(0);
+    user.nonceSeperator = BigInt.fromI32(0);
     user.save();
   }
   return user as User;
