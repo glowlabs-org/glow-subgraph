@@ -178,6 +178,36 @@ export class NominationsUsedOnProposal__Params {
   }
 }
 
+export class ProposalExecution extends ethereum.Event {
+  get params(): ProposalExecution__Params {
+    return new ProposalExecution__Params(this);
+  }
+}
+
+export class ProposalExecution__Params {
+  _event: ProposalExecution;
+
+  constructor(event: ProposalExecution) {
+    this._event = event;
+  }
+
+  get week(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get proposalId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get proposalType(): i32 {
+    return this._event.parameters[2].value.toI32();
+  }
+
+  get success(): boolean {
+    return this._event.parameters[3].value.toBoolean();
+  }
+}
+
 export class ProposalVetoed extends ethereum.Event {
   get params(): ProposalVetoed__Params {
     return new ProposalVetoed__Params(this);

@@ -6,9 +6,9 @@ dataSources:
     name: GCC
     network: goerli
     source:
-      address: "0xe5Be03F0d8C62783aD8D59585fb777b9467B063B"
+      address: "0x960a1C48E5e9415367002C0CC3199C4e9108a520"
       abi: GCC
-      startBlock: 10001364
+      startBlock: 10040914
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -21,18 +21,18 @@ dataSources:
           file: ./abis/GCC.json
       eventHandlers:
         - event:
-            GCCRetired(indexed address,indexed address,uint256,uint256,address)
+            GCCCommitted(indexed address,indexed address,uint256,uint256,uint256,address)
           handler: handleGCCRetired
-        - event: USDCRetired(indexed address,indexed address,uint256,address)
+        - event: USDCCommitted(indexed address,indexed address,uint256,uint256,address)
           handler: handleUSDCRetired
       file: ./src/gcc.ts
   - kind: ethereum
     name: Governance
     network: goerli
     source:
-      address: "0x6Bf58698fBC38850b1141DeA495163D98BE4c01d" # Replace with the Governance contract address
+      address: "0x16fcdF421bFf0D2A4490382247753d7D2A40b5C4" # Replace with the Governance contract address
       abi: Governance
-      startBlock: 10001364 # Replace with the block number when the Governance contract was deployed
+      startBlock: 10040914 # Replace with the block number when the Governance contract was deployed
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

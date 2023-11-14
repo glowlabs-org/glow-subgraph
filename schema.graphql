@@ -6,6 +6,7 @@ type GCCRetired @entity(immutable: true) {
   usdcEffect: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
+  impactPower: BigInt!
   transactionHash: Bytes!
 }
 type USDCRetired @entity(immutable: true) {
@@ -15,6 +16,7 @@ type USDCRetired @entity(immutable: true) {
   usdcEffect: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
+  impactPower: BigInt!
   transactionHash: Bytes!
 }
 

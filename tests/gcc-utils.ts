@@ -1,12 +1,16 @@
 import { newMockEvent } from "matchstick-as";
 import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts";
-import { GCCRetired } from "../generated/GCC/GCC";
+import { GCCCommitted } from "../generated/GCC/GCC";
 export function createGCCRetiredEvent(
   account: Address,
   rewardAddress: Address,
-  amount: BigInt,
-): GCCRetired {
-  let gccRetiredEvent = changetype<GCCRetired>(newMockEvent());
+  gccCommitted: BigInt,
+  usdcEffect: BigInt,
+  impactPower: BigInt,
+  referralAddress: Address,
+): GCCCommitted {
+  let gccRetiredEvent = changetype<GCCCommitted>(newMockEvent());
+
 
   gccRetiredEvent.parameters = new Array();
 
@@ -21,10 +25,35 @@ export function createGCCRetiredEvent(
   );
   gccRetiredEvent.parameters.push(
     new ethereum.EventParam(
-      "amount",
-      ethereum.Value.fromUnsignedBigInt(amount),
+      "gccAmount",
+      ethereum.Value.fromUnsignedBigInt(gccCommitted),
     ),
   );
+
+  gccRetiredEvent.parameters.push(
+    new ethereum.EventParam(
+      "usdcEffect",
+      ethereum.Value.fromUnsignedBigInt(usdcEffect),
+    ),
+  );
+
+  gccRetiredEvent.parameters.push(
+    new ethereum.EventParam(
+      "impactPower",
+      ethereum.Value.fromUnsignedBigInt(impactPower),
+    ),
+  );
+
+  gccRetiredEvent.parameters.push(
+    new ethereum.EventParam(
+      "referralAddress",
+      ethereum.Value.fromAddress(referralAddress),
+    ),
+  );
+
+
+
+
 
   return gccRetiredEvent;
 }

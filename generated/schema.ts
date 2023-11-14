@@ -132,6 +132,19 @@ export class GCCRetired extends Entity {
     this.set("blockTimestamp", Value.fromBigInt(value));
   }
 
+  get impactPower(): BigInt {
+    let value = this.get("impactPower");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set impactPower(value: BigInt) {
+    this.set("impactPower", Value.fromBigInt(value));
+  }
+
   get transactionHash(): Bytes {
     let value = this.get("transactionHash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -252,6 +265,19 @@ export class USDCRetired extends Entity {
 
   set blockTimestamp(value: BigInt) {
     this.set("blockTimestamp", Value.fromBigInt(value));
+  }
+
+  get impactPower(): BigInt {
+    let value = this.get("impactPower");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set impactPower(value: BigInt) {
+    this.set("impactPower", Value.fromBigInt(value));
   }
 
   get transactionHash(): Bytes {

@@ -36,6 +36,32 @@ export class Approval__Params {
   }
 }
 
+export class CommitGCCAllowance extends ethereum.Event {
+  get params(): CommitGCCAllowance__Params {
+    return new CommitGCCAllowance__Params(this);
+  }
+}
+
+export class CommitGCCAllowance__Params {
+  _event: CommitGCCAllowance;
+
+  constructor(event: CommitGCCAllowance) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get spender(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get value(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class EIP712DomainChanged extends ethereum.Event {
   get params(): EIP712DomainChanged__Params {
     return new EIP712DomainChanged__Params(this);
@@ -50,16 +76,16 @@ export class EIP712DomainChanged__Params {
   }
 }
 
-export class GCCRetired extends ethereum.Event {
-  get params(): GCCRetired__Params {
-    return new GCCRetired__Params(this);
+export class GCCCommitted extends ethereum.Event {
+  get params(): GCCCommitted__Params {
+    return new GCCCommitted__Params(this);
   }
 }
 
-export class GCCRetired__Params {
-  _event: GCCRetired;
+export class GCCCommitted__Params {
+  _event: GCCCommitted;
 
-  constructor(event: GCCRetired) {
+  constructor(event: GCCCommitted) {
     this._event = event;
   }
 
@@ -79,34 +105,12 @@ export class GCCRetired__Params {
     return this._event.parameters[3].value.toBigInt();
   }
 
+  get impactPower(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
   get referralAddress(): Address {
-    return this._event.parameters[4].value.toAddress();
-  }
-}
-
-export class RetireGCCAllowance extends ethereum.Event {
-  get params(): RetireGCCAllowance__Params {
-    return new RetireGCCAllowance__Params(this);
-  }
-}
-
-export class RetireGCCAllowance__Params {
-  _event: RetireGCCAllowance;
-
-  constructor(event: RetireGCCAllowance) {
-    this._event = event;
-  }
-
-  get account(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get spender(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get value(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[5].value.toAddress();
   }
 }
 
@@ -136,16 +140,16 @@ export class Transfer__Params {
   }
 }
 
-export class USDCRetired extends ethereum.Event {
-  get params(): USDCRetired__Params {
-    return new USDCRetired__Params(this);
+export class USDCCommitted extends ethereum.Event {
+  get params(): USDCCommitted__Params {
+    return new USDCCommitted__Params(this);
   }
 }
 
-export class USDCRetired__Params {
-  _event: USDCRetired;
+export class USDCCommitted__Params {
+  _event: USDCCommitted;
 
-  constructor(event: USDCRetired) {
+  constructor(event: USDCCommitted) {
     this._event = event;
   }
 
@@ -161,8 +165,162 @@ export class USDCRetired__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
+  get impactPower(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
   get referralAddress(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
+  }
+}
+
+export class GCC__commitGCCResult {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getUsdcEffect(): BigInt {
+    return this.value0;
+  }
+
+  getImpactPower(): BigInt {
+    return this.value1;
+  }
+}
+
+export class GCC__commitGCC1Result {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getValue0(): BigInt {
+    return this.value0;
+  }
+
+  getValue1(): BigInt {
+    return this.value1;
+  }
+}
+
+export class GCC__commitGCCForResult {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getUsdcEffect(): BigInt {
+    return this.value0;
+  }
+
+  getImpactPower(): BigInt {
+    return this.value1;
+  }
+}
+
+export class GCC__commitGCCFor1Result {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getValue0(): BigInt {
+    return this.value0;
+  }
+
+  getValue1(): BigInt {
+    return this.value1;
+  }
+}
+
+export class GCC__commitGCCForAuthorizedResult {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getUsdcEffect(): BigInt {
+    return this.value0;
+  }
+
+  getImpactPower(): BigInt {
+    return this.value1;
+  }
+}
+
+export class GCC__commitGCCForAuthorized1Result {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getValue0(): BigInt {
+    return this.value0;
+  }
+
+  getValue1(): BigInt {
+    return this.value1;
   }
 }
 
@@ -262,6 +420,29 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  COMMIT_PERMIT_TYPEHASH(): Bytes {
+    let result = super.call(
+      "COMMIT_PERMIT_TYPEHASH",
+      "COMMIT_PERMIT_TYPEHASH():(bytes32)",
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_COMMIT_PERMIT_TYPEHASH(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "COMMIT_PERMIT_TYPEHASH",
+      "COMMIT_PERMIT_TYPEHASH():(bytes32)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
   GCA_AND_MINER_POOL_CONTRACT(): Address {
     let result = super.call(
       "GCA_AND_MINER_POOL_CONTRACT",
@@ -315,37 +496,22 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  RETIRING_PERMIT_TYPEHASH(): Bytes {
+  IMPACT_CATALYST(): Address {
     let result = super.call(
-      "RETIRING_PERMIT_TYPEHASH",
-      "RETIRING_PERMIT_TYPEHASH():(bytes32)",
+      "IMPACT_CATALYST",
+      "IMPACT_CATALYST():(address)",
       []
     );
-
-    return result[0].toBytes();
-  }
-
-  try_RETIRING_PERMIT_TYPEHASH(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "RETIRING_PERMIT_TYPEHASH",
-      "RETIRING_PERMIT_TYPEHASH():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  SWAPPER(): Address {
-    let result = super.call("SWAPPER", "SWAPPER():(address)", []);
 
     return result[0].toAddress();
   }
 
-  try_SWAPPER(): ethereum.CallResult<Address> {
-    let result = super.tryCall("SWAPPER", "SWAPPER():(address)", []);
+  try_IMPACT_CATALYST(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "IMPACT_CATALYST",
+      "IMPACT_CATALYST():(address)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -443,6 +609,442 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall("balanceOf", "balanceOf(address):(uint256)", [
       ethereum.Value.fromAddress(account)
     ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  commitAllowance(account: Address, spender: Address): BigInt {
+    let result = super.call(
+      "commitAllowance",
+      "commitAllowance(address,address):(uint256)",
+      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_commitAllowance(
+    account: Address,
+    spender: Address
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "commitAllowance",
+      "commitAllowance(address,address):(uint256)",
+      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  commitGCC(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address
+  ): GCC__commitGCCResult {
+    let result = super.call(
+      "commitGCC",
+      "commitGCC(uint256,address,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+
+    return new GCC__commitGCCResult(result[0].toBigInt(), result[1].toBigInt());
+  }
+
+  try_commitGCC(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address
+  ): ethereum.CallResult<GCC__commitGCCResult> {
+    let result = super.tryCall(
+      "commitGCC",
+      "commitGCC(uint256,address,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCCResult(value[0].toBigInt(), value[1].toBigInt())
+    );
+  }
+
+  commitGCC1(amount: BigInt, rewardAddress: Address): GCC__commitGCC1Result {
+    let result = super.call(
+      "commitGCC",
+      "commitGCC(uint256,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress)
+      ]
+    );
+
+    return new GCC__commitGCC1Result(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_commitGCC1(
+    amount: BigInt,
+    rewardAddress: Address
+  ): ethereum.CallResult<GCC__commitGCC1Result> {
+    let result = super.tryCall(
+      "commitGCC",
+      "commitGCC(uint256,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCC1Result(value[0].toBigInt(), value[1].toBigInt())
+    );
+  }
+
+  commitGCCFor(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    referralAddress: Address
+  ): GCC__commitGCCForResult {
+    let result = super.call(
+      "commitGCCFor",
+      "commitGCCFor(address,address,uint256,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+
+    return new GCC__commitGCCForResult(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_commitGCCFor(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    referralAddress: Address
+  ): ethereum.CallResult<GCC__commitGCCForResult> {
+    let result = super.tryCall(
+      "commitGCCFor",
+      "commitGCCFor(address,address,uint256,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCCForResult(value[0].toBigInt(), value[1].toBigInt())
+    );
+  }
+
+  commitGCCFor1(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt
+  ): GCC__commitGCCFor1Result {
+    let result = super.call(
+      "commitGCCFor",
+      "commitGCCFor(address,address,uint256):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+
+    return new GCC__commitGCCFor1Result(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_commitGCCFor1(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt
+  ): ethereum.CallResult<GCC__commitGCCFor1Result> {
+    let result = super.tryCall(
+      "commitGCCFor",
+      "commitGCCFor(address,address,uint256):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCCFor1Result(value[0].toBigInt(), value[1].toBigInt())
+    );
+  }
+
+  commitGCCForAuthorized(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    deadline: BigInt,
+    signature: Bytes
+  ): GCC__commitGCCForAuthorizedResult {
+    let result = super.call(
+      "commitGCCForAuthorized",
+      "commitGCCForAuthorized(address,address,uint256,uint256,bytes):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromBytes(signature)
+      ]
+    );
+
+    return new GCC__commitGCCForAuthorizedResult(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_commitGCCForAuthorized(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    deadline: BigInt,
+    signature: Bytes
+  ): ethereum.CallResult<GCC__commitGCCForAuthorizedResult> {
+    let result = super.tryCall(
+      "commitGCCForAuthorized",
+      "commitGCCForAuthorized(address,address,uint256,uint256,bytes):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromBytes(signature)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCCForAuthorizedResult(
+        value[0].toBigInt(),
+        value[1].toBigInt()
+      )
+    );
+  }
+
+  commitGCCForAuthorized1(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    deadline: BigInt,
+    signature: Bytes,
+    referralAddress: Address
+  ): GCC__commitGCCForAuthorized1Result {
+    let result = super.call(
+      "commitGCCForAuthorized",
+      "commitGCCForAuthorized(address,address,uint256,uint256,bytes,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromBytes(signature),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+
+    return new GCC__commitGCCForAuthorized1Result(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_commitGCCForAuthorized1(
+    from: Address,
+    rewardAddress: Address,
+    amount: BigInt,
+    deadline: BigInt,
+    signature: Bytes,
+    referralAddress: Address
+  ): ethereum.CallResult<GCC__commitGCCForAuthorized1Result> {
+    let result = super.tryCall(
+      "commitGCCForAuthorized",
+      "commitGCCForAuthorized(address,address,uint256,uint256,bytes,address):(uint256,uint256)",
+      [
+        ethereum.Value.fromAddress(from),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromBytes(signature),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new GCC__commitGCCForAuthorized1Result(
+        value[0].toBigInt(),
+        value[1].toBigInt()
+      )
+    );
+  }
+
+  commitUSDC(amount: BigInt, rewardAddress: Address): BigInt {
+    let result = super.call(
+      "commitUSDC",
+      "commitUSDC(uint256,address):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_commitUSDC(
+    amount: BigInt,
+    rewardAddress: Address
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "commitUSDC",
+      "commitUSDC(uint256,address):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  commitUSDC1(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address
+  ): BigInt {
+    let result = super.call(
+      "commitUSDC",
+      "commitUSDC(uint256,address,address):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_commitUSDC1(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "commitUSDC",
+      "commitUSDC(uint256,address,address):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  commitUSDCSignature(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address,
+    deadline: BigInt,
+    v: i32,
+    r: Bytes,
+    s: Bytes
+  ): BigInt {
+    let result = super.call(
+      "commitUSDCSignature",
+      "commitUSDCSignature(uint256,address,address,uint256,uint8,bytes32,bytes32):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
+        ethereum.Value.fromFixedBytes(r),
+        ethereum.Value.fromFixedBytes(s)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_commitUSDCSignature(
+    amount: BigInt,
+    rewardAddress: Address,
+    referralAddress: Address,
+    deadline: BigInt,
+    v: i32,
+    r: Bytes,
+    s: Bytes
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "commitUSDCSignature",
+      "commitUSDCSignature(uint256,address,address,uint256,uint8,bytes32,bytes32):(uint256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(rewardAddress),
+        ethereum.Value.fromAddress(referralAddress),
+        ethereum.Value.fromUnsignedBigInt(deadline),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
+        ethereum.Value.fromFixedBytes(r),
+        ethereum.Value.fromFixedBytes(s)
+      ]
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -631,47 +1233,21 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  nextRetiringNonce(param0: Address): BigInt {
+  nextCommitNonce(param0: Address): BigInt {
     let result = super.call(
-      "nextRetiringNonce",
-      "nextRetiringNonce(address):(uint256)",
+      "nextCommitNonce",
+      "nextCommitNonce(address):(uint256)",
       [ethereum.Value.fromAddress(param0)]
     );
 
     return result[0].toBigInt();
   }
 
-  try_nextRetiringNonce(param0: Address): ethereum.CallResult<BigInt> {
+  try_nextCommitNonce(param0: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "nextRetiringNonce",
-      "nextRetiringNonce(address):(uint256)",
+      "nextCommitNonce",
+      "nextCommitNonce(address):(uint256)",
       [ethereum.Value.fromAddress(param0)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  retiringAllowance(account: Address, spender: Address): BigInt {
-    let result = super.call(
-      "retiringAllowance",
-      "retiringAllowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_retiringAllowance(
-    account: Address,
-    spender: Address
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "retiringAllowance",
-      "retiringAllowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -695,20 +1271,20 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  totalCreditsRetired(param0: Address): BigInt {
+  totalImpactPowerEarned(param0: Address): BigInt {
     let result = super.call(
-      "totalCreditsRetired",
-      "totalCreditsRetired(address):(uint256)",
+      "totalImpactPowerEarned",
+      "totalImpactPowerEarned(address):(uint256)",
       [ethereum.Value.fromAddress(param0)]
     );
 
     return result[0].toBigInt();
   }
 
-  try_totalCreditsRetired(param0: Address): ethereum.CallResult<BigInt> {
+  try_totalImpactPowerEarned(param0: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "totalCreditsRetired",
-      "totalCreditsRetired(address):(uint256)",
+      "totalImpactPowerEarned",
+      "totalImpactPowerEarned(address):(uint256)",
       [ethereum.Value.fromAddress(param0)]
     );
     if (result.reverted) {
@@ -874,6 +1450,440 @@ export class ApproveCall__Outputs {
   }
 }
 
+export class CommitGCCCall extends ethereum.Call {
+  get inputs(): CommitGCCCall__Inputs {
+    return new CommitGCCCall__Inputs(this);
+  }
+
+  get outputs(): CommitGCCCall__Outputs {
+    return new CommitGCCCall__Outputs(this);
+  }
+}
+
+export class CommitGCCCall__Inputs {
+  _call: CommitGCCCall;
+
+  constructor(call: CommitGCCCall) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class CommitGCCCall__Outputs {
+  _call: CommitGCCCall;
+
+  constructor(call: CommitGCCCall) {
+    this._call = call;
+  }
+
+  get usdcEffect(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get impactPower(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitGCC1Call extends ethereum.Call {
+  get inputs(): CommitGCC1Call__Inputs {
+    return new CommitGCC1Call__Inputs(this);
+  }
+
+  get outputs(): CommitGCC1Call__Outputs {
+    return new CommitGCC1Call__Outputs(this);
+  }
+}
+
+export class CommitGCC1Call__Inputs {
+  _call: CommitGCC1Call;
+
+  constructor(call: CommitGCC1Call) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class CommitGCC1Call__Outputs {
+  _call: CommitGCC1Call;
+
+  constructor(call: CommitGCC1Call) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get value1(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitGCCForCall extends ethereum.Call {
+  get inputs(): CommitGCCForCall__Inputs {
+    return new CommitGCCForCall__Inputs(this);
+  }
+
+  get outputs(): CommitGCCForCall__Outputs {
+    return new CommitGCCForCall__Outputs(this);
+  }
+}
+
+export class CommitGCCForCall__Inputs {
+  _call: CommitGCCForCall;
+
+  constructor(call: CommitGCCForCall) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+}
+
+export class CommitGCCForCall__Outputs {
+  _call: CommitGCCForCall;
+
+  constructor(call: CommitGCCForCall) {
+    this._call = call;
+  }
+
+  get usdcEffect(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get impactPower(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitGCCFor1Call extends ethereum.Call {
+  get inputs(): CommitGCCFor1Call__Inputs {
+    return new CommitGCCFor1Call__Inputs(this);
+  }
+
+  get outputs(): CommitGCCFor1Call__Outputs {
+    return new CommitGCCFor1Call__Outputs(this);
+  }
+}
+
+export class CommitGCCFor1Call__Inputs {
+  _call: CommitGCCFor1Call;
+
+  constructor(call: CommitGCCFor1Call) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class CommitGCCFor1Call__Outputs {
+  _call: CommitGCCFor1Call;
+
+  constructor(call: CommitGCCFor1Call) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get value1(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitGCCForAuthorizedCall extends ethereum.Call {
+  get inputs(): CommitGCCForAuthorizedCall__Inputs {
+    return new CommitGCCForAuthorizedCall__Inputs(this);
+  }
+
+  get outputs(): CommitGCCForAuthorizedCall__Outputs {
+    return new CommitGCCForAuthorizedCall__Outputs(this);
+  }
+}
+
+export class CommitGCCForAuthorizedCall__Inputs {
+  _call: CommitGCCForAuthorizedCall;
+
+  constructor(call: CommitGCCForAuthorizedCall) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get deadline(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get signature(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+}
+
+export class CommitGCCForAuthorizedCall__Outputs {
+  _call: CommitGCCForAuthorizedCall;
+
+  constructor(call: CommitGCCForAuthorizedCall) {
+    this._call = call;
+  }
+
+  get usdcEffect(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get impactPower(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitGCCForAuthorized1Call extends ethereum.Call {
+  get inputs(): CommitGCCForAuthorized1Call__Inputs {
+    return new CommitGCCForAuthorized1Call__Inputs(this);
+  }
+
+  get outputs(): CommitGCCForAuthorized1Call__Outputs {
+    return new CommitGCCForAuthorized1Call__Outputs(this);
+  }
+}
+
+export class CommitGCCForAuthorized1Call__Inputs {
+  _call: CommitGCCForAuthorized1Call;
+
+  constructor(call: CommitGCCForAuthorized1Call) {
+    this._call = call;
+  }
+
+  get from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get deadline(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get signature(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[5].value.toAddress();
+  }
+}
+
+export class CommitGCCForAuthorized1Call__Outputs {
+  _call: CommitGCCForAuthorized1Call;
+
+  constructor(call: CommitGCCForAuthorized1Call) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get value1(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class CommitUSDCCall extends ethereum.Call {
+  get inputs(): CommitUSDCCall__Inputs {
+    return new CommitUSDCCall__Inputs(this);
+  }
+
+  get outputs(): CommitUSDCCall__Outputs {
+    return new CommitUSDCCall__Outputs(this);
+  }
+}
+
+export class CommitUSDCCall__Inputs {
+  _call: CommitUSDCCall;
+
+  constructor(call: CommitUSDCCall) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class CommitUSDCCall__Outputs {
+  _call: CommitUSDCCall;
+
+  constructor(call: CommitUSDCCall) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class CommitUSDC1Call extends ethereum.Call {
+  get inputs(): CommitUSDC1Call__Inputs {
+    return new CommitUSDC1Call__Inputs(this);
+  }
+
+  get outputs(): CommitUSDC1Call__Outputs {
+    return new CommitUSDC1Call__Outputs(this);
+  }
+}
+
+export class CommitUSDC1Call__Inputs {
+  _call: CommitUSDC1Call;
+
+  constructor(call: CommitUSDC1Call) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class CommitUSDC1Call__Outputs {
+  _call: CommitUSDC1Call;
+
+  constructor(call: CommitUSDC1Call) {
+    this._call = call;
+  }
+
+  get impactPower(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class CommitUSDCSignatureCall extends ethereum.Call {
+  get inputs(): CommitUSDCSignatureCall__Inputs {
+    return new CommitUSDCSignatureCall__Inputs(this);
+  }
+
+  get outputs(): CommitUSDCSignatureCall__Outputs {
+    return new CommitUSDCSignatureCall__Outputs(this);
+  }
+}
+
+export class CommitUSDCSignatureCall__Inputs {
+  _call: CommitUSDCSignatureCall;
+
+  constructor(call: CommitUSDCSignatureCall) {
+    this._call = call;
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get rewardAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get referralAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get deadline(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get v(): i32 {
+    return this._call.inputValues[4].value.toI32();
+  }
+
+  get r(): Bytes {
+    return this._call.inputValues[5].value.toBytes();
+  }
+
+  get s(): Bytes {
+    return this._call.inputValues[6].value.toBytes();
+  }
+}
+
+export class CommitUSDCSignatureCall__Outputs {
+  _call: CommitUSDCSignatureCall;
+
+  constructor(call: CommitUSDCSignatureCall) {
+    this._call = call;
+  }
+
+  get impactPower(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
 export class DecreaseAllowanceCall extends ethereum.Call {
   get inputs(): DecreaseAllowanceCall__Inputs {
     return new DecreaseAllowanceCall__Inputs(this);
@@ -946,20 +1956,20 @@ export class DecreaseAllowancesCall__Outputs {
   }
 }
 
-export class DecreaseRetiringAllowanceCall extends ethereum.Call {
-  get inputs(): DecreaseRetiringAllowanceCall__Inputs {
-    return new DecreaseRetiringAllowanceCall__Inputs(this);
+export class DecreaseCommitAllowanceCall extends ethereum.Call {
+  get inputs(): DecreaseCommitAllowanceCall__Inputs {
+    return new DecreaseCommitAllowanceCall__Inputs(this);
   }
 
-  get outputs(): DecreaseRetiringAllowanceCall__Outputs {
-    return new DecreaseRetiringAllowanceCall__Outputs(this);
+  get outputs(): DecreaseCommitAllowanceCall__Outputs {
+    return new DecreaseCommitAllowanceCall__Outputs(this);
   }
 }
 
-export class DecreaseRetiringAllowanceCall__Inputs {
-  _call: DecreaseRetiringAllowanceCall;
+export class DecreaseCommitAllowanceCall__Inputs {
+  _call: DecreaseCommitAllowanceCall;
 
-  constructor(call: DecreaseRetiringAllowanceCall) {
+  constructor(call: DecreaseCommitAllowanceCall) {
     this._call = call;
   }
 
@@ -972,10 +1982,10 @@ export class DecreaseRetiringAllowanceCall__Inputs {
   }
 }
 
-export class DecreaseRetiringAllowanceCall__Outputs {
-  _call: DecreaseRetiringAllowanceCall;
+export class DecreaseCommitAllowanceCall__Outputs {
+  _call: DecreaseCommitAllowanceCall;
 
-  constructor(call: DecreaseRetiringAllowanceCall) {
+  constructor(call: DecreaseCommitAllowanceCall) {
     this._call = call;
   }
 }
@@ -1052,20 +2062,20 @@ export class IncreaseAllowancesCall__Outputs {
   }
 }
 
-export class IncreaseRetiringAllowanceCall extends ethereum.Call {
-  get inputs(): IncreaseRetiringAllowanceCall__Inputs {
-    return new IncreaseRetiringAllowanceCall__Inputs(this);
+export class IncreaseCommitAllowanceCall extends ethereum.Call {
+  get inputs(): IncreaseCommitAllowanceCall__Inputs {
+    return new IncreaseCommitAllowanceCall__Inputs(this);
   }
 
-  get outputs(): IncreaseRetiringAllowanceCall__Outputs {
-    return new IncreaseRetiringAllowanceCall__Outputs(this);
+  get outputs(): IncreaseCommitAllowanceCall__Outputs {
+    return new IncreaseCommitAllowanceCall__Outputs(this);
   }
 }
 
-export class IncreaseRetiringAllowanceCall__Inputs {
-  _call: IncreaseRetiringAllowanceCall;
+export class IncreaseCommitAllowanceCall__Inputs {
+  _call: IncreaseCommitAllowanceCall;
 
-  constructor(call: IncreaseRetiringAllowanceCall) {
+  constructor(call: IncreaseCommitAllowanceCall) {
     this._call = call;
   }
 
@@ -1078,10 +2088,10 @@ export class IncreaseRetiringAllowanceCall__Inputs {
   }
 }
 
-export class IncreaseRetiringAllowanceCall__Outputs {
-  _call: IncreaseRetiringAllowanceCall;
+export class IncreaseCommitAllowanceCall__Outputs {
+  _call: IncreaseCommitAllowanceCall;
 
-  constructor(call: IncreaseRetiringAllowanceCall) {
+  constructor(call: IncreaseCommitAllowanceCall) {
     this._call = call;
   }
 }
@@ -1120,380 +2130,6 @@ export class MintToCarbonCreditAuctionCall__Outputs {
   }
 }
 
-export class RetireGCCCall extends ethereum.Call {
-  get inputs(): RetireGCCCall__Inputs {
-    return new RetireGCCCall__Inputs(this);
-  }
-
-  get outputs(): RetireGCCCall__Outputs {
-    return new RetireGCCCall__Outputs(this);
-  }
-}
-
-export class RetireGCCCall__Inputs {
-  _call: RetireGCCCall;
-
-  constructor(call: RetireGCCCall) {
-    this._call = call;
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-}
-
-export class RetireGCCCall__Outputs {
-  _call: RetireGCCCall;
-
-  constructor(call: RetireGCCCall) {
-    this._call = call;
-  }
-}
-
-export class RetireGCC1Call extends ethereum.Call {
-  get inputs(): RetireGCC1Call__Inputs {
-    return new RetireGCC1Call__Inputs(this);
-  }
-
-  get outputs(): RetireGCC1Call__Outputs {
-    return new RetireGCC1Call__Outputs(this);
-  }
-}
-
-export class RetireGCC1Call__Inputs {
-  _call: RetireGCC1Call;
-
-  constructor(call: RetireGCC1Call) {
-    this._call = call;
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get referralAddress(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-}
-
-export class RetireGCC1Call__Outputs {
-  _call: RetireGCC1Call;
-
-  constructor(call: RetireGCC1Call) {
-    this._call = call;
-  }
-}
-
-export class RetireGCCForCall extends ethereum.Call {
-  get inputs(): RetireGCCForCall__Inputs {
-    return new RetireGCCForCall__Inputs(this);
-  }
-
-  get outputs(): RetireGCCForCall__Outputs {
-    return new RetireGCCForCall__Outputs(this);
-  }
-}
-
-export class RetireGCCForCall__Inputs {
-  _call: RetireGCCForCall;
-
-  constructor(call: RetireGCCForCall) {
-    this._call = call;
-  }
-
-  get from(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-}
-
-export class RetireGCCForCall__Outputs {
-  _call: RetireGCCForCall;
-
-  constructor(call: RetireGCCForCall) {
-    this._call = call;
-  }
-}
-
-export class RetireGCCFor1Call extends ethereum.Call {
-  get inputs(): RetireGCCFor1Call__Inputs {
-    return new RetireGCCFor1Call__Inputs(this);
-  }
-
-  get outputs(): RetireGCCFor1Call__Outputs {
-    return new RetireGCCFor1Call__Outputs(this);
-  }
-}
-
-export class RetireGCCFor1Call__Inputs {
-  _call: RetireGCCFor1Call;
-
-  constructor(call: RetireGCCFor1Call) {
-    this._call = call;
-  }
-
-  get from(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get referralAddress(): Address {
-    return this._call.inputValues[3].value.toAddress();
-  }
-}
-
-export class RetireGCCFor1Call__Outputs {
-  _call: RetireGCCFor1Call;
-
-  constructor(call: RetireGCCFor1Call) {
-    this._call = call;
-  }
-}
-
-export class RetireGCCForAuthorizedCall extends ethereum.Call {
-  get inputs(): RetireGCCForAuthorizedCall__Inputs {
-    return new RetireGCCForAuthorizedCall__Inputs(this);
-  }
-
-  get outputs(): RetireGCCForAuthorizedCall__Outputs {
-    return new RetireGCCForAuthorizedCall__Outputs(this);
-  }
-}
-
-export class RetireGCCForAuthorizedCall__Inputs {
-  _call: RetireGCCForAuthorizedCall;
-
-  constructor(call: RetireGCCForAuthorizedCall) {
-    this._call = call;
-  }
-
-  get from(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get deadline(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get signature(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-}
-
-export class RetireGCCForAuthorizedCall__Outputs {
-  _call: RetireGCCForAuthorizedCall;
-
-  constructor(call: RetireGCCForAuthorizedCall) {
-    this._call = call;
-  }
-}
-
-export class RetireGCCForAuthorized1Call extends ethereum.Call {
-  get inputs(): RetireGCCForAuthorized1Call__Inputs {
-    return new RetireGCCForAuthorized1Call__Inputs(this);
-  }
-
-  get outputs(): RetireGCCForAuthorized1Call__Outputs {
-    return new RetireGCCForAuthorized1Call__Outputs(this);
-  }
-}
-
-export class RetireGCCForAuthorized1Call__Inputs {
-  _call: RetireGCCForAuthorized1Call;
-
-  constructor(call: RetireGCCForAuthorized1Call) {
-    this._call = call;
-  }
-
-  get from(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get deadline(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get signature(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get referralAddress(): Address {
-    return this._call.inputValues[5].value.toAddress();
-  }
-}
-
-export class RetireGCCForAuthorized1Call__Outputs {
-  _call: RetireGCCForAuthorized1Call;
-
-  constructor(call: RetireGCCForAuthorized1Call) {
-    this._call = call;
-  }
-}
-
-export class RetireUSDCCall extends ethereum.Call {
-  get inputs(): RetireUSDCCall__Inputs {
-    return new RetireUSDCCall__Inputs(this);
-  }
-
-  get outputs(): RetireUSDCCall__Outputs {
-    return new RetireUSDCCall__Outputs(this);
-  }
-}
-
-export class RetireUSDCCall__Inputs {
-  _call: RetireUSDCCall;
-
-  constructor(call: RetireUSDCCall) {
-    this._call = call;
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-}
-
-export class RetireUSDCCall__Outputs {
-  _call: RetireUSDCCall;
-
-  constructor(call: RetireUSDCCall) {
-    this._call = call;
-  }
-}
-
-export class RetireUSDC1Call extends ethereum.Call {
-  get inputs(): RetireUSDC1Call__Inputs {
-    return new RetireUSDC1Call__Inputs(this);
-  }
-
-  get outputs(): RetireUSDC1Call__Outputs {
-    return new RetireUSDC1Call__Outputs(this);
-  }
-}
-
-export class RetireUSDC1Call__Inputs {
-  _call: RetireUSDC1Call;
-
-  constructor(call: RetireUSDC1Call) {
-    this._call = call;
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get referralAddress(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-}
-
-export class RetireUSDC1Call__Outputs {
-  _call: RetireUSDC1Call;
-
-  constructor(call: RetireUSDC1Call) {
-    this._call = call;
-  }
-}
-
-export class RetireUSDCSignatureCall extends ethereum.Call {
-  get inputs(): RetireUSDCSignatureCall__Inputs {
-    return new RetireUSDCSignatureCall__Inputs(this);
-  }
-
-  get outputs(): RetireUSDCSignatureCall__Outputs {
-    return new RetireUSDCSignatureCall__Outputs(this);
-  }
-}
-
-export class RetireUSDCSignatureCall__Inputs {
-  _call: RetireUSDCSignatureCall;
-
-  constructor(call: RetireUSDCSignatureCall) {
-    this._call = call;
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get rewardAddress(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get referralAddress(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get deadline(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get v(): i32 {
-    return this._call.inputValues[4].value.toI32();
-  }
-
-  get r(): Bytes {
-    return this._call.inputValues[5].value.toBytes();
-  }
-
-  get s(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-}
-
-export class RetireUSDCSignatureCall__Outputs {
-  _call: RetireUSDCSignatureCall;
-
-  constructor(call: RetireUSDCSignatureCall) {
-    this._call = call;
-  }
-}
-
 export class SetAllowancesCall extends ethereum.Call {
   get inputs(): SetAllowancesCall__Inputs {
     return new SetAllowancesCall__Inputs(this);
@@ -1519,7 +2155,7 @@ export class SetAllowancesCall__Inputs {
     return this._call.inputValues[1].value.toBigInt();
   }
 
-  get retiringAllowance(): BigInt {
+  get committingAllowance(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
   }
 }

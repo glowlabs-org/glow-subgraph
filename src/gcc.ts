@@ -1,6 +1,6 @@
-import { GCCRetired as GCCRetiredEvent } from "../generated/GCC/GCC";
+import { GCCCommitted as GCCRetiredEvent } from "../generated/GCC/GCC";
 import { GCCRetired } from "../generated/schema";
-import { USDCRetired as USDCRetiredEvent } from "../generated/GCC/GCC";
+import { USDCCommitted as USDCRetiredEvent } from "../generated/GCC/GCC";
 import { User } from "../generated/schema";
 import { getOrCreateUser } from "./shared/getOrCreateUser";
 import { getNextAvailableNonce } from "./shared/getNextAvailableNonce";
@@ -23,6 +23,7 @@ export function handleGCCRetired(event: GCCRetiredEvent): void {
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
   entity.transactionHash = event.transaction.hash;
+  entity.impactPower = event.params.impactPower; 
   rewardAddress.totalUSDCEffect = event.params.usdcEffect.plus(
     rewardAddress.totalUSDCEffect,
   );
@@ -47,6 +48,7 @@ bytesId)
   entity.rewardAddress = rewardAddress.id;
   entity.usdcEffect = event.params.amount;
   entity.blockNumber = event.block.number;
+  entity.impactPower = event.params.impactPower;
   entity.blockTimestamp = event.block.timestamp;
   entity.transactionHash = event.transaction.hash;
   rewardAddress.totalUSDCEffect = event.params.amount.plus(
