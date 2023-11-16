@@ -415,8 +415,8 @@ export function getNominationSpendId(
   nonce: string,
 
 ): string {
-  let num = "0"
-  let id = proposalId + "-" + nominationsUsed.toString() + "-" + proposer +  "-" + num;
+  let num = nonce;
+  let id = proposalId + "-"   + nominationsUsed.toString() + "-" + proposer +  "-" + num;
   return id;
 }
 
