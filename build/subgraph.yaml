@@ -6,9 +6,9 @@ dataSources:
     name: GCC
     network: goerli
     source:
-      address: "0xb2A99Ab46ecaCEad6283D81D671e7f921ccF3834"
+      address: "0x840C0AC63fA32625057DE2Cd246D1Cc1E8669bed"
       abi: GCC
-      startBlock: 10052400
+      startBlock: 10191084
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -29,9 +29,9 @@ dataSources:
     name: Governance
     network: goerli
     source:
-      address: "0x9B24275F0710301e5462bEB6a8aa688480dCa4b9"
+      address: "0xA1a1CDD5609c86E507637D780E4729D7F22e957E"
       abi: Governance
-      startBlock: 10052400
+      startBlock: 10191084
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
