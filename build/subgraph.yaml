@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: GCC
-    network: goerli
+    network: mainnet
     source:
-      address: "0xab03F1BdB2C3Bf019afd0c514F89014be9768D2a"
+      address: "0x21C46173591f39AfC1d2B634b74c98F0576A272B"
       abi: GCC
-      startBlock: 10203419
+      startBlock: 18809232
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -27,11 +27,11 @@ dataSources:
       file: GCC/GCC.wasm
   - kind: ethereum
     name: Governance
-    network: goerli
+    network: mainnet
     source:
-      address: "0x5A934aA98270528366B16ac7C8b7e68678d9Ffc1"
+      address: "0x8d01a258bC1ADB728322499E5D84173EA971d665"
       abi: Governance
-      startBlock: 10203419
+      startBlock: 18809232
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

@@ -37,28 +37,26 @@ export function vetoCouncilElectionOrSlashHandler(
   // let from =  getOrCreateUser(event.params.proposer);
 
   let entity = new VetoCouncilElectionOrSlashProposal(
-    event.params.proposalId.toString()
+    event.params.proposalId.toString(),
   );
 
-  let proposer =  getOrCreateUser(event.params.proposer);
+  let proposer = getOrCreateUser(event.params.proposer);
   let newAgent = getOrCreateUser(event.params.newAgent);
   let oldAgent = getOrCreateUser(event.params.oldAgent);
 
   entity.proposer = event.params.proposer.toHexString();
   entity.oldAgent = event.params.oldAgent.toHexString();
   entity.newAgent = event.params.newAgent.toHexString();
-  
+
   entity.slashOldAgent = event.params.slashOldAgent;
   // entity.nominationsUsed = event.params.nominationsUsed;
   let nominationsUsed = new NominationsUsed(event.params.proposalId.toString());
   nominationsUsed.proposal = event.params.proposalId.toString();
 
-
   nominationsUsed.nominationsUsed = event.params.nominationsUsed;
-  // 
+  //
   nominationsUsed.proposal = event.params.proposalId.toString();
   nominationsUsed.save();
-
 
   let nominationSpend = createNominationSpend(
     event.params.proposalId.toString(),
@@ -82,8 +80,8 @@ export function gcaCouncilElectionOrSlashCreationHandler(
   let proposer = getOrCreateUser(event.params.proposer);
   let newGCAs = event.params.newGCAs;
   let agentsToSlash = event.params.agentsToSlash;
-  let newGCAIds:string[]= [];
-  let agentsToSlashIds:string[] = [];
+  let newGCAIds: string[] = [];
+  let agentsToSlashIds: string[] = [];
   for (let i = 0; i < newGCAs.length; i++) {
     let newGCA = getOrCreateUser(newGCAs[i]);
     newGCAIds.push(newGCA.id);
@@ -92,7 +90,6 @@ export function gcaCouncilElectionOrSlashCreationHandler(
     let agentToSlash = getOrCreateUser(agentsToSlash[i]);
     agentsToSlashIds.push(agentToSlash.id);
   }
-
 
   let entity = new GCAElectionOrSlashProposal(
     event.params.proposalId.toString(),
@@ -109,10 +106,8 @@ export function gcaCouncilElectionOrSlashCreationHandler(
     proposer,
     event.transaction.hash.toHexString(),
     event.transaction.hash,
-
-
   );
-  
+
   nominationsUsed.nominationsUsed = event.params.nominationsUsed;
 
   entity.newGCAs = newGCAIds;
@@ -148,8 +143,6 @@ export function rfcProposalCreationHandler(
     proposer,
     event.transaction.hash.toHexString(),
     event.transaction.hash,
-
-
   );
   nominationsUsed.nominationsUsed = event.params.nominationsUsed;
   entity.nominationsUsed = nominationsUsed.id;
@@ -163,7 +156,7 @@ export function grantsProposalCreationHandler(
 ): void {
   let proposer = getOrCreateUser(event.params.proposer);
 
-  let recipient =  getOrCreateUser(event.params.recipient);
+  let recipient = getOrCreateUser(event.params.recipient);
   let entity = new GrantsProposal(event.params.proposalId.toString());
 
   // entity.nominationsUsed = event.params.nominationsUsed;
@@ -176,12 +169,10 @@ export function grantsProposalCreationHandler(
     proposer,
     event.transaction.hash.toHexString(),
     event.transaction.hash,
-
-
   );
   nominationsUsed.nominationsUsed = event.params.nominationsUsed;
   entity.nominationsUsed = nominationsUsed.id;
-  
+
   nominationsUsed.save();
   entity.proposer = event.params.proposer.toHexString();
   entity.recipient = event.params.recipient.toHexString();
@@ -196,7 +187,7 @@ export function grantsProposalCreationHandler(
 export function changeGCARequirementsProposalCreationHandler(
   event: ChangeGCARequirementsProposalCreationEvent,
 ): void {
-  let proposer =  getOrCreateUser(event.params.proposer);
+  let proposer = getOrCreateUser(event.params.proposer);
 
   let entity = new ChangeGCARequirementsHashProposal(
     event.params.proposalId.toString(),
@@ -215,8 +206,6 @@ export function changeGCARequirementsProposalCreationHandler(
     proposer,
     event.transaction.hash.toHexString(),
     event.transaction.hash,
-
-
   );
   entity.nominationsUsed = nominationsUsed.id;
 
@@ -246,30 +235,27 @@ export function nominationsUsedOnProposalHandler(
     spender,
     event.transaction.hash.toHexString(),
     event.transaction.hash,
-
-
   );
-  
+
   nominationsUsed.nominationsUsed = nominationsUsed.nominationsUsed.plus(
     event.params.amount,
   );
-  
+
   nominationsUsed.save();
 
   // Save the proposal back to the store
   // proposal.save()
 }
 
-
 export function mostPopularProposalSetHandler(
   event: MostPopularProposalSetEvent,
 ): void {
   //Find the id of the proposal ("should just be the weekId")
-  let id =  getMostPopularProposalId(event.params.weekId);
+  let id = getMostPopularProposalId(event.params.weekId);
   //Load in the proposal in case it already exists
   let entity = MostPopularProposal.load(id);
   //If it doesn't exist, create it
-  if(!entity){
+  if (!entity) {
     entity = new MostPopularProposal(id);
   }
 
@@ -281,7 +267,7 @@ export function mostPopularProposalSetHandler(
   //Load the vote breakdown in case it already exists
   let voteBreakdown = MostPopularProposalVoteBreakdown.load(voteBreakdownId);
   //If it doesn't exist, create it
-  if(!voteBreakdown) {
+  if (!voteBreakdown) {
     voteBreakdown = new MostPopularProposalVoteBreakdown(voteBreakdownId);
   }
   //Set the vote breakdown's proposal to the proposal id
@@ -292,11 +278,17 @@ export function mostPopularProposalSetHandler(
 
   //Save the vote breakdown in the entity
   entity.isVetoed = false;
-  let ratificationBreakdownId = getRatificationBreakdownId(event.params.proposalId);
+  let ratificationBreakdownId = getRatificationBreakdownId(
+    event.params.proposalId,
+  );
 
-  let ratificationBreakdown =  RatificationVoteBreakdown.load(ratificationBreakdownId);
-  if(!ratificationBreakdown) {
-    ratificationBreakdown = new RatificationVoteBreakdown(ratificationBreakdownId);
+  let ratificationBreakdown = RatificationVoteBreakdown.load(
+    ratificationBreakdownId,
+  );
+  if (!ratificationBreakdown) {
+    ratificationBreakdown = new RatificationVoteBreakdown(
+      ratificationBreakdownId,
+    );
   }
   ratificationBreakdown.mostPopularProposalVoteBreakdown = voteBreakdownId;
   //We can store is as zero, because if it's getting set
@@ -306,8 +298,8 @@ export function mostPopularProposalSetHandler(
   ratificationBreakdown.save();
 
   let rejectionBreakdownId = getRejectionBreakdownId(event.params.proposalId);
-  let rejectionBreakdown =  RejectionVoteBreakdown.load(rejectionBreakdownId);
-  if(!rejectionBreakdown) {
+  let rejectionBreakdown = RejectionVoteBreakdown.load(rejectionBreakdownId);
+  if (!rejectionBreakdown) {
     rejectionBreakdown = new RejectionVoteBreakdown(rejectionBreakdownId);
   }
   rejectionBreakdown.mostPopularProposalVoteBreakdown = voteBreakdownId;
@@ -316,7 +308,6 @@ export function mostPopularProposalSetHandler(
   //and so there are no votes
   rejectionBreakdown.totalRejectionVotes = BigInt.fromI32(0);
 
-
   rejectionBreakdown.save();
 
   voteBreakdown.ratificationVoteBreakdown = ratificationBreakdown.id;
@@ -324,105 +315,112 @@ export function mostPopularProposalSetHandler(
   //Save the vote breakdown
   voteBreakdown.save();
 
-  //Let's check if the current 
+  //Let's check if the current
   entity.voteBreakdown = voteBreakdown.id;
 
   entity.save();
 }
 //-----------------RatifyCast-----------------
-export function ratifyCastHandler(event:RatifyCastEvent):void {
+export function ratifyCastHandler(event: RatifyCastEvent): void {
   let from = getOrCreateUser(event.params.voter);
   let nextNonce = getNextAvailableNonce(from);
   //A ratification vote breakdown is tied directly to the proposalId, so we can just use that
   let ratifyBreakdownId = getRatificationBreakdownId(event.params.proposalId);
-  let ratificationVoteBreakdown = RatificationVoteBreakdown.load(ratifyBreakdownId);
-  if(!ratificationVoteBreakdown){
+  let ratificationVoteBreakdown =
+    RatificationVoteBreakdown.load(ratifyBreakdownId);
+  if (!ratificationVoteBreakdown) {
     return;
   } else {
-    ratificationVoteBreakdown.totalRatificationVotes = ratificationVoteBreakdown.totalRatificationVotes.plus(event.params.numVotes);
+    ratificationVoteBreakdown.totalRatificationVotes =
+      ratificationVoteBreakdown.totalRatificationVotes.plus(
+        event.params.numVotes,
+      );
     ratificationVoteBreakdown.save();
   }
-  let ratificationVoteId = getRatificationVoteId(event.params.proposalId.toString(), event.params.voter.toHexString(), nextNonce.toString()); 
-  let ratificationVote =  new RatificationVote(ratificationVoteId);
+  let ratificationVoteId = getRatificationVoteId(
+    event.params.proposalId.toString(),
+    event.params.voter.toHexString(),
+    nextNonce.toString(),
+  );
+  let ratificationVote = new RatificationVote(ratificationVoteId);
   ratificationVote.user = event.params.voter.toHexString();
   ratificationVote.numberOfVotes = event.params.numVotes;
   ratificationVote.transactionHash = event.transaction.hash;
   ratificationVote.blockTimestamp = event.block.timestamp;
   ratificationVote.ratificationVoteBreakdown = ratificationVoteBreakdown.id;
   ratificationVote.save();
-
-  
-  
 }
 //-----------------Reject Cast-----------------
-export function rejectCastHandler(event:RejectCastEvent):void {
+export function rejectCastHandler(event: RejectCastEvent): void {
   let from = getOrCreateUser(event.params.voter);
   let nextNonce = getNextAvailableNonce(from);
   let rejectionBreakdownId = getRejectionBreakdownId(event.params.proposalId);
-  let rejectionVoteBreakdown = RejectionVoteBreakdown.load(rejectionBreakdownId);
-  if(!rejectionVoteBreakdown){
+  let rejectionVoteBreakdown =
+    RejectionVoteBreakdown.load(rejectionBreakdownId);
+  if (!rejectionVoteBreakdown) {
     //This should never happen
     return;
   } else {
-    rejectionVoteBreakdown.totalRejectionVotes = rejectionVoteBreakdown.totalRejectionVotes.plus(event.params.numVotes);
+    rejectionVoteBreakdown.totalRejectionVotes =
+      rejectionVoteBreakdown.totalRejectionVotes.plus(event.params.numVotes);
     rejectionVoteBreakdown.save();
   }
-  let rejectionVoteId = getRejectionVoteId(event.params.proposalId.toString(), event.params.voter.toHexString(), nextNonce.toString());
-  let rejectionVote =  new RejectionVote(rejectionVoteId);
+  let rejectionVoteId = getRejectionVoteId(
+    event.params.proposalId.toString(),
+    event.params.voter.toHexString(),
+    nextNonce.toString(),
+  );
+  let rejectionVote = new RejectionVote(rejectionVoteId);
   rejectionVote.user = event.params.voter.toHexString();
   rejectionVote.numberOfVotes = event.params.numVotes;
   rejectionVote.transactionHash = event.transaction.hash;
   rejectionVote.blockTimestamp = event.block.timestamp;
   rejectionVote.rejectionVoteBreakdown = rejectionVoteBreakdown.id;
   rejectionVote.save();
-  
 }
 
-export function proposalVetoedHandler(event:ProposalVetoedEvent):void {
+export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
   let from = getOrCreateUser(event.params.vetoer);
-  let mostPopularProposal = MostPopularProposal.load(getMostPopularProposalId(event.params.weekId));
-  if(!mostPopularProposal) {
+  let mostPopularProposal = MostPopularProposal.load(
+    getMostPopularProposalId(event.params.weekId),
+  );
+  if (!mostPopularProposal) {
     return;
   }
   mostPopularProposal.vetoer = event.params.vetoer.toHexString();
   mostPopularProposal.isVetoed = true;
   mostPopularProposal.save();
-
 }
-
 
 //==================================================//
 //-----------------Helper Functions-----------------//
 //==================================================//
 
-
-export function getMostPopularProposalId(
-  weekId:BigInt
-):string {
-  return  weekId.toString();
+export function getMostPopularProposalId(weekId: BigInt): string {
+  return weekId.toString();
 }
 
 export function getMostPopularProposalVoteBreakdownId(
-  proposalId:BigInt,
-  weekId:BigInt,
-):string {
-  return "mpp-vote-breakdown-" + proposalId.toString() + "-" + weekId.toString();
+  proposalId: BigInt,
+  weekId: BigInt,
+): string {
+  return (
+    "mpp-vote-breakdown-" + proposalId.toString() + "-" + weekId.toString()
+  );
 }
 export function getNominationSpendId(
   proposalId: string,
   nominationsUsed: BigInt,
   proposer: string,
   nonce: string,
-
 ): string {
   let num = nonce;
-  let id = proposalId + "-"   + nominationsUsed.toString() + "-" + proposer +  "-" + num;
+  let id =
+    proposalId + "-" + nominationsUsed.toString() + "-" + proposer + "-" + num;
   return id;
 }
 
-export function getRatifyBreakdownId(
-  proposalId: string,
-): string {
+export function getRatifyBreakdownId(proposalId: string): string {
   return "ratify-breakdown-" + proposalId;
 }
 
@@ -442,9 +440,7 @@ export function getRejectionVoteId(
   return "rejection-vote-" + proposalId + "-" + voter + "-" + nonce;
 }
 
-export function getRejectBreakdownId(
-  proposalId: string,
-): string {
+export function getRejectBreakdownId(proposalId: string): string {
   return "reject-breakdown-" + proposalId;
 }
 
@@ -452,9 +448,9 @@ function createNominationSpend(
   proposalId: string,
   nominationsUsed: BigInt,
   proposer: string,
-  proposerUser:User,
-  transactionHash:string,
-  txHashByes:Bytes,
+  proposerUser: User,
+  transactionHash: string,
+  txHashByes: Bytes,
 ): string {
   let nominationSpendId = getNominationSpendId(
     proposalId,
@@ -474,12 +470,11 @@ function createNominationSpend(
   return nominationSpendId;
 }
 
-
-function getRatificationBreakdownId(proposalId:BigInt):string {
+function getRatificationBreakdownId(proposalId: BigInt): string {
   return "ratify-breakdown-" + proposalId.toString();
 }
 
-function getRejectionBreakdownId(proposalId:BigInt):string {
+function getRejectionBreakdownId(proposalId: BigInt): string {
   return "reject-breakdown-" + proposalId.toString();
 }
 // function randomBytes32(): Bytes {

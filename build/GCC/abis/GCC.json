@@ -523,6 +523,37 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "burn",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "burnFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "account",
         "type": "address"
@@ -557,38 +588,9 @@
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "referralAddress",
-        "type": "address"
-      }
-    ],
-    "name": "commitGCC",
-    "outputs": [
-      {
         "internalType": "uint256",
-        "name": "usdcEffect",
+        "name": "minImpactPower",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "impactPower",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "rewardAddress",
-        "type": "address"
       }
     ],
     "name": "commitGCC",
@@ -610,9 +612,9 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
         "internalType": "address",
@@ -620,17 +622,17 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
         "internalType": "address",
         "name": "referralAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
-    "name": "commitGCCFor",
+    "name": "commitGCC",
     "outputs": [
       {
         "internalType": "uint256",
@@ -661,6 +663,11 @@
       {
         "internalType": "uint256",
         "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
         "type": "uint256"
       }
     ],
@@ -698,17 +705,17 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "deadline",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "referralAddress",
+        "type": "address"
       },
       {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
-    "name": "commitGCCForAuthorized",
+    "name": "commitGCCFor",
     "outputs": [
       {
         "internalType": "uint256",
@@ -755,6 +762,11 @@
         "internalType": "address",
         "name": "referralAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
     "name": "commitGCCForAuthorized",
@@ -776,6 +788,55 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "rewardAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
+      }
+    ],
+    "name": "commitGCCForAuthorized",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "usdcEffect",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "impactPower",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
@@ -784,6 +845,11 @@
         "internalType": "address",
         "name": "rewardAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
     "name": "commitUSDC",
@@ -813,6 +879,11 @@
         "internalType": "address",
         "name": "referralAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
     "name": "commitUSDC",
@@ -862,6 +933,11 @@
         "internalType": "bytes32",
         "name": "s",
         "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minImpactPower",
+        "type": "uint256"
       }
     ],
     "name": "commitUSDCSignature",
