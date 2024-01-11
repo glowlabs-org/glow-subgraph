@@ -29,13 +29,12 @@ enum ProposalType {
 }
 
 interface Proposal @entity {
-  id: ID! 
+  id: ID!
   proposer: User! # Address of the proposer
   blockTimestamp: BigInt!
   transactionHash: Bytes!
   proposalType: ProposalType!
   nominationsUsed: NominationsUsed!
-
 }
 
 type MostPopularProposal @entity {
@@ -53,21 +52,20 @@ type MostPopularProposalVoteBreakdown @entity {
   rejectionVoteBreakdown: RejectionVoteBreakdown!
 }
 
-
 type RatificationVoteBreakdown @entity {
   id: ID!
   mostPopularProposalVoteBreakdown: MostPopularProposalVoteBreakdown!
   totalRatificationVotes: BigInt!
-  ratificationVotes: [RatificationVote!]! @derivedFrom(field: "ratificationVoteBreakdown")
-
+  ratificationVotes: [RatificationVote!]!
+    @derivedFrom(field: "ratificationVoteBreakdown")
 }
 
 type RejectionVoteBreakdown @entity {
   id: ID!
   mostPopularProposalVoteBreakdown: MostPopularProposalVoteBreakdown!
   totalRejectionVotes: BigInt!
-  rejectionVotes: [RejectionVote!]! @derivedFrom(field: "rejectionVoteBreakdown")
-
+  rejectionVotes: [RejectionVote!]!
+    @derivedFrom(field: "rejectionVoteBreakdown")
 }
 type RatificationVote @entity(immutable: true) {
   id: ID!
@@ -85,7 +83,6 @@ type RejectionVote @entity(immutable: true) {
   transactionHash: Bytes!
   numberOfVotes: BigInt!
   blockTimestamp: BigInt!
-
 }
 
 # type RatificationVoteSingular @entity(immutable:true) {
@@ -140,10 +137,7 @@ type GrantsProposal implements Proposal @entity {
   nominationsUsed: NominationsUsed!
   recipient: User!
   amount: BigInt!
-
 }
-
-
 
 type ChangeGCARequirementsHashProposal implements Proposal @entity {
   id: ID!
@@ -169,7 +163,8 @@ type NominationsUsed @entity {
   id: ID!
   proposal: Proposal!
   nominationsUsed: BigInt!
-  nominationBreakdown: [NominationSpend!]! @derivedFrom(field: "nominationsUsed")
+  nominationBreakdown: [NominationSpend!]!
+    @derivedFrom(field: "nominationsUsed")
 }
 
 type NominationSpend @entity(immutable: true) {
@@ -188,6 +183,41 @@ type User @entity {
   nominationsUsed: [NominationSpend!]! @derivedFrom(field: "user")
   ratificationVotes: [RatificationVote!]! @derivedFrom(field: "user")
   rejectionVotes: [RejectionVote!]! @derivedFrom(field: "user")
+  donations: [Donation!]! @derivedFrom(field: "user")
+  earlyLiquidityPurchases: [EarlyLiquidityPurchase!]!
+    @derivedFrom(field: "user")
   totalUSDCEffect: BigInt!
   nonceSeperator: BigInt!
+}
+
+# Order Of Operations for An Early Liquidity Purchase
+# 1. Emit AmountDonatedToBucket(indexed uint256,uint256) first from MinerPoolAndGCA
+# 2. Emit Purchase(indexed uint256,uint256,uint256) from EarlyLiquidityPurchase
+# Note: Their transaction will be the same transactionHash since they are emitted in the same transaction
+# In order to make sure we're not putting in duplicate data, we do the following:
+# 1. Insert the `Donation` since it's emitted first
+# 2. In the `EarlyLiquidityPurchase` we check if the `Donation` with that transaction hash and current nonce exists,
+# 3. If it does exist, we delete the `Donation` and insert the `EarlyLiquidityPurchase`
+#
+
+type EarlyLiquidityOrDonationTransactionHashNonceManager @entity {
+  id: ID!
+  nonce: BigInt!
+}
+type EarlyLiquidityPurchase @entity(immutable: true) {
+  id: ID!
+  user: User!
+  glowReceived: BigInt!
+  usdcSpent: BigInt!
+  transactionHash: Bytes!
+  blockTimestamp: BigInt!
+}
+type Donation @entity {
+  id: ID!
+  user: User!
+  amount: BigInt!
+  transactionHash: Bytes!
+  blockTimestamp: BigInt!
+  bucketId: BigInt!
+  isDonation: Boolean!
 }
