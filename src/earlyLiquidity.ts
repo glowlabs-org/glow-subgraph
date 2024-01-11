@@ -10,6 +10,7 @@ import { getOrCreateUser } from "./shared/getOrCreateUser";
 import { BigInt } from "@graphprotocol/graph-ts";
 import { getPastNonce } from "./shared/getPastNonce";
 import { getDonationId } from "./minerPoolAndGCA";
+import { getProtocolFeeAggregationObject } from "./shared/getProtocolFeeAggregationObject";
 
 export function handlePurchase(event: PurchaseEvent): void {
   const msg_sender = event.transaction.from;
@@ -25,6 +26,10 @@ export function handlePurchase(event: PurchaseEvent): void {
   if (matchingDonation) {
     matchingDonation.isDonation = false;
     matchingDonation.save();
+    const protocolFeeSum = getProtocolFeeAggregationObject();
+    protocolFeeSum.totalProtocolFeesPaid =
+      protocolFeeSum.totalProtocolFeesPaid.minus(event.params.totalUSDCSpent);
+    protocolFeeSum.save();
   }
 
   //

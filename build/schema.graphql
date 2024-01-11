@@ -221,3 +221,8 @@ type Donation @entity {
   bucketId: BigInt!
   isDonation: Boolean!
 }
+
+type ProtocolFeeSum @entity {
+  id: ID!
+  totalProtocolFeesPaid: BigInt!
+}

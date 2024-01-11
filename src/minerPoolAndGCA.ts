@@ -8,7 +8,8 @@ import { User } from "../generated/schema";
 import { getNextAvailableNonce } from "./shared/getNextAvailableNonce";
 import { getOrCreateUser } from "./shared/getOrCreateUser";
 import { Address, BigInt } from "@graphprotocol/graph-ts";
-
+import { ProtocolFeeSum } from "../generated/schema";
+import { getProtocolFeeAggregationObject } from "./shared/getProtocolFeeAggregationObject";
 export function handleAmountDonated(event: AmountDonatedToBucketEvent): void {
   const msg_sender = event.transaction.from;
   const msg_sender_hex = msg_sender.toHexString();
@@ -24,6 +25,11 @@ export function handleAmountDonated(event: AmountDonatedToBucketEvent): void {
   entity.transactionHash = event.transaction.hash;
   entity.isDonation = true;
   entity.save();
+
+  const protocolFeeSum = getProtocolFeeAggregationObject();
+  protocolFeeSum.totalProtocolFeesPaid =
+    protocolFeeSum.totalProtocolFeesPaid.plus(event.params.totalAmountDonated);
+  protocolFeeSum.save();
 }
 
 export function getDonationId(from: Address, nonce: BigInt): string {
