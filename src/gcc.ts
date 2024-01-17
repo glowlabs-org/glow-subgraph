@@ -13,11 +13,11 @@ export function handleGCCRetired(event: GCCRetiredEvent): void {
   );
   let entity = new GCCRetired(bytesId);
 
-  let rewardAddress = User.load(event.params.rewardAddress.toHexString());
-  if (!rewardAddress) {
-    rewardAddress = new User(event.params.rewardAddress.toHexString());
-    rewardAddress.save();
-  }
+  let rewardAddress = getOrCreateUser(event.params.rewardAddress);
+  rewardAddress.totalImpactPoints = event.params.impactPower.plus(
+    rewardAddress.totalImpactPoints,
+  );
+  rewardAddress.save();
 
   entity.account = from.id;
   entity.rewardAddress = rewardAddress.id;
@@ -42,11 +42,11 @@ export function handleUSDCRetired(event: USDCRetiredEvent): void {
   );
 
   let entity = new USDCRetired(bytesId);
-  let rewardAddress = User.load(event.params.rewardAddress.toHexString());
-  if (!rewardAddress) {
-    rewardAddress = new User(event.params.rewardAddress.toHexString());
-    rewardAddress.save();
-  }
+  let rewardAddress = getOrCreateUser(event.params.rewardAddress);
+  rewardAddress.totalImpactPoints = event.params.impactPower.plus(
+    rewardAddress.totalImpactPoints,
+  );
+  rewardAddress.save();
 
   entity.account = from.id;
   entity.rewardAddress = rewardAddress.id;

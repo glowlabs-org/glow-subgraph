@@ -188,6 +188,7 @@ type User @entity {
     @derivedFrom(field: "user")
   totalUSDCEffect: BigInt!
   nonceSeperator: BigInt!
+  totalImpactPoints: BigInt!
 }
 
 # Order Of Operations for An Early Liquidity Purchase

@@ -1963,6 +1963,19 @@ export class User extends Entity {
   set nonceSeperator(value: BigInt) {
     this.set("nonceSeperator", Value.fromBigInt(value));
   }
+
+  get totalImpactPoints(): BigInt {
+    let value = this.get("totalImpactPoints");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalImpactPoints(value: BigInt) {
+    this.set("totalImpactPoints", Value.fromBigInt(value));
+  }
 }
 
 export class EarlyLiquidityOrDonationTransactionHashNonceManager extends Entity {
