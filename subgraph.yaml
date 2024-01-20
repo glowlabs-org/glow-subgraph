@@ -50,6 +50,70 @@ dataSources:
           handler: handleAmountDonated
       file: ./src/minerPoolAndGCA.ts
   - kind: ethereum
+    name: GLOW
+    network: mainnet
+    source:
+      address: "0xf4fbC617A5733EAAF9af08E1Ab816B103388d8B6"
+      abi: GLOW
+      startBlock: 18809232
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - GLOW
+      abis:
+        - name: GLOW
+          file: ./abis/GLOW.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/glow.ts
+  - kind: ethereum
+    name: GCC_USDG_UniswapV2Pair
+    network: mainnet
+    source:
+      address: "0xeed0974404f635aa5e5f6e4793d1a417798f164e"
+      abi: UniswapV2Pair
+      startBlock: 18809232
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - GCC_USDG_PAIR
+      abis:
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+      eventHandlers:
+        - event:
+            Swap(indexed address,uint256,uint256,uint256,uint256,indexed
+            address)
+          handler: handleSwap
+      file: ./src/gcc_usdg_pair.ts
+  - kind: ethereum
+    name: GLOW_USDG_UniswapV2Pair
+    network: mainnet
+    source:
+      address: "0x6fa09ffc45f1ddc95c1bc192956717042f142c5d"
+      abi: UniswapV2Pair
+      startBlock: 18809232
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - GLOW_USDG_PAIR
+      abis:
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+      eventHandlers:
+        - event:
+            Swap(indexed address,uint256,uint256,uint256,uint256,indexed
+            address)
+          handler: handleSwap
+      file: ./src/glow_usdg_pair.ts
+  - kind: ethereum
     name: EarlyLiquidity
     network: mainnet
     source:

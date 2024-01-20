@@ -227,3 +227,29 @@ type ProtocolFeeSum @entity {
   id: ID!
   totalProtocolFeesPaid: BigInt!
 }
+
+type TotalGlowBurnedAggregate @entity {
+  id: ID!
+  totalGlowBurned: BigInt!
+}
+
+type Total_USDG_GCC_Pair_Aggregate @entity {
+  id: ID!
+  totalAmountZeroOut: BigInt!
+  totalAmountOneOut: BigInt!
+  totalAmountZeroIn: BigInt!
+  totalAmountOneIn: BigInt!
+}
+
+type Total_GLOW_USDG_Pair_Aggregate @entity {
+  id: ID!
+  totalAmountZeroOut: BigInt!
+  totalAmountOneOut: BigInt!
+  totalAmountZeroIn: BigInt!
+  totalAmountOneIn: BigInt!
+}
+
+type TotalImpactPointsAggregate @entity {
+  id: ID!
+  totalImpactPoints: BigInt!
+}

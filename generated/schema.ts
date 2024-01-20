@@ -2334,6 +2334,324 @@ export class ProtocolFeeSum extends Entity {
   }
 }
 
+export class TotalGlowBurnedAggregate extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save TotalGlowBurnedAggregate entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TotalGlowBurnedAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TotalGlowBurnedAggregate", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): TotalGlowBurnedAggregate | null {
+    return changetype<TotalGlowBurnedAggregate | null>(
+      store.get_in_block("TotalGlowBurnedAggregate", id)
+    );
+  }
+
+  static load(id: string): TotalGlowBurnedAggregate | null {
+    return changetype<TotalGlowBurnedAggregate | null>(
+      store.get("TotalGlowBurnedAggregate", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalGlowBurned(): BigInt {
+    let value = this.get("totalGlowBurned");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalGlowBurned(value: BigInt) {
+    this.set("totalGlowBurned", Value.fromBigInt(value));
+  }
+}
+
+export class Total_USDG_GCC_Pair_Aggregate extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save Total_USDG_GCC_Pair_Aggregate entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Total_USDG_GCC_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Total_USDG_GCC_Pair_Aggregate", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Total_USDG_GCC_Pair_Aggregate | null {
+    return changetype<Total_USDG_GCC_Pair_Aggregate | null>(
+      store.get_in_block("Total_USDG_GCC_Pair_Aggregate", id)
+    );
+  }
+
+  static load(id: string): Total_USDG_GCC_Pair_Aggregate | null {
+    return changetype<Total_USDG_GCC_Pair_Aggregate | null>(
+      store.get("Total_USDG_GCC_Pair_Aggregate", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalAmountZeroOut(): BigInt {
+    let value = this.get("totalAmountZeroOut");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountZeroOut(value: BigInt) {
+    this.set("totalAmountZeroOut", Value.fromBigInt(value));
+  }
+
+  get totalAmountOneOut(): BigInt {
+    let value = this.get("totalAmountOneOut");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountOneOut(value: BigInt) {
+    this.set("totalAmountOneOut", Value.fromBigInt(value));
+  }
+
+  get totalAmountZeroIn(): BigInt {
+    let value = this.get("totalAmountZeroIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountZeroIn(value: BigInt) {
+    this.set("totalAmountZeroIn", Value.fromBigInt(value));
+  }
+
+  get totalAmountOneIn(): BigInt {
+    let value = this.get("totalAmountOneIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountOneIn(value: BigInt) {
+    this.set("totalAmountOneIn", Value.fromBigInt(value));
+  }
+}
+
+export class Total_GLOW_USDG_Pair_Aggregate extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save Total_GLOW_USDG_Pair_Aggregate entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Total_GLOW_USDG_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Total_GLOW_USDG_Pair_Aggregate", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Total_GLOW_USDG_Pair_Aggregate | null {
+    return changetype<Total_GLOW_USDG_Pair_Aggregate | null>(
+      store.get_in_block("Total_GLOW_USDG_Pair_Aggregate", id)
+    );
+  }
+
+  static load(id: string): Total_GLOW_USDG_Pair_Aggregate | null {
+    return changetype<Total_GLOW_USDG_Pair_Aggregate | null>(
+      store.get("Total_GLOW_USDG_Pair_Aggregate", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalAmountZeroOut(): BigInt {
+    let value = this.get("totalAmountZeroOut");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountZeroOut(value: BigInt) {
+    this.set("totalAmountZeroOut", Value.fromBigInt(value));
+  }
+
+  get totalAmountOneOut(): BigInt {
+    let value = this.get("totalAmountOneOut");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountOneOut(value: BigInt) {
+    this.set("totalAmountOneOut", Value.fromBigInt(value));
+  }
+
+  get totalAmountZeroIn(): BigInt {
+    let value = this.get("totalAmountZeroIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountZeroIn(value: BigInt) {
+    this.set("totalAmountZeroIn", Value.fromBigInt(value));
+  }
+
+  get totalAmountOneIn(): BigInt {
+    let value = this.get("totalAmountOneIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalAmountOneIn(value: BigInt) {
+    this.set("totalAmountOneIn", Value.fromBigInt(value));
+  }
+}
+
+export class TotalImpactPointsAggregate extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save TotalImpactPointsAggregate entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TotalImpactPointsAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TotalImpactPointsAggregate", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): TotalImpactPointsAggregate | null {
+    return changetype<TotalImpactPointsAggregate | null>(
+      store.get_in_block("TotalImpactPointsAggregate", id)
+    );
+  }
+
+  static load(id: string): TotalImpactPointsAggregate | null {
+    return changetype<TotalImpactPointsAggregate | null>(
+      store.get("TotalImpactPointsAggregate", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalImpactPoints(): BigInt {
+    let value = this.get("totalImpactPoints");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalImpactPoints(value: BigInt) {
+    this.set("totalImpactPoints", Value.fromBigInt(value));
+  }
+}
+
 export class RatificationVoteLoader extends Entity {
   _entity: string;
   _field: string;
