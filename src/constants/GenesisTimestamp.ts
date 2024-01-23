@@ -1,0 +1,1 @@
+export const GENESIS_TIMESTAMP = 1700352000;

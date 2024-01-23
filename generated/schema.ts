@@ -2334,6 +2334,66 @@ export class ProtocolFeeSum extends Entity {
   }
 }
 
+export class EarlyLiquidityPaymentsPerWeek extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save EarlyLiquidityPaymentsPerWeek entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type EarlyLiquidityPaymentsPerWeek must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("EarlyLiquidityPaymentsPerWeek", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): EarlyLiquidityPaymentsPerWeek | null {
+    return changetype<EarlyLiquidityPaymentsPerWeek | null>(
+      store.get_in_block("EarlyLiquidityPaymentsPerWeek", id)
+    );
+  }
+
+  static load(id: string): EarlyLiquidityPaymentsPerWeek | null {
+    return changetype<EarlyLiquidityPaymentsPerWeek | null>(
+      store.get("EarlyLiquidityPaymentsPerWeek", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalPayments(): BigInt {
+    let value = this.get("totalPayments");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalPayments(value: BigInt) {
+    this.set("totalPayments", Value.fromBigInt(value));
+  }
+}
+
 export class TotalGlowBurnedAggregate extends Entity {
   constructor(id: string) {
     super();
