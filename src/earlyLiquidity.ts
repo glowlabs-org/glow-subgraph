@@ -13,6 +13,7 @@ import { getDonationId } from "./minerPoolAndGCA";
 import { getProtocolFeeAggregationObject } from "./shared/getProtocolFeeAggregationObject";
 import { EarlyLiquidityPaymentsPerWeek } from "../generated/schema";
 import { getProtocolWeek } from "./shared/getProtocolWeek";
+import { getProtocolPaymentPerWeekObjectForCurrentWeek } from "./shared/getProtocolPaymentPerWeekObjectForCurrentWeek";
 export function handlePurchase(event: PurchaseEvent): void {
   const msg_sender = event.transaction.from;
   const msg_sender_hex = msg_sender.toHexString();
@@ -51,6 +52,13 @@ export function handlePurchase(event: PurchaseEvent): void {
       protocolFeeSum.totalProtocolFeesPaid.minus(event.params.totalUSDCSpent);
     protocolFeeSum.save();
   }
+
+  let protocolFeePerWeekPayment = getProtocolPaymentPerWeekObjectForCurrentWeek(
+    event.block.timestamp,
+  );
+  protocolFeePerWeekPayment.totalPayments =
+    protocolFeePerWeekPayment.totalPayments.minus(event.params.totalUSDCSpent);
+  protocolFeePerWeekPayment.save();
 
   //
   entity.user = from.id;

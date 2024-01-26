@@ -10,6 +10,7 @@ import { getOrCreateUser } from "./shared/getOrCreateUser";
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { ProtocolFeeSum } from "../generated/schema";
 import { getProtocolFeeAggregationObject } from "./shared/getProtocolFeeAggregationObject";
+import { getProtocolPaymentPerWeekObjectForCurrentWeek } from "./shared/getProtocolPaymentPerWeekObjectForCurrentWeek";
 export function handleAmountDonated(event: AmountDonatedToBucketEvent): void {
   const msg_sender = event.transaction.from;
   const msg_sender_hex = msg_sender.toHexString();
@@ -18,6 +19,16 @@ export function handleAmountDonated(event: AmountDonatedToBucketEvent): void {
   let entity = new Donation(
     getDonationId(msg_sender, getNextAvailableNonce(from)),
   );
+
+  //Increment it in the amount donated,
+  //But also need to decrement it in early liquidity since that wouldnt be a protocol fee paymnet
+  let protocolFeePerWeek = getProtocolPaymentPerWeekObjectForCurrentWeek(
+    event.block.timestamp,
+  );
+  protocolFeePerWeek.totalPayments = protocolFeePerWeek.totalPayments.plus(
+    event.params.totalAmountDonated,
+  );
+  protocolFeePerWeek.save();
   entity.user = from.id;
   entity.amount = event.params.totalAmountDonated;
   entity.bucketId = event.params.bucketId;

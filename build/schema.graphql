@@ -233,6 +233,11 @@ type EarlyLiquidityPaymentsPerWeek @entity {
   totalPayments: BigInt!
 }
 
+type ProtocolFeePaymentsPerWeek @entity {
+  id: ID! #week number
+  totalPayments: BigInt!
+}
+
 type TotalGlowBurnedAggregate @entity {
   id: ID!
   totalGlowBurned: BigInt!
