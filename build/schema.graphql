@@ -262,4 +262,7 @@ type Total_GLOW_USDG_Pair_Aggregate @entity {
 type TotalImpactPointsAggregate @entity {
   id: ID!
   totalImpactPoints: BigInt!
+  totalUSDC_Committed: BigInt!
+  totalGCC_Committed: BigInt!
+  totalUSDC_Value: BigInt! #includes usdc of swaps
 }

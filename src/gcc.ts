@@ -6,6 +6,7 @@ import { USDCRetired } from "../generated/schema";
 import { getOrCreateUser } from "./shared/getOrCreateUser";
 import { getNextAvailableNonce } from "./shared/getNextAvailableNonce";
 import { incrementTotalImpactPointsGenerated } from "./shared/incrementTotalImpactPointsGenerated";
+import { BigInt } from "@graphprotocol/graph-ts";
 export function handleGCCRetired(event: GCCRetiredEvent): void {
   let from = getOrCreateUser(event.params.account);
   const nonce = getNextAvailableNonce(from);
@@ -19,7 +20,13 @@ export function handleGCCRetired(event: GCCRetiredEvent): void {
     rewardAddress.totalImpactPoints,
   );
   rewardAddress.save();
-  incrementTotalImpactPointsGenerated(event.params.impactPower);
+
+  incrementTotalImpactPointsGenerated(
+    event.params.impactPower,
+    BigInt.fromI32(0),
+    event.params.gccAmount,
+    event.params.usdcEffect,
+  );
 
   entity.account = from.id;
   entity.rewardAddress = rewardAddress.id;
@@ -49,7 +56,13 @@ export function handleUSDCRetired(event: USDCRetiredEvent): void {
     rewardAddress.totalImpactPoints,
   );
   rewardAddress.save();
-  incrementTotalImpactPointsGenerated(event.params.impactPower);
+
+  incrementTotalImpactPointsGenerated(
+    event.params.impactPower,
+    event.params.amount,
+    BigInt.fromI32(0),
+    event.params.amount,
+  );
 
   entity.account = from.id;
   entity.rewardAddress = rewardAddress.id;

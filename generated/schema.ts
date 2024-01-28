@@ -2770,6 +2770,45 @@ export class TotalImpactPointsAggregate extends Entity {
   set totalImpactPoints(value: BigInt) {
     this.set("totalImpactPoints", Value.fromBigInt(value));
   }
+
+  get totalUSDC_Committed(): BigInt {
+    let value = this.get("totalUSDC_Committed");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalUSDC_Committed(value: BigInt) {
+    this.set("totalUSDC_Committed", Value.fromBigInt(value));
+  }
+
+  get totalGCC_Committed(): BigInt {
+    let value = this.get("totalGCC_Committed");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalGCC_Committed(value: BigInt) {
+    this.set("totalGCC_Committed", Value.fromBigInt(value));
+  }
+
+  get totalUSDC_Value(): BigInt {
+    let value = this.get("totalUSDC_Value");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalUSDC_Value(value: BigInt) {
+    this.set("totalUSDC_Value", Value.fromBigInt(value));
+  }
 }
 
 export class RatificationVoteLoader extends Entity {
