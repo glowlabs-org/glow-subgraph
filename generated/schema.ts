@@ -2394,6 +2394,162 @@ export class EarlyLiquidityPaymentsPerWeek extends Entity {
   }
 }
 
+export class ProtocolFeePaymentNonceManager extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save ProtocolFeePaymentNonceManager entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ProtocolFeePaymentNonceManager must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ProtocolFeePaymentNonceManager", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): ProtocolFeePaymentNonceManager | null {
+    return changetype<ProtocolFeePaymentNonceManager | null>(
+      store.get_in_block("ProtocolFeePaymentNonceManager", id)
+    );
+  }
+
+  static load(id: string): ProtocolFeePaymentNonceManager | null {
+    return changetype<ProtocolFeePaymentNonceManager | null>(
+      store.get("ProtocolFeePaymentNonceManager", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get nextNonce(): BigInt {
+    let value = this.get("nextNonce");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set nextNonce(value: BigInt) {
+    this.set("nextNonce", Value.fromBigInt(value));
+  }
+}
+
+export class ProtocolFeePayment extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ProtocolFeePayment entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ProtocolFeePayment must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ProtocolFeePayment", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): ProtocolFeePayment | null {
+    return changetype<ProtocolFeePayment | null>(
+      store.get_in_block("ProtocolFeePayment", id)
+    );
+  }
+
+  static load(id: string): ProtocolFeePayment | null {
+    return changetype<ProtocolFeePayment | null>(
+      store.get("ProtocolFeePayment", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get user(): string {
+    let value = this.get("user");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set user(value: string) {
+    this.set("user", Value.fromString(value));
+  }
+
+  get amountPaid(): BigInt {
+    let value = this.get("amountPaid");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set amountPaid(value: BigInt) {
+    this.set("amountPaid", Value.fromBigInt(value));
+  }
+
+  get transactionHash(): Bytes {
+    let value = this.get("transactionHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set transactionHash(value: Bytes) {
+    this.set("transactionHash", Value.fromBytes(value));
+  }
+
+  get blockTimestamp(): BigInt {
+    let value = this.get("blockTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set blockTimestamp(value: BigInt) {
+    this.set("blockTimestamp", Value.fromBigInt(value));
+  }
+}
+
 export class ProtocolFeePaymentsPerWeek extends Entity {
   constructor(id: string) {
     super();

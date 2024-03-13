@@ -233,6 +233,15 @@ type EarlyLiquidityPaymentsPerWeek @entity {
   totalPayments: BigInt!
 }
 
+# type ProtocolFeePaymentNonce
+# type ProtocolFeePayment @entity {
+#   id: ID!
+#   user: User!
+#   amountPaid: BigInt!
+#   transactionHash: Bytes!
+#   blockTimestamp: BigInt!
+# }
+
 type ProtocolFeePaymentsPerWeek @entity {
   id: ID! #week number
   totalPayments: BigInt!

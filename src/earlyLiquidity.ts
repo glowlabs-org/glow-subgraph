@@ -4,15 +4,13 @@ import {
   EarlyLiquidityPurchase,
 } from "../generated/schema";
 import { Purchase as PurchaseEvent } from "../generated/EarlyLiquidity/EarlyLiquidity";
-import { User } from "../generated/schema";
-import { getNextAvailableNonce } from "./shared/getNextAvailableNonce";
 import { getOrCreateUser } from "./shared/getOrCreateUser";
-import { BigInt } from "@graphprotocol/graph-ts";
 import { getPastNonce } from "./shared/getPastNonce";
 import { getDonationId } from "./minerPoolAndGCA";
 import { getProtocolFeeAggregationObject } from "./shared/getProtocolFeeAggregationObject";
 import { EarlyLiquidityPaymentsPerWeek } from "../generated/schema";
 import { getProtocolWeek } from "./shared/getProtocolWeek";
+// import { getProtocolFeeObject } from "./shared/getProtocolFeeObject";
 import { getProtocolPaymentPerWeekObjectForCurrentWeek } from "./shared/getProtocolPaymentPerWeekObjectForCurrentWeek";
 export function handlePurchase(event: PurchaseEvent): void {
   const msg_sender = event.transaction.from;
