@@ -20,6 +20,7 @@ import { User } from "../generated/schema";
 import { BigInt, Bytes } from "@graphprotocol/graph-ts";
 import { GrantsProposalCreation as GrantsProposalCreationEvent } from "../generated/Governance/Governance";
 import { GrantsProposal } from "../generated/schema";
+import { Activity, ActivityType } from '../generated/schema'
 
 import { ChangeGCARequirementsProposalCreation as ChangeGCARequirementsProposalCreationEvent } from "../generated/Governance/Governance";
 import { ChangeGCARequirementsHashProposal } from "../generated/schema";
@@ -118,8 +119,14 @@ export function gcaCouncilElectionOrSlashCreationHandler(
   entity.nominationsUsed = nominationsUsed.id;
   entity.proposalType = "GCAElectionOrSlash";
   nominationsUsed.save();
-
   entity.save();
+
+  createActivity(
+    event,
+    ActivityType.Create,
+    event.params.proposer.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function rfcProposalCreationHandler(
@@ -149,6 +156,13 @@ export function rfcProposalCreationHandler(
 
   nominationsUsed.save();
   entity.save();
+
+  createActivity(
+    event,
+    ActivityType.Create,
+    event.params.proposer.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function grantsProposalCreationHandler(
@@ -182,6 +196,13 @@ export function grantsProposalCreationHandler(
   entity.amount = event.params.amount;
   entity.proposalType = "Grants";
   entity.save();
+
+  createActivity(
+    event,
+    ActivityType.Create,
+    event.params.proposer.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function changeGCARequirementsProposalCreationHandler(
@@ -215,6 +236,13 @@ export function changeGCARequirementsProposalCreationHandler(
   entity.transactionHash = event.transaction.hash;
   entity.proposalType = "ChangeGCARequirements";
   entity.save();
+
+  createActivity(
+    event,
+    ActivityType.Create,
+    event.params.proposer.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function nominationsUsedOnProposalHandler(
@@ -245,6 +273,14 @@ export function nominationsUsedOnProposalHandler(
 
   // Save the proposal back to the store
   // proposal.save()
+
+  // Is this a vote?
+  createActivity(
+    event,
+    ActivityType.Vote,
+    event.params.spender.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function mostPopularProposalSetHandler(
@@ -349,6 +385,14 @@ export function ratifyCastHandler(event: RatifyCastEvent): void {
   ratificationVote.blockTimestamp = event.block.timestamp;
   ratificationVote.ratificationVoteBreakdown = ratificationVoteBreakdown.id;
   ratificationVote.save();
+
+  // Should include how many ratify votes were used
+  createActivity(
+    event,
+    ActivityType.Ratify,
+    event.params.voter.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 //-----------------Reject Cast-----------------
 export function rejectCastHandler(event: RejectCastEvent): void {
@@ -377,6 +421,14 @@ export function rejectCastHandler(event: RejectCastEvent): void {
   rejectionVote.blockTimestamp = event.block.timestamp;
   rejectionVote.rejectionVoteBreakdown = rejectionVoteBreakdown.id;
   rejectionVote.save();
+
+  // Should include how many ratify votes were used
+  createActivity(
+    event,
+    ActivityType.Ratify,
+    event.params.voter.toHexString(),
+    event.params.proposalId.toString()
+  );
 }
 
 export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
@@ -398,6 +450,37 @@ export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
 
 export function getMostPopularProposalId(weekId: BigInt): string {
   return weekId.toString();
+}
+
+export function getActivityId(
+  ownerlId: string,
+  transactionHash: string,
+  logIndex: string,
+): string {
+  return (
+    "activity-" + ownerlId + "-" + transactionHash + "-" + logIndex
+  );
+}
+
+function createActivity(
+  // TODO: add type of event
+  event: any,
+  activityType: ActivityType,
+  userAddress: string,
+  proposalId: string
+): void {
+  let activityId = getActivityId(
+    userAddress,
+    event.transaction.hash.toHexString(),
+    event.logIndex.toString()
+  );
+  let activity = new Activity(activityId);
+  activity.user = userAddress;
+  activity.activityType = activityType;
+  activity.timestamp = event.block.timestamp;
+  activity.transactionHash = event.transaction.hash;
+  activity.proposal = proposalId;
+  activity.save();
 }
 
 export function getMostPopularProposalVoteBreakdownId(

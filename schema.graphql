@@ -176,6 +176,23 @@ type NominationSpend @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+enum ActivityType {
+  Vote
+  Stake
+  Ratify
+  Reject
+  Create
+}
+
+type Activity @entity {
+  id: ID!
+  user: User!
+  activityType: ActivityType!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+  proposal: Proposal
+}
+
 type User @entity {
   id: ID!
   gccRetired: [GCCRetired!]! @derivedFrom(field: "account")
