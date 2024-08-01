@@ -176,6 +176,29 @@ type NominationSpend @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+enum ActivityType {
+  Vote
+  Stake
+  Unstake
+  Ratify
+  Reject
+  Create
+  Veto
+}
+
+type Activity @entity {
+  id: ID!
+  user: User!
+  activityType: ActivityType!
+  timestamp: BigInt!
+  transactionHash: Bytes!
+  proposal: Proposal
+  ratificationVote: RatificationVote
+  rejectionVote: RejectionVote
+  stakedGlow: BigInt
+  unstakedGlow: BigInt
+}
+
 type User @entity {
   id: ID!
   gccRetired: [GCCRetired!]! @derivedFrom(field: "account")
@@ -186,6 +209,7 @@ type User @entity {
   donations: [Donation!]! @derivedFrom(field: "user")
   earlyLiquidityPurchases: [EarlyLiquidityPurchase!]!
     @derivedFrom(field: "user")
+  activities: [Activity!]! @derivedFrom(field: "user")
   totalUSDCEffect: BigInt!
   nonceSeperator: BigInt!
   totalImpactPoints: BigInt!
@@ -232,6 +256,15 @@ type EarlyLiquidityPaymentsPerWeek @entity {
   id: ID! #week number
   totalPayments: BigInt!
 }
+
+# type ProtocolFeePaymentNonce
+# type ProtocolFeePayment @entity {
+#   id: ID!
+#   user: User!
+#   amountPaid: BigInt!
+#   transactionHash: Bytes!
+#   blockTimestamp: BigInt!
+# }
 
 type ProtocolFeePaymentsPerWeek @entity {
   id: ID! #week number

@@ -68,6 +68,10 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+        - event: Stake(indexed address,uint256)
+          handler: handleStake
+        - event: Unstake(indexed address,uint256)
+          handler: handleUnstake
       file: ./src/glow.ts
   - kind: ethereum
     name: GCC_USDG_UniswapV2Pair

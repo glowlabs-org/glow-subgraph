@@ -12,6 +12,7 @@ import {
   RejectionVoteBreakdown,
   VetoCouncilElectionOrSlashProposal,
 } from "../generated/schema";
+
 import { GCACouncilElectionOrSlashCreation as GCACouncilElectionOrSlashCreationEvent } from "../generated/Governance/Governance";
 import { GCAElectionOrSlashProposal } from "../generated/schema";
 import { RFCProposalCreation as RFProposalCreationEvent } from "../generated/Governance/Governance";
@@ -20,7 +21,6 @@ import { User } from "../generated/schema";
 import { BigInt, Bytes } from "@graphprotocol/graph-ts";
 import { GrantsProposalCreation as GrantsProposalCreationEvent } from "../generated/Governance/Governance";
 import { GrantsProposal } from "../generated/schema";
-import { Activity, ActivityType } from '../generated/schema'
 
 import { ChangeGCARequirementsProposalCreation as ChangeGCARequirementsProposalCreationEvent } from "../generated/Governance/Governance";
 import { ChangeGCARequirementsHashProposal } from "../generated/schema";
@@ -32,6 +32,8 @@ import { RejectCast as RejectCastEvent } from "../generated/Governance/Governanc
 import { MostPopularProposal } from "../generated/schema";
 import { MostPopularProposalSet as MostPopularProposalSetEvent } from "../generated/Governance/Governance";
 import { ProposalVetoed as ProposalVetoedEvent } from "../generated/Governance/Governance";
+import { createActivity } from './shared/createActivity'
+
 export function vetoCouncilElectionOrSlashHandler(
   event: VetoCouncilElectionOrSlashEvent,
 ): void {
@@ -121,12 +123,14 @@ export function gcaCouncilElectionOrSlashCreationHandler(
   nominationsUsed.save();
   entity.save();
 
-  createActivity(
-    event,
-    ActivityType.Create,
-    event.params.proposer.toHexString(),
-    event.params.proposalId.toString()
-  );
+  // createActivity(
+  //   event,
+  //   "Create",
+  //   event.params.proposer.toHexString(),
+  //   {
+  //     proposalId: event.params.proposalId.toString()
+  //   }
+  // );
 }
 
 export function rfcProposalCreationHandler(
@@ -157,12 +161,14 @@ export function rfcProposalCreationHandler(
   nominationsUsed.save();
   entity.save();
 
-  createActivity(
-    event,
-    ActivityType.Create,
-    event.params.proposer.toHexString(),
-    event.params.proposalId.toString()
-  );
+  // createActivity(
+  //   event,
+  //   "Create",
+  //   event.params.proposer.toHexString(),
+  //   {
+  //     proposalId: event.params.proposalId.toString()
+  //   }
+  // );
 }
 
 export function grantsProposalCreationHandler(
@@ -197,12 +203,12 @@ export function grantsProposalCreationHandler(
   entity.proposalType = "Grants";
   entity.save();
 
-  createActivity(
-    event,
-    ActivityType.Create,
-    event.params.proposer.toHexString(),
-    event.params.proposalId.toString()
-  );
+  // createActivity(
+  //   event,
+  //   "Create",
+  //   event.params.proposer.toHexString(),
+  //   event.params.proposalId.toString(),
+  // );
 }
 
 export function changeGCARequirementsProposalCreationHandler(
@@ -237,12 +243,14 @@ export function changeGCARequirementsProposalCreationHandler(
   entity.proposalType = "ChangeGCARequirements";
   entity.save();
 
-  createActivity(
-    event,
-    ActivityType.Create,
-    event.params.proposer.toHexString(),
-    event.params.proposalId.toString()
-  );
+  // createActivity(
+  //   event,
+  //   "Create",
+  //   event.params.proposer.toHexString(),
+  //   {
+  //     proposalId: event.params.proposalId.toString()
+  //   }
+  // );
 }
 
 export function nominationsUsedOnProposalHandler(
@@ -275,12 +283,15 @@ export function nominationsUsedOnProposalHandler(
   // proposal.save()
 
   // Is this a vote?
-  createActivity(
-    event,
-    ActivityType.Vote,
-    event.params.spender.toHexString(),
-    event.params.proposalId.toString()
-  );
+
+  // createActivity(
+  //   event,
+  //   "Vote",
+  //   event.params.spender.toHexString(),
+  //   {
+  //     proposalId: event.params.proposalId.toString()
+  //   }
+  // );
 }
 
 export function mostPopularProposalSetHandler(
@@ -387,12 +398,16 @@ export function ratifyCastHandler(event: RatifyCastEvent): void {
   ratificationVote.save();
 
   // Should include how many ratify votes were used
-  createActivity(
-    event,
-    ActivityType.Ratify,
-    event.params.voter.toHexString(),
-    event.params.proposalId.toString()
-  );
+
+  // createActivity(
+  //   event,
+  //   "Ratify",
+  //   event.params.voter.toHexString(),
+  //   {
+  //     ratificationVoteId: ratificationVoteId
+  //   }
+  // );
+  
 }
 //-----------------Reject Cast-----------------
 export function rejectCastHandler(event: RejectCastEvent): void {
@@ -423,12 +438,15 @@ export function rejectCastHandler(event: RejectCastEvent): void {
   rejectionVote.save();
 
   // Should include how many ratify votes were used
-  createActivity(
-    event,
-    ActivityType.Ratify,
-    event.params.voter.toHexString(),
-    event.params.proposalId.toString()
-  );
+
+  // createActivity(
+  //   event,
+  //   "Reject",
+  //   event.params.voter.toHexString(),
+  //   {
+  //     rejectionVoteId: rejectionVoteId
+  //   }
+  // );
 }
 
 export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
@@ -442,6 +460,15 @@ export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
   mostPopularProposal.vetoer = event.params.vetoer.toHexString();
   mostPopularProposal.isVetoed = true;
   mostPopularProposal.save();
+
+  // createActivity(
+  //   event,
+  //   "Veto",
+  //   event.params.vetoer.toHexString(),
+  //   {
+  //     proposalId: event.params.proposalId.toString()
+  //   }
+  // );
 }
 
 //==================================================//
@@ -452,36 +479,37 @@ export function getMostPopularProposalId(weekId: BigInt): string {
   return weekId.toString();
 }
 
-export function getActivityId(
-  ownerlId: string,
-  transactionHash: string,
-  logIndex: string,
-): string {
-  return (
-    "activity-" + ownerlId + "-" + transactionHash + "-" + logIndex
-  );
-}
+// export function getActivityId(
+//   ownerlId: string,
+//   transactionHash: string,
+//   logIndex: string,
+// ): string {
+//   return (
+//     "activity-" + ownerlId + "-" + transactionHash + "-" + logIndex
+//   );
+// }
 
-function createActivity(
-  // TODO: add type of event
-  event: any,
-  activityType: ActivityType,
-  userAddress: string,
-  proposalId: string
-): void {
-  let activityId = getActivityId(
-    userAddress,
-    event.transaction.hash.toHexString(),
-    event.logIndex.toString()
-  );
-  let activity = new Activity(activityId);
-  activity.user = userAddress;
-  activity.activityType = activityType;
-  activity.timestamp = event.block.timestamp;
-  activity.transactionHash = event.transaction.hash;
-  activity.proposal = proposalId;
-  activity.save();
-}
+// function createActivity(
+//   event: any, // TODO: Replace 'any' with a more specific type
+//   activityType: string,
+//   userAddress: string,
+//   proposalId: string | undefined = undefined,
+//   voteBreakdown: MostPopularProposalVoteBreakdown | undefined = undefined
+// ): void {
+//   let activityId = getActivityId(
+//     userAddress,
+//     event.transaction.hash.toHexString(),
+//     event.logIndex.toString()
+//   );
+//   let activity = new Activity(activityId);
+//   activity.user = userAddress;
+//   activity.activityType = activityType;
+//   activity.timestamp = event.block.timestamp;
+//   activity.transactionHash = event.transaction.hash;
+//   if (proposalId) activity.proposal = proposalId;
+//   if (voteBreakdown) activity.voteBreakdown = voteBreakdown.id; 
+//   activity.save();
+// }
 
 export function getMostPopularProposalVoteBreakdownId(
   proposalId: BigInt,

@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class Approval extends ethereum.Event {
@@ -340,7 +340,7 @@ export class GCC__eip712DomainResult {
     value3: BigInt,
     value4: Address,
     value5: Bytes,
-    value6: Array<BigInt>
+    value6: Array<BigInt>,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -401,7 +401,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "CARBON_CREDIT_AUCTION",
       "CARBON_CREDIT_AUCTION():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -411,7 +411,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "CARBON_CREDIT_AUCTION",
       "CARBON_CREDIT_AUCTION():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -424,7 +424,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "COMMIT_PERMIT_TYPEHASH",
       "COMMIT_PERMIT_TYPEHASH():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -434,7 +434,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "COMMIT_PERMIT_TYPEHASH",
       "COMMIT_PERMIT_TYPEHASH():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -447,7 +447,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "GCA_AND_MINER_POOL_CONTRACT",
       "GCA_AND_MINER_POOL_CONTRACT():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -457,7 +457,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "GCA_AND_MINER_POOL_CONTRACT",
       "GCA_AND_MINER_POOL_CONTRACT():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -500,7 +500,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "IMPACT_CATALYST",
       "IMPACT_CATALYST():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -510,7 +510,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "IMPACT_CATALYST",
       "IMPACT_CATALYST():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -529,7 +529,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "UNISWAP_ROUTER",
       "UNISWAP_ROUTER():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -557,7 +557,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)]
+      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)],
     );
 
     return result[0].toBigInt();
@@ -567,7 +567,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)]
+      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -579,7 +579,7 @@ export class GCC extends ethereum.SmartContract {
   approve(spender: Address, value: BigInt): boolean {
     let result = super.call("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
 
     return result[0].toBoolean();
@@ -588,7 +588,7 @@ export class GCC extends ethereum.SmartContract {
   try_approve(spender: Address, value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -599,7 +599,7 @@ export class GCC extends ethereum.SmartContract {
 
   balanceOf(account: Address): BigInt {
     let result = super.call("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
 
     return result[0].toBigInt();
@@ -607,7 +607,7 @@ export class GCC extends ethereum.SmartContract {
 
   try_balanceOf(account: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -620,7 +620,10 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "commitAllowance",
       "commitAllowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
+      [
+        ethereum.Value.fromAddress(account),
+        ethereum.Value.fromAddress(spender),
+      ],
     );
 
     return result[0].toBigInt();
@@ -628,12 +631,15 @@ export class GCC extends ethereum.SmartContract {
 
   try_commitAllowance(
     account: Address,
-    spender: Address
+    spender: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "commitAllowance",
       "commitAllowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(account), ethereum.Value.fromAddress(spender)]
+      [
+        ethereum.Value.fromAddress(account),
+        ethereum.Value.fromAddress(spender),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -645,7 +651,7 @@ export class GCC extends ethereum.SmartContract {
   commitGCC(
     amount: BigInt,
     rewardAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCCResult {
     let result = super.call(
       "commitGCC",
@@ -653,8 +659,8 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCCResult(result[0].toBigInt(), result[1].toBigInt());
@@ -663,7 +669,7 @@ export class GCC extends ethereum.SmartContract {
   try_commitGCC(
     amount: BigInt,
     rewardAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCCResult> {
     let result = super.tryCall(
       "commitGCC",
@@ -671,15 +677,15 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new GCC__commitGCCResult(value[0].toBigInt(), value[1].toBigInt())
+      new GCC__commitGCCResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -687,7 +693,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     rewardAddress: Address,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCC1Result {
     let result = super.call(
       "commitGCC",
@@ -696,13 +702,13 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCC1Result(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -710,7 +716,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     rewardAddress: Address,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCC1Result> {
     let result = super.tryCall(
       "commitGCC",
@@ -719,15 +725,15 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new GCC__commitGCC1Result(value[0].toBigInt(), value[1].toBigInt())
+      new GCC__commitGCC1Result(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -735,7 +741,7 @@ export class GCC extends ethereum.SmartContract {
     from: Address,
     rewardAddress: Address,
     amount: BigInt,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCCForResult {
     let result = super.call(
       "commitGCCFor",
@@ -744,13 +750,13 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromUnsignedBigInt(amount),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCCForResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -758,7 +764,7 @@ export class GCC extends ethereum.SmartContract {
     from: Address,
     rewardAddress: Address,
     amount: BigInt,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCCForResult> {
     let result = super.tryCall(
       "commitGCCFor",
@@ -767,15 +773,15 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromUnsignedBigInt(amount),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new GCC__commitGCCForResult(value[0].toBigInt(), value[1].toBigInt())
+      new GCC__commitGCCForResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -784,7 +790,7 @@ export class GCC extends ethereum.SmartContract {
     rewardAddress: Address,
     amount: BigInt,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCCFor1Result {
     let result = super.call(
       "commitGCCFor",
@@ -794,13 +800,13 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCCFor1Result(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -809,7 +815,7 @@ export class GCC extends ethereum.SmartContract {
     rewardAddress: Address,
     amount: BigInt,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCCFor1Result> {
     let result = super.tryCall(
       "commitGCCFor",
@@ -819,15 +825,15 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new GCC__commitGCCFor1Result(value[0].toBigInt(), value[1].toBigInt())
+      new GCC__commitGCCFor1Result(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -838,7 +844,7 @@ export class GCC extends ethereum.SmartContract {
     deadline: BigInt,
     signature: Bytes,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCCForAuthorizedResult {
     let result = super.call(
       "commitGCCForAuthorized",
@@ -850,13 +856,13 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(deadline),
         ethereum.Value.fromBytes(signature),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCCForAuthorizedResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -867,7 +873,7 @@ export class GCC extends ethereum.SmartContract {
     deadline: BigInt,
     signature: Bytes,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCCForAuthorizedResult> {
     let result = super.tryCall(
       "commitGCCForAuthorized",
@@ -879,8 +885,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(deadline),
         ethereum.Value.fromBytes(signature),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -889,8 +895,8 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new GCC__commitGCCForAuthorizedResult(
         value[0].toBigInt(),
-        value[1].toBigInt()
-      )
+        value[1].toBigInt(),
+      ),
     );
   }
 
@@ -900,7 +906,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     deadline: BigInt,
     signature: Bytes,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): GCC__commitGCCForAuthorized1Result {
     let result = super.call(
       "commitGCCForAuthorized",
@@ -911,13 +917,13 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromUnsignedBigInt(deadline),
         ethereum.Value.fromBytes(signature),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return new GCC__commitGCCForAuthorized1Result(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -927,7 +933,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     deadline: BigInt,
     signature: Bytes,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<GCC__commitGCCForAuthorized1Result> {
     let result = super.tryCall(
       "commitGCCForAuthorized",
@@ -938,8 +944,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromUnsignedBigInt(deadline),
         ethereum.Value.fromBytes(signature),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -948,15 +954,15 @@ export class GCC extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new GCC__commitGCCForAuthorized1Result(
         value[0].toBigInt(),
-        value[1].toBigInt()
-      )
+        value[1].toBigInt(),
+      ),
     );
   }
 
   commitUSDC(
     amount: BigInt,
     rewardAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): BigInt {
     let result = super.call(
       "commitUSDC",
@@ -964,8 +970,8 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return result[0].toBigInt();
@@ -974,7 +980,7 @@ export class GCC extends ethereum.SmartContract {
   try_commitUSDC(
     amount: BigInt,
     rewardAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "commitUSDC",
@@ -982,8 +988,8 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -996,7 +1002,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     rewardAddress: Address,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): BigInt {
     let result = super.call(
       "commitUSDC",
@@ -1005,8 +1011,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return result[0].toBigInt();
@@ -1016,7 +1022,7 @@ export class GCC extends ethereum.SmartContract {
     amount: BigInt,
     rewardAddress: Address,
     referralAddress: Address,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "commitUSDC",
@@ -1025,8 +1031,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(rewardAddress),
         ethereum.Value.fromAddress(referralAddress),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1043,7 +1049,7 @@ export class GCC extends ethereum.SmartContract {
     v: i32,
     r: Bytes,
     s: Bytes,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): BigInt {
     let result = super.call(
       "commitUSDCSignature",
@@ -1056,8 +1062,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
         ethereum.Value.fromFixedBytes(s),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
 
     return result[0].toBigInt();
@@ -1071,7 +1077,7 @@ export class GCC extends ethereum.SmartContract {
     v: i32,
     r: Bytes,
     s: Bytes,
-    minImpactPower: BigInt
+    minImpactPower: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "commitUSDCSignature",
@@ -1084,8 +1090,8 @@ export class GCC extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
         ethereum.Value.fromFixedBytes(s),
-        ethereum.Value.fromUnsignedBigInt(minImpactPower)
-      ]
+        ethereum.Value.fromUnsignedBigInt(minImpactPower),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1115,8 +1121,8 @@ export class GCC extends ethereum.SmartContract {
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(requestedDecrease)
-      ]
+        ethereum.Value.fromUnsignedBigInt(requestedDecrease),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1124,15 +1130,15 @@ export class GCC extends ethereum.SmartContract {
 
   try_decreaseAllowance(
     spender: Address,
-    requestedDecrease: BigInt
+    requestedDecrease: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "decreaseAllowance",
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(requestedDecrease)
-      ]
+        ethereum.Value.fromUnsignedBigInt(requestedDecrease),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1145,7 +1151,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "domainSeparatorV4",
       "domainSeparatorV4():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -1155,7 +1161,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "domainSeparatorV4",
       "domainSeparatorV4():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1168,7 +1174,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
 
     return new GCC__eip712DomainResult(
@@ -1178,7 +1184,7 @@ export class GCC extends ethereum.SmartContract {
       result[3].toBigInt(),
       result[4].toAddress(),
       result[5].toBytes(),
-      result[6].toBigIntArray()
+      result[6].toBigIntArray(),
     );
   }
 
@@ -1186,7 +1192,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1200,8 +1206,8 @@ export class GCC extends ethereum.SmartContract {
         value[3].toBigInt(),
         value[4].toAddress(),
         value[5].toBytes(),
-        value[6].toBigIntArray()
-      )
+        value[6].toBigIntArray(),
+      ),
     );
   }
 
@@ -1211,8 +1217,8 @@ export class GCC extends ethereum.SmartContract {
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(addedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1220,15 +1226,15 @@ export class GCC extends ethereum.SmartContract {
 
   try_increaseAllowance(
     spender: Address,
-    addedValue: BigInt
+    addedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "increaseAllowance",
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(addedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1241,7 +1247,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "isBucketMinted",
       "isBucketMinted(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBoolean();
@@ -1251,7 +1257,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "isBucketMinted",
       "isBucketMinted(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1279,7 +1285,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "nextCommitNonce",
       "nextCommitNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBigInt();
@@ -1289,7 +1295,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "nextCommitNonce",
       "nextCommitNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1317,7 +1323,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.call(
       "totalImpactPowerEarned",
       "totalImpactPowerEarned(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBigInt();
@@ -1327,7 +1333,7 @@ export class GCC extends ethereum.SmartContract {
     let result = super.tryCall(
       "totalImpactPowerEarned",
       "totalImpactPowerEarned(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1354,7 +1360,7 @@ export class GCC extends ethereum.SmartContract {
   transfer(to: Address, value: BigInt): boolean {
     let result = super.call("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
 
     return result[0].toBoolean();
@@ -1363,7 +1369,7 @@ export class GCC extends ethereum.SmartContract {
   try_transfer(to: Address, value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1379,8 +1385,8 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(value),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1389,7 +1395,7 @@ export class GCC extends ethereum.SmartContract {
   try_transferFrom(
     from: Address,
     to: Address,
-    value: BigInt
+    value: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "transferFrom",
@@ -1397,8 +1403,8 @@ export class GCC extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(value),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

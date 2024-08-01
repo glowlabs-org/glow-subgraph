@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class ChangeGCARequirementsProposalCreation extends ethereum.Event {
@@ -392,7 +392,7 @@ export class Governance__eip712DomainResult {
     value3: BigInt,
     value4: Address,
     value5: Bytes,
-    value6: Array<BigInt>
+    value6: Array<BigInt>,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -481,7 +481,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "SPEND_NOMINATIONS_ON_PROPOSAL_TYPEHASH",
       "SPEND_NOMINATIONS_ON_PROPOSAL_TYPEHASH():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -491,7 +491,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "SPEND_NOMINATIONS_ON_PROPOSAL_TYPEHASH",
       "SPEND_NOMINATIONS_ON_PROPOSAL_TYPEHASH():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -504,7 +504,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "costForNewProposal",
       "costForNewProposal():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -514,7 +514,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "costForNewProposal",
       "costForNewProposal():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -542,7 +542,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
 
     return new Governance__eip712DomainResult(
@@ -552,7 +552,7 @@ export class Governance extends ethereum.SmartContract {
       result[3].toBigInt(),
       result[4].toAddress(),
       result[5].toBytes(),
-      result[6].toBigIntArray()
+      result[6].toBigIntArray(),
     );
   }
 
@@ -560,7 +560,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -574,8 +574,8 @@ export class Governance extends ethereum.SmartContract {
         value[3].toBigInt(),
         value[4].toAddress(),
         value[5].toBytes(),
-        value[6].toBigIntArray()
-      )
+        value[6].toBigIntArray(),
+      ),
     );
   }
 
@@ -583,7 +583,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "getProposalStatus",
       "getProposalStatus(uint256):(uint8)",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
 
     return result[0].toI32();
@@ -593,7 +593,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "getProposalStatus",
       "getProposalStatus(uint256):(uint8)",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -608,8 +608,8 @@ export class Governance extends ethereum.SmartContract {
       "hasEndorsedProposal(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(gca),
-        ethereum.Value.fromUnsignedBigInt(weekId)
-      ]
+        ethereum.Value.fromUnsignedBigInt(weekId),
+      ],
     );
 
     return result[0].toBoolean();
@@ -617,15 +617,15 @@ export class Governance extends ethereum.SmartContract {
 
   try_hasEndorsedProposal(
     gca: Address,
-    weekId: BigInt
+    weekId: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "hasEndorsedProposal",
       "hasEndorsedProposal(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(gca),
-        ethereum.Value.fromUnsignedBigInt(weekId)
-      ]
+        ethereum.Value.fromUnsignedBigInt(weekId),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -638,7 +638,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "lastExecutedWeek",
       "lastExecutedWeek():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -648,7 +648,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "lastExecutedWeek",
       "lastExecutedWeek():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -661,7 +661,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "lastExpiredProposalId",
       "lastExpiredProposalId():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -671,7 +671,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "lastExpiredProposalId",
       "lastExpiredProposalId():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -686,8 +686,8 @@ export class Governance extends ethereum.SmartContract {
       "longStakerVotesForProposal(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
+        ethereum.Value.fromUnsignedBigInt(param1),
+      ],
     );
 
     return result[0].toBigInt();
@@ -695,15 +695,15 @@ export class Governance extends ethereum.SmartContract {
 
   try_longStakerVotesForProposal(
     param0: Address,
-    param1: BigInt
+    param1: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "longStakerVotesForProposal",
       "longStakerVotesForProposal(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
+        ethereum.Value.fromUnsignedBigInt(param1),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -716,7 +716,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "mostPopularProposal",
       "mostPopularProposal(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toBigInt();
@@ -726,7 +726,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "mostPopularProposal",
       "mostPopularProposal(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -739,7 +739,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "nominationsOf",
       "nominationsOf(address):(uint256)",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
 
     return result[0].toBigInt();
@@ -749,7 +749,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "nominationsOf",
       "nominationsOf(address):(uint256)",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -762,7 +762,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "numEndorsementsOnWeek",
       "numEndorsementsOnWeek(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toBigInt();
@@ -772,7 +772,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "numEndorsementsOnWeek",
       "numEndorsementsOnWeek(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -791,7 +791,7 @@ export class Governance extends ethereum.SmartContract {
     let result = super.tryCall(
       "proposalCount",
       "proposalCount():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -801,28 +801,26 @@ export class Governance extends ethereum.SmartContract {
   }
 
   proposalLongStakerVotes(
-    proposalId: BigInt
+    proposalId: BigInt,
   ): Governance__proposalLongStakerVotesResultValue0Struct {
     let result = super.call(
       "proposalLongStakerVotes",
       "proposalLongStakerVotes(uint256):((uint128,uint128))",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
 
     return changetype<Governance__proposalLongStakerVotesResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_proposalLongStakerVotes(
-    proposalId: BigInt
-  ): ethereum.CallResult<
-    Governance__proposalLongStakerVotesResultValue0Struct
-  > {
+    proposalId: BigInt,
+  ): ethereum.CallResult<Governance__proposalLongStakerVotesResultValue0Struct> {
     let result = super.tryCall(
       "proposalLongStakerVotes",
       "proposalLongStakerVotes(uint256):((uint128,uint128))",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -830,8 +828,8 @@ export class Governance extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<Governance__proposalLongStakerVotesResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
@@ -839,28 +837,28 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "proposals",
       "proposals(uint256):((uint8,uint64,uint184,bytes))",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
 
     return changetype<Governance__proposalsResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_proposals(
-    proposalId: BigInt
+    proposalId: BigInt,
   ): ethereum.CallResult<Governance__proposalsResultValue0Struct> {
     let result = super.tryCall(
       "proposals",
       "proposals(uint256):((uint8,uint64,uint184,bytes))",
-      [ethereum.Value.fromUnsignedBigInt(proposalId)]
+      [ethereum.Value.fromUnsignedBigInt(proposalId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<Governance__proposalsResultValue0Struct>(value[0].toTuple())
+      changetype<Governance__proposalsResultValue0Struct>(value[0].toTuple()),
     );
   }
 
@@ -868,19 +866,19 @@ export class Governance extends ethereum.SmartContract {
     let result = super.call(
       "spendNominationsOnProposalNonce",
       "spendNominationsOnProposalNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBigInt();
   }
 
   try_spendNominationsOnProposalNonce(
-    param0: Address
+    param0: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "spendNominationsOnProposalNonce",
       "spendNominationsOnProposalNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
