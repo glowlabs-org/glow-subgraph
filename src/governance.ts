@@ -81,10 +81,8 @@ export function vetoCouncilElectionOrSlashHandler(
     "Veto",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -139,10 +137,8 @@ export function gcaCouncilElectionOrSlashCreationHandler(
     "Create",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -179,10 +175,8 @@ export function rfcProposalCreationHandler(
     "Create",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -223,10 +217,8 @@ export function grantsProposalCreationHandler(
     "Create",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -267,10 +259,8 @@ export function changeGCARequirementsProposalCreationHandler(
     "Create",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -381,6 +371,15 @@ export function mostPopularProposalSetHandler(
 }
 //-----------------RatifyCast-----------------
 export function ratifyCastHandler(event: RatifyCastEvent): void {
+  createActivity(
+    event,
+    "Ratify",
+    event.params.voter.toHexString(),
+    event.params.proposalId.toString(),  // proposalId
+    event.params.numVotes, // votes
+    null, // glowAmount
+  );
+
   let from = getOrCreateUser(event.params.voter);
   let nextNonce = getNextAvailableNonce(from);
   //A ratification vote breakdown is tied directly to the proposalId, so we can just use that
@@ -409,22 +408,21 @@ export function ratifyCastHandler(event: RatifyCastEvent): void {
   ratificationVote.ratificationVoteBreakdown = ratificationVoteBreakdown.id;
   ratificationVote.save();
 
-  // Should include how many ratify votes were used
-
-  createActivity(
-    event,
-    "Ratify",
-    event.params.voter.toHexString(),
-    event.params.proposalId.toString(),  // proposalId
-    ratificationVoteId, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
-  );
+  // This is not being invoked.
+  
   
 }
 //-----------------Reject Cast-----------------
 export function rejectCastHandler(event: RejectCastEvent): void {
+  createActivity(
+    event,
+    "Reject",
+    event.params.voter.toHexString(),
+    event.params.proposalId.toString(),  // proposalId
+    event.params.numVotes, // votes
+    null, // glowAmount
+  );
+  
   let from = getOrCreateUser(event.params.voter);
   let nextNonce = getNextAvailableNonce(from);
   let rejectionBreakdownId = getRejectionBreakdownId(event.params.proposalId);
@@ -451,16 +449,8 @@ export function rejectCastHandler(event: RejectCastEvent): void {
   rejectionVote.rejectionVoteBreakdown = rejectionVoteBreakdown.id;
   rejectionVote.save();
 
-  createActivity(
-    event,
-    "Reject",
-    event.params.voter.toHexString(),
-    event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    rejectionVoteId, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
-  );
+  // This is not being invoked.
+
 }
 
 export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
@@ -480,10 +470,8 @@ export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
     "Veto",
     event.params.vetoer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    null, // glowAmount
   );
 }
 
@@ -495,37 +483,6 @@ export function getMostPopularProposalId(weekId: BigInt): string {
   return weekId.toString();
 }
 
-// export function getActivityId(
-//   ownerlId: string,
-//   transactionHash: string,
-//   logIndex: string,
-// ): string {
-//   return (
-//     "activity-" + ownerlId + "-" + transactionHash + "-" + logIndex
-//   );
-// }
-
-// function createActivity(
-//   event: any, // TODO: Replace 'any' with a more specific type
-//   activityType: string,
-//   userAddress: string,
-//   proposalId: string | undefined = undefined,
-//   voteBreakdown: MostPopularProposalVoteBreakdown | undefined = undefined
-// ): void {
-//   let activityId = getActivityId(
-//     userAddress,
-//     event.transaction.hash.toHexString(),
-//     event.logIndex.toString()
-//   );
-//   let activity = new Activity(activityId);
-//   activity.user = userAddress;
-//   activity.activityType = activityType;
-//   activity.timestamp = event.block.timestamp;
-//   activity.transactionHash = event.transaction.hash;
-//   if (proposalId) activity.proposal = proposalId;
-//   if (voteBreakdown) activity.voteBreakdown = voteBreakdown.id; 
-//   activity.save();
-// }
 
 export function getMostPopularProposalVoteBreakdownId(
   proposalId: BigInt,

@@ -1951,42 +1951,8 @@ export class Activity extends Entity {
     }
   }
 
-  get ratificationVote(): string | null {
-    let value = this.get("ratificationVote");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set ratificationVote(value: string | null) {
-    if (!value) {
-      this.unset("ratificationVote");
-    } else {
-      this.set("ratificationVote", Value.fromString(<string>value));
-    }
-  }
-
-  get rejectionVote(): string | null {
-    let value = this.get("rejectionVote");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set rejectionVote(value: string | null) {
-    if (!value) {
-      this.unset("rejectionVote");
-    } else {
-      this.set("rejectionVote", Value.fromString(<string>value));
-    }
-  }
-
-  get stakedGlow(): BigInt | null {
-    let value = this.get("stakedGlow");
+  get votes(): BigInt | null {
+    let value = this.get("votes");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -1994,16 +1960,16 @@ export class Activity extends Entity {
     }
   }
 
-  set stakedGlow(value: BigInt | null) {
+  set votes(value: BigInt | null) {
     if (!value) {
-      this.unset("stakedGlow");
+      this.unset("votes");
     } else {
-      this.set("stakedGlow", Value.fromBigInt(<BigInt>value));
+      this.set("votes", Value.fromBigInt(<BigInt>value));
     }
   }
 
-  get unstakedGlow(): BigInt | null {
-    let value = this.get("unstakedGlow");
+  get glowAmount(): BigInt | null {
+    let value = this.get("glowAmount");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -2011,11 +1977,11 @@ export class Activity extends Entity {
     }
   }
 
-  set unstakedGlow(value: BigInt | null) {
+  set glowAmount(value: BigInt | null) {
     if (!value) {
-      this.unset("unstakedGlow");
+      this.unset("glowAmount");
     } else {
-      this.set("unstakedGlow", Value.fromBigInt(<BigInt>value));
+      this.set("glowAmount", Value.fromBigInt(<BigInt>value));
     }
   }
 }

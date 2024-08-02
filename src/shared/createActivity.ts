@@ -1,13 +1,25 @@
 import { Activity, User } from "../../generated/schema";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { getOrCreateUser } from './getOrCreateUser';
+// import { log } from '@graphprotocol/graph-ts'
+
+// enum ActivityType {
+//   Vote
+//   Stake
+//   Unstake
+//   Ratify
+//   Reject
+//   Create
+//   Veto
+// }
 
 export function getActivityId(
+  activityType: string,
   userAddress: string,
   transactionHash: string,
   logIndex: string
 ): string {
-  return "activity-" + userAddress + "-" + transactionHash + "-" + logIndex;
+  return "activity-" + activityType + "-" + userAddress + "-" + transactionHash + "-" + logIndex;
 }
 
 export function createActivity(
@@ -15,12 +27,11 @@ export function createActivity(
   activityType: string,
   userAddress: string,
   proposalId: string | null = null,
-  ratificationVoteId: string | null = null,
-  rejectionVoteId: string | null = null,
-  stakedGlow: BigInt | null = null,
-  unstakedGlow: BigInt | null = null
+  votes: BigInt | null = null,
+  glowAmount: BigInt | null = null
 ): void {
   const activityId = getActivityId(
+    activityType,
     userAddress,
     event.transaction.hash.toHexString(),
     event.logIndex.toString()
@@ -39,20 +50,12 @@ export function createActivity(
     activity.proposal = proposalId;
   }
 
-  if (ratificationVoteId) {
-    activity.ratificationVote = ratificationVoteId;
+  if (votes) {
+    activity.votes = votes;
   }
 
-  if (rejectionVoteId) {
-    activity.rejectionVote = rejectionVoteId;
-  }
-
-  if (stakedGlow) {
-    activity.stakedGlow = stakedGlow;
-  }
-
-  if (unstakedGlow) {
-    activity.unstakedGlow = unstakedGlow;
+  if (glowAmount) {
+    activity.glowAmount = glowAmount;
   }
 
   activity.save();

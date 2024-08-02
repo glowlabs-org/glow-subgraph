@@ -18,6 +18,7 @@ import { createRejectCastEvent } from "./governance-utils";
 import { createRatifyCastEvent } from "./governance-utils";
 import { createMostPopularProposalSetEvent } from "./governance-utils";
 import { getActivityId } from "../src/shared/createActivity";
+import { getOrCreateUser } from "../src/shared/getOrCreateUser"
   // Tests structure (matchstick-as >=0.5.0)
   // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
   
@@ -39,7 +40,7 @@ import { getActivityId } from "../src/shared/createActivity";
     // For more test scenarios, see:
     // https://thegraph.com/docs/en/developer/matchstick/#write-a-unit-test
   
-    test("Create Veto Council Proposal", () => {
+    test("Create Veto Council Proposal And Check Activity", () => {
         let proposer = Address.fromString("0x0000000000000000000000000000000000000001");
         let oldAgent = Address.fromString("0x6884efd53b2650679996D3Ea206D116356dA08a9");
         let newAgent = Address.fromString("0x0000000000000000000000000000000000000007");
@@ -154,9 +155,27 @@ import { getActivityId } from "../src/shared/createActivity";
       // )
       // More assert options:
       // https://thegraph.com/docs/en/developer/matchstick/#asserts
+
+      const activityId = getActivityId(
+        "Veto",
+        proposer.toHexString(),
+        event.transaction.hash.toHexString(),
+        event.logIndex.toString()
+      );
+
+      const activity = Activity.load(activityId);
+
+      assert.assertNotNull(activity);
+      if (activity) {
+        assert.stringEquals(activity.user, proposer.toHexString());
+        assert.stringEquals(activity.activityType, "Veto");
+        assert.bigIntEquals(activity.timestamp, event.block.timestamp);
+        assert.bytesEquals(activity.transactionHash, event.transaction.hash);
+        assert.stringEquals(activity.proposal!, proposalId.toString());
+      }
     });
 
-    test("Create GCA Council Proposal", () => {
+    test("Create GCA Council Proposal and Check Activity", () => {
         let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
         let gcasToSlash = [
             Address.fromString("0x6884efd53b2650679996D3Ea206D116356dA08a9"),
@@ -180,53 +199,68 @@ import { getActivityId } from "../src/shared/createActivity";
     );
 
     gcaCouncilElectionOrSlashCreationHandler(event);
+
+    const activityId = getActivityId(
+        "Create",
+        proposer.toHexString(),
+        event.transaction.hash.toHexString(),
+        event.logIndex.toString()
+      );
+
+      const activity = Activity.load(activityId);
+
+      assert.assertNotNull(activity);
+      if (activity) {
+        assert.stringEquals(activity.user, proposer.toHexString());
+        assert.stringEquals(activity.activityType, "Create");
+        assert.bigIntEquals(activity.timestamp, event.block.timestamp);
+        assert.bytesEquals(activity.transactionHash, event.transaction.hash);
+        assert.stringEquals(activity.proposal!, proposalId.toString());
+      }
     });
     
     test("Create Ratify Proposal and check Activity", () => { 
         let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
         let proposalId = BigInt.fromU32(1);
         let numVotes = BigInt.fromI32(20);
+    
         let event = createRatifyCastEvent(
             proposalId,
             proposer,
             numVotes,
         );
-
-    
+        
         ratifyCastHandler(event);
     
-        // Check if Activity entity was created
         const activityId = getActivityId(
-          proposer.toHexString(),
+          "Ratify",
+          event.params.voter.toHexString(),
           event.transaction.hash.toHexString(),
           event.logIndex.toString()
         );
-        const activity = Activity.load(activityId);
-
         
-    
+        log.info("Looking for activity with ID: {}", [`id: ${activityId}`]);
+        
+        const activity = Activity.load(activityId);
+        
         assert.assertNotNull(activity);
+        
         if (activity) {
-
-        let ratifiedActivity = `
-        id:  ${activity.id},
-        user: ${activity.user},
-        ActivityType: ${activity.activityType},`;
-
-        log.info("ratifiedActivity: {}", [ratifiedActivity]);
-
           assert.stringEquals(activity.user, proposer.toHexString());
-        //   assert.stringEquals(activity.activityType, "Ratify");
+          assert.stringEquals(activity.activityType, "Ratify");
           assert.bigIntEquals(activity.timestamp, event.block.timestamp);
           assert.bytesEquals(activity.transactionHash, event.transaction.hash);
           assert.stringEquals(activity.proposal!, proposalId.toString());
+          assert.bigIntEquals(activity.votes!, numVotes);
         }
-      });
+    });
+
     
       test("Create Reject Proposal and check Activity", () => { 
         let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
         let proposalId = BigInt.fromU32(1);
         let numVotes = BigInt.fromI32(20);
+
         let event = createRejectCastEvent(
             proposalId,
             proposer,
@@ -237,6 +271,7 @@ import { getActivityId } from "../src/shared/createActivity";
     
         // Check if Activity entity was created
         const activityId = getActivityId(
+          "Reject",
           proposer.toHexString(),
           event.transaction.hash.toHexString(),
           event.logIndex.toString()
@@ -246,7 +281,7 @@ import { getActivityId } from "../src/shared/createActivity";
         assert.assertNotNull(activity);
         if (activity) {
           assert.stringEquals(activity.user, proposer.toHexString());
-        //   assert.stringEquals(activity.activityType, "Reject");
+          assert.stringEquals(activity.activityType, "Reject");
           assert.bigIntEquals(activity.timestamp, event.block.timestamp);
           assert.bytesEquals(activity.transactionHash, event.transaction.hash);
           assert.stringEquals(activity.proposal!, proposalId.toString());

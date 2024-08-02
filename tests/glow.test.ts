@@ -30,6 +30,7 @@ describe("Glow Stake and Unstake Handlers", () => {
     handleStake(event);
     // Check if Activity entity was created
     const activityId = getActivityId(
+      "Stake",
       userAddress,
       event.transaction.hash.toHexString(),
       event.logIndex.toString()
@@ -42,7 +43,7 @@ describe("Glow Stake and Unstake Handlers", () => {
       assert.stringEquals(activity.activityType, "Stake");
       assert.bigIntEquals(activity.timestamp, event.block.timestamp);
       assert.bytesEquals(activity.transactionHash, event.transaction.hash);
-      assert.bigIntEquals(activity.stakedGlow!, amount);
+      assert.bigIntEquals(activity.glowAmount!, amount);
     }
   });
 
@@ -60,6 +61,7 @@ describe("Glow Stake and Unstake Handlers", () => {
 
     // Check if Activity entity was created
     const activityId = getActivityId(
+      "Unstake",
       userAddress,
       event.transaction.hash.toHexString(),
       event.logIndex.toString()
@@ -72,7 +74,7 @@ describe("Glow Stake and Unstake Handlers", () => {
       assert.stringEquals(activity.activityType, "Unstake");
       assert.bigIntEquals(activity.timestamp, event.block.timestamp);
       assert.bytesEquals(activity.transactionHash, event.transaction.hash);
-      assert.bigIntEquals(activity.unstakedGlow!, amount);
+      assert.bigIntEquals(activity.glowAmount!, amount);
     }
   });
 });

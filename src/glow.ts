@@ -42,16 +42,13 @@ export function handleStake(event: StakeEvent): void {
   // user.save();
 
   // Create activity for staking
-
   createActivity(
     event,
     "Stake",
     userAddress,
     null,  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    stakeAmount, // stakedGlow
-    null  // unstakedGlow
+    null, // votes
+    stakeAmount, // glowAmount
   );
 }
 
@@ -72,9 +69,7 @@ export function handleUnstake(event: UnstakeEvent): void {
     "Unstake",
     userAddress,
     null,  // proposalId
-    null, // ratificationVoteId
-    null, // rejectionVoteId
-    null, // stakedGlow
-    unstakeAmount  // unstakedGlow
+    null, // votes
+    unstakeAmount, // glowAmount
   );
 }
