@@ -6,17 +6,18 @@ import {
     beforeAll,
     afterAll,
   } from "matchstick-as/assembly/index";
-  import { Address, BigInt, JSONValue } from "@graphprotocol/graph-ts";
+  import { Address, BigInt, JSONValue, Bytes } from "@graphprotocol/graph-ts";
   import { Approval as ApprovalEvent } from "../generated/GCC/GCC";
   import { createVetoCouncilElectionOrSlashEvent } from "./governance-utils";
-  import { changeGCARequirementsProposalCreationHandler, getMostPopularProposalId, getNominationSpendId, mostPopularProposalSetHandler, ratifyCastHandler, rejectCastHandler, vetoCouncilElectionOrSlashHandler } from "../src/governance";
-  import { MostPopularProposal, NominationSpend, NominationsUsed, RatificationVoteBreakdown, RejectionVoteBreakdown, User, VetoCouncilElectionOrSlashProposal } from "../generated/schema";
+  import { changeGCARequirementsProposalCreationHandler, getMostPopularProposalId, getNominationSpendId, mostPopularProposalSetHandler, ratifyCastHandler, rejectCastHandler, vetoCouncilElectionOrSlashHandler, grantsProposalCreationHandler } from "../src/governance";
+  import { MostPopularProposal, NominationSpend, NominationsUsed, RatificationVoteBreakdown, RejectionVoteBreakdown, User, VetoCouncilElectionOrSlashProposal, Activity, GrantsProposal } from "../generated/schema";
   import { log } from '@graphprotocol/graph-ts'
 import { createGCAElectionOrSlashProposalEvent } from "./governance-utils";
 import {gcaCouncilElectionOrSlashCreationHandler} from "../src/governance";
 import { createRejectCastEvent } from "./governance-utils";
 import { createRatifyCastEvent } from "./governance-utils";
 import { createMostPopularProposalSetEvent } from "./governance-utils";
+import { getActivityId } from "../src/shared/createActivity";
   // Tests structure (matchstick-as >=0.5.0)
   // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
   
@@ -181,7 +182,7 @@ import { createMostPopularProposalSetEvent } from "./governance-utils";
     gcaCouncilElectionOrSlashCreationHandler(event);
     });
     
-    test("Create Ratify Proposal", () => { 
+    test("Create Ratify Proposal and check Activity", () => { 
         let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
         let proposalId = BigInt.fromU32(1);
         let numVotes = BigInt.fromI32(20);
@@ -191,11 +192,38 @@ import { createMostPopularProposalSetEvent } from "./governance-utils";
             numVotes,
         );
 
+    
         ratifyCastHandler(event);
-    }
-    );
+    
+        // Check if Activity entity was created
+        const activityId = getActivityId(
+          proposer.toHexString(),
+          event.transaction.hash.toHexString(),
+          event.logIndex.toString()
+        );
+        const activity = Activity.load(activityId);
 
-    test("Create Reject Proposal", () => { 
+        
+    
+        assert.assertNotNull(activity);
+        if (activity) {
+
+        let ratifiedActivity = `
+        id:  ${activity.id},
+        user: ${activity.user},
+        ActivityType: ${activity.activityType},`;
+
+        log.info("ratifiedActivity: {}", [ratifiedActivity]);
+
+          assert.stringEquals(activity.user, proposer.toHexString());
+        //   assert.stringEquals(activity.activityType, "Ratify");
+          assert.bigIntEquals(activity.timestamp, event.block.timestamp);
+          assert.bytesEquals(activity.transactionHash, event.transaction.hash);
+          assert.stringEquals(activity.proposal!, proposalId.toString());
+        }
+      });
+    
+      test("Create Reject Proposal and check Activity", () => { 
         let proposer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
         let proposalId = BigInt.fromU32(1);
         let numVotes = BigInt.fromI32(20);
@@ -204,10 +232,28 @@ import { createMostPopularProposalSetEvent } from "./governance-utils";
             proposer,
             numVotes,
         );
-
+    
         rejectCastHandler(event);
-    }
-    );
+    
+        // Check if Activity entity was created
+        const activityId = getActivityId(
+          proposer.toHexString(),
+          event.transaction.hash.toHexString(),
+          event.logIndex.toString()
+        );
+        const activity = Activity.load(activityId);
+    
+        assert.assertNotNull(activity);
+        if (activity) {
+          assert.stringEquals(activity.user, proposer.toHexString());
+        //   assert.stringEquals(activity.activityType, "Reject");
+          assert.bigIntEquals(activity.timestamp, event.block.timestamp);
+          assert.bytesEquals(activity.transactionHash, event.transaction.hash);
+          assert.stringEquals(activity.proposal!, proposalId.toString());
+        }
+      });
+
+   
 
     test("Create Most Popular Proposal Set", () => { 
         const weekId = BigInt.fromI32(0);
@@ -238,7 +284,58 @@ import { createMostPopularProposalSetEvent } from "./governance-utils";
 
         
 
-    }
-    );
+    });
   });
   
+
+//   test("Create Grants Proposal creates an Activity", () => {
+//     const proposer = Address.fromString("0x0000000000000000000000000000000000000001");
+//     const recipient = Address.fromString("0x0000000000000000000000000000000000000002");
+//     const proposalId = BigInt.fromI32(1);
+//     const nominationsUsed = BigInt.fromI32(20);
+//     const amount = BigInt.fromI32(1000);
+//     const hash = "0x1234567890abcdef";
+  
+//     let event = createGrantsProposalCreationEvent(
+//       proposer,
+//       recipient,
+//       proposalId,
+//       nominationsUsed,
+//       amount,
+//       hash
+//     );
+    
+//     grantsProposalCreationHandler(event);
+//     assert.assertNotNull(true);
+//     // Check if Activity entity was created
+//     // const activityId = getActivityId(
+//     //   proposer.toHexString(),
+//     //   event.transaction.hash.toHexString(),
+//     //   event.logIndex.toString()
+//     // );
+//     // const activity = Activity.load(activityId);
+  
+//     // assert.assertNotNull(activity);
+//     // if (activity) {
+//     //   assert.stringEquals(activity.user, proposer.toHexString());
+//     //   assert.stringEquals(activity.activityType, "Create");
+//     //   assert.bigIntEquals(activity.timestamp, event.block.timestamp);
+//     //   assert.bytesEquals(activity.transactionHash, event.transaction.hash);
+      
+//     //   // Check if activity.proposal matches proposalId.toString()
+//     //   assert.assertTrue(
+//     //     activity.proposal == proposalId.toString()
+//     //   );
+//     // }
+  
+//     // // Check if GrantsProposal entity was created
+//     // const grantsProposal = GrantsProposal.load(proposalId.toString());
+//     // assert.assertNotNull(grantsProposal);
+//     // if (grantsProposal) {
+//     //   assert.stringEquals(grantsProposal.proposer, proposer.toHexString());
+//     //   assert.stringEquals(grantsProposal.recipient, recipient.toHexString());
+//     //   assert.bigIntEquals(grantsProposal.amount, amount);
+//     //   assert.bytesEquals(grantsProposal.hash, Bytes.fromHexString(hash));
+//     //   assert.stringEquals(grantsProposal.proposalType, "Grants");
+//     // }
+//   });

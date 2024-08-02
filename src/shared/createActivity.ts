@@ -1,5 +1,6 @@
 import { Activity, User } from "../../generated/schema";
-import { BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
+import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
+import { getOrCreateUser } from './getOrCreateUser';
 
 export function getActivityId(
   userAddress: string,
@@ -26,11 +27,8 @@ export function createActivity(
   );
 
   let activity = new Activity(activityId);
-  let user = User.load(userAddress);
-  if (user == null) {
-    user = new User(userAddress);
-    user.save();
-  }
+
+  let user = getOrCreateUser(Address.fromString(userAddress));
 
   activity.user = user.id;
   activity.activityType = activityType;

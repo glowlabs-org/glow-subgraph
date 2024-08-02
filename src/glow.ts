@@ -56,8 +56,8 @@ export function handleStake(event: StakeEvent): void {
 }
 
 export function handleUnstake(event: UnstakeEvent): void {
-  // let userAddress = event.params.user.toHexString();
-  // let unstakeAmount = event.params.amount;
+  let userAddress = event.params.user.toHexString();
+  let unstakeAmount = event.params.amount;
 
   // // TODO: Update user's staked amount
   // // let user = User.load(userAddress);
@@ -67,10 +67,14 @@ export function handleUnstake(event: UnstakeEvent): void {
   // // }
 
   // // Create activity for unstaking
-  // createActivity(
-  //   event,
-  //   "Unstake",
-  //   userAddress,
-  //   unstakedGlow: unstakeAmount
-  // );
+  createActivity(
+    event,
+    "Unstake",
+    userAddress,
+    null,  // proposalId
+    null, // ratificationVoteId
+    null, // rejectionVoteId
+    null, // stakedGlow
+    unstakeAmount  // unstakedGlow
+  );
 }

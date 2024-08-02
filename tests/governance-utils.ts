@@ -1,5 +1,5 @@
 import { newMockEvent } from "matchstick-as";
-import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts";
+import { ethereum, Address, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {VetoCouncilElectionOrSlash as VetoCouncilElectionOrSlashEvent} from "../generated/Governance/Governance";
 import { GCACouncilElectionOrSlashCreation } from "../generated/Governance/Governance";
 import { RatifyCast as RatifyCastEvent } from "../generated/Governance/Governance";
@@ -174,3 +174,45 @@ export function createMostPopularProposalSetEvent(
     return mockEvent;
 
     }
+
+
+
+
+
+        // export function createGrantsProposalCreationEvent(
+        //     proposer: Address,
+        //     recipient: Address,
+        //     proposalId: BigInt,
+        //     nominationsUsed: BigInt,
+        //     amount: BigInt,
+        //     hash: Bytes
+        //   ): GrantsProposalCreationEvent {
+        //     let mockEvent = changetype<GrantsProposalCreationEvent>(newMockEvent());
+        //     mockEvent.parameters = new Array();
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("proposalId", ethereum.Value.fromUnsignedBigInt(proposalId))
+        //     );
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("proposer", ethereum.Value.fromAddress(proposer))
+        //     );
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("recipient", ethereum.Value.fromAddress(recipient))
+        //     );
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("amount", ethereum.Value.fromUnsignedBigInt(amount))
+        //     );
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("hash", ethereum.Value.fromBytes(hash))
+        //     );
+          
+        //     mockEvent.parameters.push(
+        //       new ethereum.EventParam("nominationsUsed", ethereum.Value.fromUnsignedBigInt(nominationsUsed))
+        //     );
+          
+        //     return mockEvent;
+        //   }
