@@ -1,17 +1,6 @@
 import { Activity, User } from "../../generated/schema";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { getOrCreateUser } from './getOrCreateUser';
-// import { log } from '@graphprotocol/graph-ts'
-
-// enum ActivityType {
-//   Vote
-//   Stake
-//   Unstake
-//   Ratify
-//   Reject
-//   Create
-//   Veto
-// }
 
 export function getActivityId(
   activityType: string,

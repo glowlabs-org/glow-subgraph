@@ -176,11 +176,20 @@ type NominationSpend @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+enum ActivityType {
+  Vote
+  Stake
+  Unstake
+  Ratify
+  Reject
+  Create
+  Veto
+}
 
 type Activity @entity {
   id: ID!
   user: User!
-  activityType: String!
+  activityType: ActivityType!
   timestamp: BigInt!
   transactionHash: Bytes!
   proposal: Proposal

@@ -408,9 +408,6 @@ export function ratifyCastHandler(event: RatifyCastEvent): void {
   ratificationVote.ratificationVoteBreakdown = ratificationVoteBreakdown.id;
   ratificationVote.save();
 
-  // This is not being invoked.
-  
-  
 }
 //-----------------Reject Cast-----------------
 export function rejectCastHandler(event: RejectCastEvent): void {
@@ -422,7 +419,7 @@ export function rejectCastHandler(event: RejectCastEvent): void {
     event.params.numVotes, // votes
     null, // glowAmount
   );
-  
+
   let from = getOrCreateUser(event.params.voter);
   let nextNonce = getNextAvailableNonce(from);
   let rejectionBreakdownId = getRejectionBreakdownId(event.params.proposalId);
@@ -448,9 +445,6 @@ export function rejectCastHandler(event: RejectCastEvent): void {
   rejectionVote.blockTimestamp = event.block.timestamp;
   rejectionVote.rejectionVoteBreakdown = rejectionVoteBreakdown.id;
   rejectionVote.save();
-
-  // This is not being invoked.
-
 }
 
 export function proposalVetoedHandler(event: ProposalVetoedEvent): void {

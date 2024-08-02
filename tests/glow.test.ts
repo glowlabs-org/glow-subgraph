@@ -23,10 +23,6 @@ describe("Glow Stake and Unstake Handlers", () => {
     const amount = BigInt.fromI32(1000);
     const event = createStakeEvent(user, amount);
 
-    // Create a User entity first
-    let newUser = getOrCreateUser(user)
-    newUser.save();
-    
     handleStake(event);
     // Check if Activity entity was created
     const activityId = getActivityId(
@@ -53,10 +49,6 @@ describe("Glow Stake and Unstake Handlers", () => {
     const amount = BigInt.fromI32(1000);
     const event = createUnstakeEvent(user, amount);
 
-    // Create a User entity first
-    let newUser = getOrCreateUser(user)
-    newUser.save();
-    
     handleUnstake(event);
 
     // Check if Activity entity was created
