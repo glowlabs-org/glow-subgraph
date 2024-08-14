@@ -211,6 +211,7 @@ type User @entity {
   totalUSDCEffect: BigInt!
   nonceSeperator: BigInt!
   totalImpactPoints: BigInt!
+  totalStakedGlow: BigInt!
 }
 
 # Order Of Operations for An Early Liquidity Purchase

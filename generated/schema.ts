@@ -2119,6 +2119,19 @@ export class User extends Entity {
   set totalImpactPoints(value: BigInt) {
     this.set("totalImpactPoints", Value.fromBigInt(value));
   }
+
+  get totalStakedGlow(): BigInt {
+    let value = this.get("totalStakedGlow");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalStakedGlow(value: BigInt) {
+    this.set("totalStakedGlow", Value.fromBigInt(value));
+  }
 }
 
 export class EarlyLiquidityOrDonationTransactionHashNonceManager extends Entity {
