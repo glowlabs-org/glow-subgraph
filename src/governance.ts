@@ -78,7 +78,7 @@ export function vetoCouncilElectionOrSlashHandler(
 
   createActivity(
     event,
-    "Veto",
+    "Create",
     event.params.proposer.toHexString(),
     event.params.proposalId.toString(),  // proposalId
     null, // votes
@@ -292,8 +292,6 @@ export function nominationsUsedOnProposalHandler(
 
   // Save the proposal back to the store
   // proposal.save()
-
-  // Is this an activity?
 }
 
 export function mostPopularProposalSetHandler(

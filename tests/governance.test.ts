@@ -156,7 +156,7 @@ import { getActivityId } from "../src/shared/createActivity";
       // https://thegraph.com/docs/en/developer/matchstick/#asserts
 
       const activityId = getActivityId(
-        "Veto",
+        "Create",
         proposer.toHexString(),
         event.transaction.hash.toHexString(),
         event.logIndex.toString()
@@ -167,7 +167,7 @@ import { getActivityId } from "../src/shared/createActivity";
       assert.assertNotNull(activity);
       if (activity) {
         assert.stringEquals(activity.user, proposer.toHexString());
-        assert.stringEquals(activity.activityType, "Veto");
+        assert.stringEquals(activity.activityType, "Create");
         assert.bigIntEquals(activity.timestamp, event.block.timestamp);
         assert.bytesEquals(activity.transactionHash, event.transaction.hash);
         assert.stringEquals(activity.proposal!, proposalId.toString());

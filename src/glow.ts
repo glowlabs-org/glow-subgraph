@@ -56,12 +56,12 @@ export function handleUnstake(event: UnstakeEvent): void {
   let userAddress = event.params.user.toHexString();
   let unstakeAmount = event.params.amount;
 
-  // // TODO: Update user's staked amount
-  // // let user = User.load(userAddress);
-  // // if (user) {
-  // //   user.stakedGlow = (user.stakedGlow || BigInt.fromI32(0)).minus(unstakeAmount);
-  // //   user.save();
-  // // }
+  // TODO: Update user's staked amount
+  // let user = User.load(userAddress);
+  // if (user) {
+  //   user.stakedGlow = (user.stakedGlow || BigInt.fromI32(0)).minus(unstakeAmount);
+  //   user.save();
+  // }
 
   // // Create activity for unstaking
   createActivity(

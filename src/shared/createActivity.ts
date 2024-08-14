@@ -1,6 +1,14 @@
-import { Activity, User } from "../../generated/schema";
+import { Activity } from "../../generated/schema";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { getOrCreateUser } from './getOrCreateUser';
+
+import { ByteArray, crypto } from '@graphprotocol/graph-ts'
+
+function customHash(input: string): string {
+  let inputBytes = ByteArray.fromUTF8(input)
+  let hashBytes = crypto.keccak256(inputBytes)
+  return hashBytes.toHexString().slice(2, 26)
+}
 
 export function getActivityId(
   activityType: string,
@@ -8,7 +16,9 @@ export function getActivityId(
   transactionHash: string,
   logIndex: string
 ): string {
-  return "activity-" + activityType + "-" + userAddress + "-" + transactionHash + "-" + logIndex;
+  const uniquePartString = `${userAddress}-${transactionHash}-${logIndex}`
+  const hashedPart = customHash(uniquePartString)
+  return `activity-${activityType}-${hashedPart}`
 }
 
 export function createActivity(
