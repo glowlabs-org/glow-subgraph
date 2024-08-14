@@ -15,9 +15,6 @@ importers:
         specifier: 0.30.0
         version: 0.30.0
     devDependencies:
-      '@types/node':
-        specifier: ^22.3.0
-        version: 22.3.0
       matchstick-as:
         specifier: 0.5.0
         version: 0.5.0

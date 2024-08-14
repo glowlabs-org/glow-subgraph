@@ -50,7 +50,7 @@ describe("Glow Stake and Unstake Handlers", () => {
     
     if (userEntity) {
       log.info(
-        "User totalStakedGlow: {}, Staked amount: {}",
+        "Actual totalStakedGlow: {}, Expected totalStakedGlow: {}",
         [userEntity.totalStakedGlow.toString(), amount.toString()]
       );
       assert.bigIntEquals(userEntity.totalStakedGlow, amount);
