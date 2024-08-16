@@ -184,6 +184,7 @@ enum ActivityType {
   Reject
   Create
   Veto
+  Nominate
 }
 
 type Activity @entity {
