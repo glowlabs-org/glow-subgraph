@@ -195,6 +195,7 @@ type Activity @entity {
   proposal: Proposal
   votes: BigInt
   glowAmount: BigInt
+  nominationsUsed: BigInt
 }
 
 type User @entity {

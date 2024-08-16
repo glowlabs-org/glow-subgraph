@@ -184,6 +184,7 @@ enum ActivityType {
   Reject
   Create
   Veto
+  Nominate
 }
 
 type Activity @entity {
@@ -195,6 +196,7 @@ type Activity @entity {
   proposal: Proposal
   votes: BigInt
   glowAmount: BigInt
+  nominationsUsed: BigInt
 }
 
 type User @entity {

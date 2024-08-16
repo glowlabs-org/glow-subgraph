@@ -171,6 +171,7 @@ import { getActivityId } from "../src/shared/createActivity";
         assert.bigIntEquals(activity.timestamp, event.block.timestamp);
         assert.bytesEquals(activity.transactionHash, event.transaction.hash);
         assert.stringEquals(activity.proposal!, proposalId.toString());
+        assert.bigIntEquals(activity.nominationsUsed!, nominationsUsed);
       }
     });
 
@@ -215,6 +216,7 @@ import { getActivityId } from "../src/shared/createActivity";
         assert.bigIntEquals(activity.timestamp, event.block.timestamp);
         assert.bytesEquals(activity.transactionHash, event.transaction.hash);
         assert.stringEquals(activity.proposal!, proposalId.toString());
+        assert.bigIntEquals(activity.nominationsUsed!, nominationsUsed);
       }
     });
     

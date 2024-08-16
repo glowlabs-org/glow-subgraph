@@ -27,7 +27,8 @@ export function createActivity(
   userAddress: string,
   proposalId: string | null = null,
   votes: BigInt | null = null,
-  glowAmount: BigInt | null = null
+  glowAmount: BigInt | null = null,
+  nominationsUsed: BigInt | null = null
 ): void {
   const activityId = getActivityId(
     activityType,
@@ -55,6 +56,10 @@ export function createActivity(
 
   if (glowAmount) {
     activity.glowAmount = glowAmount;
+  }
+
+  if (nominationsUsed) {
+    activity.nominationsUsed = nominationsUsed;
   }
 
   activity.save();

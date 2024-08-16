@@ -1984,6 +1984,23 @@ export class Activity extends Entity {
       this.set("glowAmount", Value.fromBigInt(<BigInt>value));
     }
   }
+
+  get nominationsUsed(): BigInt | null {
+    let value = this.get("nominationsUsed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set nominationsUsed(value: BigInt | null) {
+    if (!value) {
+      this.unset("nominationsUsed");
+    } else {
+      this.set("nominationsUsed", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class User extends Entity {

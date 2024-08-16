@@ -83,6 +83,7 @@ export function vetoCouncilElectionOrSlashHandler(
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    event.params.nominationsUsed // nominationsUsed
   );
 }
 
@@ -139,6 +140,7 @@ export function gcaCouncilElectionOrSlashCreationHandler(
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    event.params.nominationsUsed // nominationsUsed
   );
 }
 
@@ -177,6 +179,7 @@ export function rfcProposalCreationHandler(
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    event.params.nominationsUsed // nominationsUsed
   );
 }
 
@@ -219,6 +222,7 @@ export function grantsProposalCreationHandler(
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    event.params.nominationsUsed // nominationsUsed
   );
 }
 
@@ -261,6 +265,7 @@ export function changeGCARequirementsProposalCreationHandler(
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    event.params.nominationsUsed // nominationsUsed
   );
 }
 
@@ -292,6 +297,16 @@ export function nominationsUsedOnProposalHandler(
 
   // Save the proposal back to the store
   // proposal.save()
+
+  createActivity(
+    event,
+    "Nominate",
+    event.params.spender.toHexString(),
+    event.params.proposalId.toString(),  // proposalId
+    null, // votes
+    null, // glowAmount
+    event.params.amount // nominationsUsed
+  );
 }
 
 export function mostPopularProposalSetHandler(
@@ -376,6 +391,7 @@ export function ratifyCastHandler(event: RatifyCastEvent): void {
     event.params.proposalId.toString(),  // proposalId
     event.params.numVotes, // votes
     null, // glowAmount
+    null // nominationsUsed
   );
 
   let from = getOrCreateUser(event.params.voter);
@@ -416,6 +432,7 @@ export function rejectCastHandler(event: RejectCastEvent): void {
     event.params.proposalId.toString(),  // proposalId
     event.params.numVotes, // votes
     null, // glowAmount
+    null // nominationsUsed
   );
 
   let from = getOrCreateUser(event.params.voter);
@@ -464,6 +481,7 @@ export function proposalVetoedHandler(event: ProposalVetoedEvent): void {
     event.params.proposalId.toString(),  // proposalId
     null, // votes
     null, // glowAmount
+    null // nominationsUsed
   );
 }
 

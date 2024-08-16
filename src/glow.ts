@@ -39,7 +39,8 @@ export function handleStake(event: StakeEvent): void {
     user.id,
     null,
     null,
-    amount
+    amount,
+    null // nominationsUsed
   );
 }
 
@@ -60,6 +61,7 @@ export function handleUnstake(event: UnstakeEvent): void {
     user.id,
     null,
     null,
-    event.params.amount
+    event.params.amount,
+    null // nominationsUsed
   );
 }
