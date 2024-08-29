@@ -9,7 +9,7 @@
     "remove-local": "graph remove --node http://localhost:8020/ glow-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 glow-subgraph",
     "test": "graph test",
-    "prettier":"npx prettier --write ./src/**/*"
+    "prettier": "npx prettier --write ./src/**/*"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.59.0",

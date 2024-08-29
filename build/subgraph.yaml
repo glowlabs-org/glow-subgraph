@@ -18,7 +18,7 @@ dataSources:
         - User
       abis:
         - name: GCC
-          file: GCC/abis/GCC.json
+          file: GCC/GCC.json
       eventHandlers:
         - event: GCCCommitted(indexed address,indexed address,uint256,uint256,uint256,address)
           handler: handleGCCRetired
@@ -40,7 +40,7 @@ dataSources:
         - MinerPoolAndGCA
       abis:
         - name: MinerPoolAndGCA
-          file: MinerPoolAndGCA/abis/MinerPoolAndGCA.json
+          file: MinerPoolAndGCA/MinerPoolAndGCA.json
       eventHandlers:
         - event: AmountDonatedToBucket(indexed uint256,uint256)
           handler: handleAmountDonated
@@ -60,10 +60,14 @@ dataSources:
         - GLOW
       abis:
         - name: GLOW
-          file: GLOW/abis/GLOW.json
+          file: GLOW/GLOW.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+        - event: Stake(indexed address,uint256)
+          handler: handleStake
+        - event: Unstake(indexed address,uint256)
+          handler: handleUnstake
       file: GLOW/GLOW.wasm
   - kind: ethereum
     name: GCC_USDG_UniswapV2Pair
@@ -80,7 +84,7 @@ dataSources:
         - GCC_USDG_PAIR
       abis:
         - name: UniswapV2Pair
-          file: GCC_USDG_UniswapV2Pair/abis/UniswapV2Pair.json
+          file: GCC_USDG_UniswapV2Pair/UniswapV2Pair.json
       eventHandlers:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleSwap
@@ -100,7 +104,7 @@ dataSources:
         - GLOW_USDG_PAIR
       abis:
         - name: UniswapV2Pair
-          file: GLOW_USDG_UniswapV2Pair/abis/UniswapV2Pair.json
+          file: GLOW_USDG_UniswapV2Pair/UniswapV2Pair.json
       eventHandlers:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleSwap
@@ -120,7 +124,7 @@ dataSources:
         - EarlyLiquidity
       abis:
         - name: EarlyLiquidity
-          file: EarlyLiquidity/abis/EarlyLiquidity.json
+          file: EarlyLiquidity/EarlyLiquidity.json
       eventHandlers:
         - event: Purchase(indexed address,uint256,uint256)
           handler: handlePurchase
@@ -140,7 +144,7 @@ dataSources:
         - Governance
       abis:
         - name: Governance
-          file: Governance/abis/Governance.json
+          file: Governance/Governance.json
       eventHandlers:
         - event: VetoCouncilElectionOrSlash(indexed uint256,indexed
             address,address,address,bool,uint256)

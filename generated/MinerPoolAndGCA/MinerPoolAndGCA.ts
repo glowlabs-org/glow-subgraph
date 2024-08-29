@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class AmountDonatedToBucket extends ethereum.Event {
@@ -248,9 +248,7 @@ export class MinerPoolAndGCA__bucketResultBucketStruct extends ethereum.Tuple {
   }
 
   get reports(): Array<MinerPoolAndGCA__bucketResultBucketReportsStruct> {
-    return this[3].toTupleArray<
-      MinerPoolAndGCA__bucketResultBucketReportsStruct
-    >();
+    return this[3].toTupleArray<MinerPoolAndGCA__bucketResultBucketReportsStruct>();
   }
 }
 
@@ -306,7 +304,7 @@ export class MinerPoolAndGCA__eip712DomainResult {
     value3: BigInt,
     value4: Address,
     value5: Bytes,
-    value6: Array<BigInt>
+    value6: Array<BigInt>,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -441,7 +439,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "CLAIM_PAYOUT_RELAY_PERMIT_TYPEHASH",
       "CLAIM_PAYOUT_RELAY_PERMIT_TYPEHASH():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -451,7 +449,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "CLAIM_PAYOUT_RELAY_PERMIT_TYPEHASH",
       "CLAIM_PAYOUT_RELAY_PERMIT_TYPEHASH():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -479,7 +477,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "GENESIS_TIMESTAMP",
       "GENESIS_TIMESTAMP():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -489,7 +487,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "GENESIS_TIMESTAMP",
       "GENESIS_TIMESTAMP():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -502,7 +500,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "GLOW_REWARDS_PER_BUCKET",
       "GLOW_REWARDS_PER_BUCKET():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -512,7 +510,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "GLOW_REWARDS_PER_BUCKET",
       "GLOW_REWARDS_PER_BUCKET():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -555,7 +553,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "HOLDING_CONTRACT",
       "HOLDING_CONTRACT():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -565,7 +563,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "HOLDING_CONTRACT",
       "HOLDING_CONTRACT():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -608,7 +606,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "REWARDS_PER_SECOND_FOR_ALL",
       "REWARDS_PER_SECOND_FOR_ALL():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -618,7 +616,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "REWARDS_PER_SECOND_FOR_ALL",
       "REWARDS_PER_SECOND_FOR_ALL():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -631,7 +629,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "SHARES_REQUIRED_PER_COMP_PLAN",
       "SHARES_REQUIRED_PER_COMP_PLAN():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -641,7 +639,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "SHARES_REQUIRED_PER_COMP_PLAN",
       "SHARES_REQUIRED_PER_COMP_PLAN():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -654,7 +652,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "TOTAL_VESTING_PERIODS",
       "TOTAL_VESTING_PERIODS():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -664,7 +662,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "TOTAL_VESTING_PERIODS",
       "TOTAL_VESTING_PERIODS():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -709,8 +707,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       "amountWithdrawnAtPaymentNonce(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
+        ethereum.Value.fromUnsignedBigInt(param1),
+      ],
     );
 
     return result[0].toBigInt();
@@ -718,15 +716,15 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_amountWithdrawnAtPaymentNonce(
     param0: Address,
-    param1: BigInt
+    param1: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "amountWithdrawnAtPaymentNonce",
       "amountWithdrawnAtPaymentNonce(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
+        ethereum.Value.fromUnsignedBigInt(param1),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -739,28 +737,28 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "bucket",
       "bucket(uint256):((uint64,uint64,uint128,(uint128,uint64,uint64,bytes32,address)[]))",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return changetype<MinerPoolAndGCA__bucketResultBucketStruct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_bucket(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): ethereum.CallResult<MinerPoolAndGCA__bucketResultBucketStruct> {
     let result = super.tryCall(
       "bucket",
       "bucket(uint256):((uint64,uint64,uint128,(uint128,uint64,uint64,bytes32,address)[]))",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<MinerPoolAndGCA__bucketResultBucketStruct>(value[0].toTuple())
+      changetype<MinerPoolAndGCA__bucketResultBucketStruct>(value[0].toTuple()),
     );
   }
 
@@ -770,8 +768,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       "bucketClaimBitmap(uint256,address):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(bucketId),
-        ethereum.Value.fromAddress(user)
-      ]
+        ethereum.Value.fromAddress(user),
+      ],
     );
 
     return result[0].toBigInt();
@@ -779,15 +777,15 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_bucketClaimBitmap(
     bucketId: BigInt,
-    user: Address
+    user: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "bucketClaimBitmap",
       "bucketClaimBitmap(uint256,address):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(bucketId),
-        ethereum.Value.fromAddress(user)
-      ]
+        ethereum.Value.fromAddress(user),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -800,7 +798,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "bucketDelayDuration",
       "bucketDelayDuration():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -810,7 +808,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "bucketDelayDuration",
       "bucketDelayDuration():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -823,19 +821,19 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "bucketEndSubmissionTimestampNotReinstated",
       "bucketEndSubmissionTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBigInt();
   }
 
   try_bucketEndSubmissionTimestampNotReinstated(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "bucketEndSubmissionTimestampNotReinstated",
       "bucketEndSubmissionTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -848,19 +846,19 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "bucketFinalizationTimestampNotReinstated",
       "bucketFinalizationTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBigInt();
   }
 
   try_bucketFinalizationTimestampNotReinstated(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "bucketFinalizationTimestampNotReinstated",
       "bucketFinalizationTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -870,26 +868,26 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   }
 
   bucketGlobalState(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): MinerPoolAndGCA__bucketGlobalStateResultValue0Struct {
     let result = super.call(
       "bucketGlobalState",
       "bucketGlobalState(uint256):((uint128,uint64,uint64))",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return changetype<MinerPoolAndGCA__bucketGlobalStateResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_bucketGlobalState(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): ethereum.CallResult<MinerPoolAndGCA__bucketGlobalStateResultValue0Struct> {
     let result = super.tryCall(
       "bucketGlobalState",
       "bucketGlobalState(uint256):((uint128,uint64,uint64))",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -897,8 +895,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<MinerPoolAndGCA__bucketGlobalStateResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
@@ -906,19 +904,19 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "bucketStartSubmissionTimestampNotReinstated",
       "bucketStartSubmissionTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBigInt();
   }
 
   try_bucketStartSubmissionTimestampNotReinstated(
-    bucketId: BigInt
+    bucketId: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "bucketStartSubmissionTimestampNotReinstated",
       "bucketStartSubmissionTimestampNotReinstated(uint256):(uint128)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -932,7 +930,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     glwWeight: BigInt,
     usdcWeight: BigInt,
     index: BigInt,
-    claimFromInflation: boolean
+    claimFromInflation: boolean,
   ): Bytes {
     let result = super.call(
       "createClaimRewardFromBucketDigest",
@@ -942,8 +940,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(glwWeight),
         ethereum.Value.fromUnsignedBigInt(usdcWeight),
         ethereum.Value.fromUnsignedBigInt(index),
-        ethereum.Value.fromBoolean(claimFromInflation)
-      ]
+        ethereum.Value.fromBoolean(claimFromInflation),
+      ],
     );
 
     return result[0].toBytes();
@@ -954,7 +952,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     glwWeight: BigInt,
     usdcWeight: BigInt,
     index: BigInt,
-    claimFromInflation: boolean
+    claimFromInflation: boolean,
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "createClaimRewardFromBucketDigest",
@@ -964,8 +962,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(glwWeight),
         ethereum.Value.fromUnsignedBigInt(usdcWeight),
         ethereum.Value.fromUnsignedBigInt(index),
-        ethereum.Value.fromBoolean(claimFromInflation)
-      ]
+        ethereum.Value.fromBoolean(claimFromInflation),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -977,7 +975,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   createRelayDigest(
     relayer: Address,
     paymentNonce: BigInt,
-    relayNonce: BigInt
+    relayNonce: BigInt,
   ): Bytes {
     let result = super.call(
       "createRelayDigest",
@@ -985,8 +983,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(relayer),
         ethereum.Value.fromUnsignedBigInt(paymentNonce),
-        ethereum.Value.fromUnsignedBigInt(relayNonce)
-      ]
+        ethereum.Value.fromUnsignedBigInt(relayNonce),
+      ],
     );
 
     return result[0].toBytes();
@@ -995,7 +993,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   try_createRelayDigest(
     relayer: Address,
     paymentNonce: BigInt,
-    relayNonce: BigInt
+    relayNonce: BigInt,
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "createRelayDigest",
@@ -1003,8 +1001,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(relayer),
         ethereum.Value.fromUnsignedBigInt(paymentNonce),
-        ethereum.Value.fromUnsignedBigInt(relayNonce)
-      ]
+        ethereum.Value.fromUnsignedBigInt(relayNonce),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1023,7 +1021,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "currentBucket",
       "currentBucket():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1042,7 +1040,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "earlyLiquidity",
       "earlyLiquidity():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1055,7 +1053,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
 
     return new MinerPoolAndGCA__eip712DomainResult(
@@ -1065,7 +1063,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       result[3].toBigInt(),
       result[4].toAddress(),
       result[5].toBytes(),
-      result[6].toBigIntArray()
+      result[6].toBigIntArray(),
     );
   }
 
@@ -1073,7 +1071,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1087,14 +1085,14 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
         value[3].toBigInt(),
         value[4].toAddress(),
         value[5].toBytes(),
-        value[6].toBigIntArray()
-      )
+        value[6].toBigIntArray(),
+      ),
     );
   }
 
   gcaAgents(param0: BigInt): Address {
     let result = super.call("gcaAgents", "gcaAgents(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
     return result[0].toAddress();
@@ -1102,7 +1100,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_gcaAgents(param0: BigInt): ethereum.CallResult<Address> {
     let result = super.tryCall("gcaAgents", "gcaAgents(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1112,26 +1110,26 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   }
 
   gcaPayoutData(
-    gca: Address
+    gca: Address,
   ): MinerPoolAndGCA__gcaPayoutDataResultValue0Struct {
     let result = super.call(
       "gcaPayoutData",
       "gcaPayoutData(address):((uint64,uint64,uint128))",
-      [ethereum.Value.fromAddress(gca)]
+      [ethereum.Value.fromAddress(gca)],
     );
 
     return changetype<MinerPoolAndGCA__gcaPayoutDataResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_gcaPayoutData(
-    gca: Address
+    gca: Address,
   ): ethereum.CallResult<MinerPoolAndGCA__gcaPayoutDataResultValue0Struct> {
     let result = super.tryCall(
       "gcaPayoutData",
       "gcaPayoutData(address):((uint64,uint64,uint128))",
-      [ethereum.Value.fromAddress(gca)]
+      [ethereum.Value.fromAddress(gca)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1139,8 +1137,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<MinerPoolAndGCA__gcaPayoutDataResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
@@ -1148,21 +1146,19 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "getBucketTracker",
       "getBucketTracker():((uint48,uint48,uint48))",
-      []
+      [],
     );
 
     return changetype<MinerPoolAndGCA__getBucketTrackerResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
-  try_getBucketTracker(): ethereum.CallResult<
-    MinerPoolAndGCA__getBucketTrackerResultValue0Struct
-  > {
+  try_getBucketTracker(): ethereum.CallResult<MinerPoolAndGCA__getBucketTrackerResultValue0Struct> {
     let result = super.tryCall(
       "getBucketTracker",
       "getBucketTracker():((uint48,uint48,uint48))",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1170,8 +1166,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<MinerPoolAndGCA__getBucketTrackerResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
@@ -1179,7 +1175,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     user: Address,
     paymentNonce: BigInt,
     activeGCAsAtPaymentNonce: Array<Address>,
-    userIndex: BigInt
+    userIndex: BigInt,
   ): MinerPoolAndGCA__getPayoutDataResult {
     let result = super.call(
       "getPayoutData",
@@ -1188,14 +1184,14 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
         ethereum.Value.fromAddress(user),
         ethereum.Value.fromUnsignedBigInt(paymentNonce),
         ethereum.Value.fromAddressArray(activeGCAsAtPaymentNonce),
-        ethereum.Value.fromUnsignedBigInt(userIndex)
-      ]
+        ethereum.Value.fromUnsignedBigInt(userIndex),
+      ],
     );
 
     return new MinerPoolAndGCA__getPayoutDataResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toBigInt()
+      result[2].toBigInt(),
     );
   }
 
@@ -1203,7 +1199,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     user: Address,
     paymentNonce: BigInt,
     activeGCAsAtPaymentNonce: Array<Address>,
-    userIndex: BigInt
+    userIndex: BigInt,
   ): ethereum.CallResult<MinerPoolAndGCA__getPayoutDataResult> {
     let result = super.tryCall(
       "getPayoutData",
@@ -1212,8 +1208,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
         ethereum.Value.fromAddress(user),
         ethereum.Value.fromUnsignedBigInt(paymentNonce),
         ethereum.Value.fromAddressArray(activeGCAsAtPaymentNonce),
-        ethereum.Value.fromUnsignedBigInt(userIndex)
-      ]
+        ethereum.Value.fromUnsignedBigInt(userIndex),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1223,8 +1219,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       new MinerPoolAndGCA__getPayoutDataResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toBigInt()
-      )
+        value[2].toBigInt(),
+      ),
     );
   }
 
@@ -1234,8 +1230,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       "getProposalHashes(uint256,uint256):(bytes32[])",
       [
         ethereum.Value.fromUnsignedBigInt(start),
-        ethereum.Value.fromUnsignedBigInt(end)
-      ]
+        ethereum.Value.fromUnsignedBigInt(end),
+      ],
     );
 
     return result[0].toBytesArray();
@@ -1243,15 +1239,15 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_getProposalHashes(
     start: BigInt,
-    end: BigInt
+    end: BigInt,
   ): ethereum.CallResult<Array<Bytes>> {
     let result = super.tryCall(
       "getProposalHashes",
       "getProposalHashes(uint256,uint256):(bytes32[])",
       [
         ethereum.Value.fromUnsignedBigInt(start),
-        ethereum.Value.fromUnsignedBigInt(end)
-      ]
+        ethereum.Value.fromUnsignedBigInt(end),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1264,7 +1260,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "getProposalHashes",
       "getProposalHashes():(bytes32[])",
-      []
+      [],
     );
 
     return result[0].toBytesArray();
@@ -1274,7 +1270,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "getProposalHashes",
       "getProposalHashes():(bytes32[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1287,7 +1283,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "hasBucketBeenDelayed",
       "hasBucketBeenDelayed(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBoolean();
@@ -1297,7 +1293,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "hasBucketBeenDelayed",
       "hasBucketBeenDelayed(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1310,7 +1306,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "isBucketFinalized",
       "isBucketFinalized(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
 
     return result[0].toBoolean();
@@ -1320,7 +1316,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "isBucketFinalized",
       "isBucketFinalized(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(bucketId)]
+      [ethereum.Value.fromUnsignedBigInt(bucketId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1331,7 +1327,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   isGCA(account: Address): boolean {
     let result = super.call("isGCA", "isGCA(address):(bool)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
 
     return result[0].toBoolean();
@@ -1339,7 +1335,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_isGCA(account: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall("isGCA", "isGCA(address):(bool)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1351,7 +1347,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   isGCA1(account: Address, index: BigInt): boolean {
     let result = super.call("isGCA", "isGCA(address,uint256):(bool)", [
       ethereum.Value.fromAddress(account),
-      ethereum.Value.fromUnsignedBigInt(index)
+      ethereum.Value.fromUnsignedBigInt(index),
     ]);
 
     return result[0].toBoolean();
@@ -1360,7 +1356,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
   try_isGCA1(account: Address, index: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("isGCA", "isGCA(address,uint256):(bool)", [
       ethereum.Value.fromAddress(account),
-      ethereum.Value.fromUnsignedBigInt(index)
+      ethereum.Value.fromUnsignedBigInt(index),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1371,7 +1367,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   isSlashed(param0: Address): boolean {
     let result = super.call("isSlashed", "isSlashed(address):(bool)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
 
     return result[0].toBoolean();
@@ -1379,7 +1375,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_isSlashed(param0: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall("isSlashed", "isSlashed(address):(bool)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1392,7 +1388,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "nextProposalIndexToUpdate",
       "nextProposalIndexToUpdate():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -1402,7 +1398,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "nextProposalIndexToUpdate",
       "nextProposalIndexToUpdate():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1415,7 +1411,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "nextRelayNonce",
       "nextRelayNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBigInt();
@@ -1425,7 +1421,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "nextRelayNonce",
       "nextRelayNonce(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1455,8 +1451,8 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
       "paymentNonceToCompensationPlan(uint256,uint256):(uint32[5])",
       [
         ethereum.Value.fromUnsignedBigInt(nonce),
-        ethereum.Value.fromUnsignedBigInt(index)
-      ]
+        ethereum.Value.fromUnsignedBigInt(index),
+      ],
     );
 
     return result[0].toBigIntArray();
@@ -1464,15 +1460,15 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
 
   try_paymentNonceToCompensationPlan(
     nonce: BigInt,
-    index: BigInt
+    index: BigInt,
   ): ethereum.CallResult<Array<BigInt>> {
     let result = super.tryCall(
       "paymentNonceToCompensationPlan",
       "paymentNonceToCompensationPlan(uint256,uint256):(uint32[5])",
       [
         ethereum.Value.fromUnsignedBigInt(nonce),
-        ethereum.Value.fromUnsignedBigInt(index)
-      ]
+        ethereum.Value.fromUnsignedBigInt(index),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1485,19 +1481,19 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "paymentNonceToShiftStartTimestamp",
       "paymentNonceToShiftStartTimestamp(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(nonce)]
+      [ethereum.Value.fromUnsignedBigInt(nonce)],
     );
 
     return result[0].toBigInt();
   }
 
   try_paymentNonceToShiftStartTimestamp(
-    nonce: BigInt
+    nonce: BigInt,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "paymentNonceToShiftStartTimestamp",
       "paymentNonceToShiftStartTimestamp(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(nonce)]
+      [ethereum.Value.fromUnsignedBigInt(nonce)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1510,7 +1506,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "payoutNonceToGCAHash",
       "payoutNonceToGCAHash(uint256):(bytes32)",
-      [ethereum.Value.fromUnsignedBigInt(nonce)]
+      [ethereum.Value.fromUnsignedBigInt(nonce)],
     );
 
     return result[0].toBytes();
@@ -1520,7 +1516,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "payoutNonceToGCAHash",
       "payoutNonceToGCAHash(uint256):(bytes32)",
-      [ethereum.Value.fromUnsignedBigInt(nonce)]
+      [ethereum.Value.fromUnsignedBigInt(nonce)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1533,7 +1529,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "proposalHashes",
       "proposalHashes(uint256):(bytes32)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toBytes();
@@ -1543,7 +1539,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "proposalHashes",
       "proposalHashes(uint256):(bytes32)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1556,7 +1552,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "requirementsHash",
       "requirementsHash():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -1566,7 +1562,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "requirementsHash",
       "requirementsHash():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1579,28 +1575,28 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "reward",
       "reward(uint256):((bool,uint256,uint256))",
-      [ethereum.Value.fromUnsignedBigInt(id)]
+      [ethereum.Value.fromUnsignedBigInt(id)],
     );
 
     return changetype<MinerPoolAndGCA__rewardResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_reward(
-    id: BigInt
+    id: BigInt,
   ): ethereum.CallResult<MinerPoolAndGCA__rewardResultValue0Struct> {
     let result = super.tryCall(
       "reward",
       "reward(uint256):((bool,uint256,uint256))",
-      [ethereum.Value.fromUnsignedBigInt(id)]
+      [ethereum.Value.fromUnsignedBigInt(id)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<MinerPoolAndGCA__rewardResultValue0Struct>(value[0].toTuple())
+      changetype<MinerPoolAndGCA__rewardResultValue0Struct>(value[0].toTuple()),
     );
   }
 
@@ -1623,7 +1619,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.call(
       "slashNonceToSlashTimestamp",
       "slashNonceToSlashTimestamp(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toBigInt();
@@ -1633,7 +1629,7 @@ export class MinerPoolAndGCA extends ethereum.SmartContract {
     let result = super.tryCall(
       "slashNonceToSlashTimestamp",
       "slashNonceToSlashTimestamp(uint256):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

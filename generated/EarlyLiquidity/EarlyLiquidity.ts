@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class Purchase extends ethereum.Event {
@@ -60,7 +60,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.call(
       "HOLDING_CONTRACT",
       "HOLDING_CONTRACT():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -70,7 +70,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "HOLDING_CONTRACT",
       "HOLDING_CONTRACT():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -98,7 +98,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.call(
       "MIN_TOKEN_INCREMENT",
       "MIN_TOKEN_INCREMENT():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -108,7 +108,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "MIN_TOKEN_INCREMENT",
       "MIN_TOKEN_INCREMENT():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -121,7 +121,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.call(
       "TOTAL_INCREMENTS_TO_SELL",
       "TOTAL_INCREMENTS_TO_SELL():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -131,7 +131,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "TOTAL_INCREMENTS_TO_SELL",
       "TOTAL_INCREMENTS_TO_SELL():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -150,7 +150,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "USDC_DECIMALS",
       "USDC_DECIMALS():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -178,7 +178,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.call(
       "getCurrentPrice",
       "getCurrentPrice():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -188,7 +188,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "getCurrentPrice",
       "getCurrentPrice():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -199,7 +199,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
 
   getPrice(incrementsToPurchase: BigInt): BigInt {
     let result = super.call("getPrice", "getPrice(uint256):(uint256)", [
-      ethereum.Value.fromUnsignedBigInt(incrementsToPurchase)
+      ethereum.Value.fromUnsignedBigInt(incrementsToPurchase),
     ]);
 
     return result[0].toBigInt();
@@ -207,7 +207,7 @@ export class EarlyLiquidity extends ethereum.SmartContract {
 
   try_getPrice(incrementsToPurchase: BigInt): ethereum.CallResult<BigInt> {
     let result = super.tryCall("getPrice", "getPrice(uint256):(uint256)", [
-      ethereum.Value.fromUnsignedBigInt(incrementsToPurchase)
+      ethereum.Value.fromUnsignedBigInt(incrementsToPurchase),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();

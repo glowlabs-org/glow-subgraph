@@ -1,5 +1,5 @@
 import { newMockEvent } from "matchstick-as";
-import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts";
+import { ethereum, Address, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {VetoCouncilElectionOrSlash as VetoCouncilElectionOrSlashEvent} from "../generated/Governance/Governance";
 import { GCACouncilElectionOrSlashCreation } from "../generated/Governance/Governance";
 import { RatifyCast as RatifyCastEvent } from "../generated/Governance/Governance";

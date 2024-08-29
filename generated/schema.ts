@@ -8,7 +8,7 @@ import {
   store,
   Bytes,
   BigInt,
-  BigDecimal
+  BigDecimal,
 } from "@graphprotocol/graph-ts";
 
 export class GCCRetired extends Entity {
@@ -23,7 +23,7 @@ export class GCCRetired extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type GCCRetired must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type GCCRetired must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("GCCRetired", id.toBytes().toHexString(), this);
     }
@@ -31,13 +31,13 @@ export class GCCRetired extends Entity {
 
   static loadInBlock(id: Bytes): GCCRetired | null {
     return changetype<GCCRetired | null>(
-      store.get_in_block("GCCRetired", id.toHexString())
+      store.get_in_block("GCCRetired", id.toHexString()),
     );
   }
 
   static load(id: Bytes): GCCRetired | null {
     return changetype<GCCRetired | null>(
-      store.get("GCCRetired", id.toHexString())
+      store.get("GCCRetired", id.toHexString()),
     );
   }
 
@@ -171,7 +171,7 @@ export class USDCRetired extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type USDCRetired must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type USDCRetired must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("USDCRetired", id.toBytes().toHexString(), this);
     }
@@ -179,13 +179,13 @@ export class USDCRetired extends Entity {
 
   static loadInBlock(id: Bytes): USDCRetired | null {
     return changetype<USDCRetired | null>(
-      store.get_in_block("USDCRetired", id.toHexString())
+      store.get_in_block("USDCRetired", id.toHexString()),
     );
   }
 
   static load(id: Bytes): USDCRetired | null {
     return changetype<USDCRetired | null>(
-      store.get("USDCRetired", id.toHexString())
+      store.get("USDCRetired", id.toHexString()),
     );
   }
 
@@ -306,7 +306,7 @@ export class MostPopularProposal extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type MostPopularProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type MostPopularProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("MostPopularProposal", id.toString(), this);
     }
@@ -314,13 +314,13 @@ export class MostPopularProposal extends Entity {
 
   static loadInBlock(id: string): MostPopularProposal | null {
     return changetype<MostPopularProposal | null>(
-      store.get_in_block("MostPopularProposal", id)
+      store.get_in_block("MostPopularProposal", id),
     );
   }
 
   static load(id: string): MostPopularProposal | null {
     return changetype<MostPopularProposal | null>(
-      store.get("MostPopularProposal", id)
+      store.get("MostPopularProposal", id),
     );
   }
 
@@ -404,12 +404,12 @@ export class MostPopularProposalVoteBreakdown extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save MostPopularProposalVoteBreakdown entity without an ID"
+      "Cannot save MostPopularProposalVoteBreakdown entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type MostPopularProposalVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type MostPopularProposalVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("MostPopularProposalVoteBreakdown", id.toString(), this);
     }
@@ -417,13 +417,13 @@ export class MostPopularProposalVoteBreakdown extends Entity {
 
   static loadInBlock(id: string): MostPopularProposalVoteBreakdown | null {
     return changetype<MostPopularProposalVoteBreakdown | null>(
-      store.get_in_block("MostPopularProposalVoteBreakdown", id)
+      store.get_in_block("MostPopularProposalVoteBreakdown", id),
     );
   }
 
   static load(id: string): MostPopularProposalVoteBreakdown | null {
     return changetype<MostPopularProposalVoteBreakdown | null>(
-      store.get("MostPopularProposalVoteBreakdown", id)
+      store.get("MostPopularProposalVoteBreakdown", id),
     );
   }
 
@@ -490,12 +490,12 @@ export class RatificationVoteBreakdown extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save RatificationVoteBreakdown entity without an ID"
+      "Cannot save RatificationVoteBreakdown entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RatificationVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RatificationVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RatificationVoteBreakdown", id.toString(), this);
     }
@@ -503,13 +503,13 @@ export class RatificationVoteBreakdown extends Entity {
 
   static loadInBlock(id: string): RatificationVoteBreakdown | null {
     return changetype<RatificationVoteBreakdown | null>(
-      store.get_in_block("RatificationVoteBreakdown", id)
+      store.get_in_block("RatificationVoteBreakdown", id),
     );
   }
 
   static load(id: string): RatificationVoteBreakdown | null {
     return changetype<RatificationVoteBreakdown | null>(
-      store.get("RatificationVoteBreakdown", id)
+      store.get("RatificationVoteBreakdown", id),
     );
   }
 
@@ -556,7 +556,7 @@ export class RatificationVoteBreakdown extends Entity {
     return new RatificationVoteLoader(
       "RatificationVoteBreakdown",
       this.get("id")!.toString(),
-      "ratificationVotes"
+      "ratificationVotes",
     );
   }
 }
@@ -571,12 +571,12 @@ export class RejectionVoteBreakdown extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save RejectionVoteBreakdown entity without an ID"
+      "Cannot save RejectionVoteBreakdown entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RejectionVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RejectionVoteBreakdown must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RejectionVoteBreakdown", id.toString(), this);
     }
@@ -584,13 +584,13 @@ export class RejectionVoteBreakdown extends Entity {
 
   static loadInBlock(id: string): RejectionVoteBreakdown | null {
     return changetype<RejectionVoteBreakdown | null>(
-      store.get_in_block("RejectionVoteBreakdown", id)
+      store.get_in_block("RejectionVoteBreakdown", id),
     );
   }
 
   static load(id: string): RejectionVoteBreakdown | null {
     return changetype<RejectionVoteBreakdown | null>(
-      store.get("RejectionVoteBreakdown", id)
+      store.get("RejectionVoteBreakdown", id),
     );
   }
 
@@ -637,7 +637,7 @@ export class RejectionVoteBreakdown extends Entity {
     return new RejectionVoteLoader(
       "RejectionVoteBreakdown",
       this.get("id")!.toString(),
-      "rejectionVotes"
+      "rejectionVotes",
     );
   }
 }
@@ -654,7 +654,7 @@ export class RatificationVote extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RatificationVote must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RatificationVote must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RatificationVote", id.toString(), this);
     }
@@ -662,13 +662,13 @@ export class RatificationVote extends Entity {
 
   static loadInBlock(id: string): RatificationVote | null {
     return changetype<RatificationVote | null>(
-      store.get_in_block("RatificationVote", id)
+      store.get_in_block("RatificationVote", id),
     );
   }
 
   static load(id: string): RatificationVote | null {
     return changetype<RatificationVote | null>(
-      store.get("RatificationVote", id)
+      store.get("RatificationVote", id),
     );
   }
 
@@ -763,7 +763,7 @@ export class RejectionVote extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RejectionVote must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RejectionVote must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RejectionVote", id.toString(), this);
     }
@@ -771,7 +771,7 @@ export class RejectionVote extends Entity {
 
   static loadInBlock(id: string): RejectionVote | null {
     return changetype<RejectionVote | null>(
-      store.get_in_block("RejectionVote", id)
+      store.get_in_block("RejectionVote", id),
     );
   }
 
@@ -868,12 +868,12 @@ export class VetoCouncilElectionOrSlashProposal extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save VetoCouncilElectionOrSlashProposal entity without an ID"
+      "Cannot save VetoCouncilElectionOrSlashProposal entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type VetoCouncilElectionOrSlashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type VetoCouncilElectionOrSlashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("VetoCouncilElectionOrSlashProposal", id.toString(), this);
     }
@@ -881,13 +881,13 @@ export class VetoCouncilElectionOrSlashProposal extends Entity {
 
   static loadInBlock(id: string): VetoCouncilElectionOrSlashProposal | null {
     return changetype<VetoCouncilElectionOrSlashProposal | null>(
-      store.get_in_block("VetoCouncilElectionOrSlashProposal", id)
+      store.get_in_block("VetoCouncilElectionOrSlashProposal", id),
     );
   }
 
   static load(id: string): VetoCouncilElectionOrSlashProposal | null {
     return changetype<VetoCouncilElectionOrSlashProposal | null>(
-      store.get("VetoCouncilElectionOrSlashProposal", id)
+      store.get("VetoCouncilElectionOrSlashProposal", id),
     );
   }
 
@@ -1019,12 +1019,12 @@ export class GCAElectionOrSlashProposal extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save GCAElectionOrSlashProposal entity without an ID"
+      "Cannot save GCAElectionOrSlashProposal entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type GCAElectionOrSlashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type GCAElectionOrSlashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("GCAElectionOrSlashProposal", id.toString(), this);
     }
@@ -1032,13 +1032,13 @@ export class GCAElectionOrSlashProposal extends Entity {
 
   static loadInBlock(id: string): GCAElectionOrSlashProposal | null {
     return changetype<GCAElectionOrSlashProposal | null>(
-      store.get_in_block("GCAElectionOrSlashProposal", id)
+      store.get_in_block("GCAElectionOrSlashProposal", id),
     );
   }
 
   static load(id: string): GCAElectionOrSlashProposal | null {
     return changetype<GCAElectionOrSlashProposal | null>(
-      store.get("GCAElectionOrSlashProposal", id)
+      store.get("GCAElectionOrSlashProposal", id),
     );
   }
 
@@ -1159,7 +1159,7 @@ export class RFCProposal extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type RFCProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RFCProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RFCProposal", id.toString(), this);
     }
@@ -1167,7 +1167,7 @@ export class RFCProposal extends Entity {
 
   static loadInBlock(id: string): RFCProposal | null {
     return changetype<RFCProposal | null>(
-      store.get_in_block("RFCProposal", id)
+      store.get_in_block("RFCProposal", id),
     );
   }
 
@@ -1279,7 +1279,7 @@ export class GrantsProposal extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type GrantsProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type GrantsProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("GrantsProposal", id.toString(), this);
     }
@@ -1287,7 +1287,7 @@ export class GrantsProposal extends Entity {
 
   static loadInBlock(id: string): GrantsProposal | null {
     return changetype<GrantsProposal | null>(
-      store.get_in_block("GrantsProposal", id)
+      store.get_in_block("GrantsProposal", id),
     );
   }
 
@@ -1423,12 +1423,12 @@ export class ChangeGCARequirementsHashProposal extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save ChangeGCARequirementsHashProposal entity without an ID"
+      "Cannot save ChangeGCARequirementsHashProposal entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ChangeGCARequirementsHashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type ChangeGCARequirementsHashProposal must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("ChangeGCARequirementsHashProposal", id.toString(), this);
     }
@@ -1436,13 +1436,13 @@ export class ChangeGCARequirementsHashProposal extends Entity {
 
   static loadInBlock(id: string): ChangeGCARequirementsHashProposal | null {
     return changetype<ChangeGCARequirementsHashProposal | null>(
-      store.get_in_block("ChangeGCARequirementsHashProposal", id)
+      store.get_in_block("ChangeGCARequirementsHashProposal", id),
     );
   }
 
   static load(id: string): ChangeGCARequirementsHashProposal | null {
     return changetype<ChangeGCARequirementsHashProposal | null>(
-      store.get("ChangeGCARequirementsHashProposal", id)
+      store.get("ChangeGCARequirementsHashProposal", id),
     );
   }
 
@@ -1550,7 +1550,7 @@ export class RetireGCCAllowance extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type RetireGCCAllowance must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RetireGCCAllowance must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("RetireGCCAllowance", id.toBytes().toHexString(), this);
     }
@@ -1558,13 +1558,13 @@ export class RetireGCCAllowance extends Entity {
 
   static loadInBlock(id: Bytes): RetireGCCAllowance | null {
     return changetype<RetireGCCAllowance | null>(
-      store.get_in_block("RetireGCCAllowance", id.toHexString())
+      store.get_in_block("RetireGCCAllowance", id.toHexString()),
     );
   }
 
   static load(id: Bytes): RetireGCCAllowance | null {
     return changetype<RetireGCCAllowance | null>(
-      store.get("RetireGCCAllowance", id.toHexString())
+      store.get("RetireGCCAllowance", id.toHexString()),
     );
   }
 
@@ -1672,7 +1672,7 @@ export class NominationsUsed extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type NominationsUsed must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type NominationsUsed must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("NominationsUsed", id.toString(), this);
     }
@@ -1680,7 +1680,7 @@ export class NominationsUsed extends Entity {
 
   static loadInBlock(id: string): NominationsUsed | null {
     return changetype<NominationsUsed | null>(
-      store.get_in_block("NominationsUsed", id)
+      store.get_in_block("NominationsUsed", id),
     );
   }
 
@@ -1731,7 +1731,7 @@ export class NominationsUsed extends Entity {
     return new NominationSpendLoader(
       "NominationsUsed",
       this.get("id")!.toString(),
-      "nominationBreakdown"
+      "nominationBreakdown",
     );
   }
 }
@@ -1748,7 +1748,7 @@ export class NominationSpend extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type NominationSpend must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type NominationSpend must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("NominationSpend", id.toString(), this);
     }
@@ -1756,7 +1756,7 @@ export class NominationSpend extends Entity {
 
   static loadInBlock(id: string): NominationSpend | null {
     return changetype<NominationSpend | null>(
-      store.get_in_block("NominationSpend", id)
+      store.get_in_block("NominationSpend", id),
     );
   }
 
@@ -1843,6 +1843,166 @@ export class NominationSpend extends Entity {
   }
 }
 
+export class Activity extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Activity entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Activity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
+      );
+      store.set("Activity", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Activity | null {
+    return changetype<Activity | null>(store.get_in_block("Activity", id));
+  }
+
+  static load(id: string): Activity | null {
+    return changetype<Activity | null>(store.get("Activity", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get user(): string {
+    let value = this.get("user");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set user(value: string) {
+    this.set("user", Value.fromString(value));
+  }
+
+  get activityType(): string {
+    let value = this.get("activityType");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set activityType(value: string) {
+    this.set("activityType", Value.fromString(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get transactionHash(): Bytes {
+    let value = this.get("transactionHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set transactionHash(value: Bytes) {
+    this.set("transactionHash", Value.fromBytes(value));
+  }
+
+  get proposal(): string | null {
+    let value = this.get("proposal");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set proposal(value: string | null) {
+    if (!value) {
+      this.unset("proposal");
+    } else {
+      this.set("proposal", Value.fromString(<string>value));
+    }
+  }
+
+  get votes(): BigInt | null {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set votes(value: BigInt | null) {
+    if (!value) {
+      this.unset("votes");
+    } else {
+      this.set("votes", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get glowAmount(): BigInt | null {
+    let value = this.get("glowAmount");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set glowAmount(value: BigInt | null) {
+    if (!value) {
+      this.unset("glowAmount");
+    } else {
+      this.set("glowAmount", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get nominationsUsed(): BigInt | null {
+    let value = this.get("nominationsUsed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set nominationsUsed(value: BigInt | null) {
+    if (!value) {
+      this.unset("nominationsUsed");
+    } else {
+      this.set("nominationsUsed", Value.fromBigInt(<BigInt>value));
+    }
+  }
+}
+
 export class User extends Entity {
   constructor(id: string) {
     super();
@@ -1855,7 +2015,7 @@ export class User extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type User must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type User must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("User", id.toString(), this);
     }
@@ -1885,20 +2045,16 @@ export class User extends Entity {
   get gccRetired(): GCCRetiredLoader {
     return new GCCRetiredLoader(
       "User",
-      this.get("id")!
-        .toBytes()
-        .toHexString(),
-      "gccRetired"
+      this.get("id")!.toString(),
+      "gccRetired",
     );
   }
 
   get usdcRetired(): USDCRetiredLoader {
     return new USDCRetiredLoader(
       "User",
-      this.get("id")!
-        .toBytes()
-        .toHexString(),
-      "usdcRetired"
+      this.get("id")!.toString(),
+      "usdcRetired",
     );
   }
 
@@ -1906,7 +2062,7 @@ export class User extends Entity {
     return new NominationSpendLoader(
       "User",
       this.get("id")!.toString(),
-      "nominationsUsed"
+      "nominationsUsed",
     );
   }
 
@@ -1914,7 +2070,7 @@ export class User extends Entity {
     return new RatificationVoteLoader(
       "User",
       this.get("id")!.toString(),
-      "ratificationVotes"
+      "ratificationVotes",
     );
   }
 
@@ -1922,7 +2078,7 @@ export class User extends Entity {
     return new RejectionVoteLoader(
       "User",
       this.get("id")!.toString(),
-      "rejectionVotes"
+      "rejectionVotes",
     );
   }
 
@@ -1934,8 +2090,12 @@ export class User extends Entity {
     return new EarlyLiquidityPurchaseLoader(
       "User",
       this.get("id")!.toString(),
-      "earlyLiquidityPurchases"
+      "earlyLiquidityPurchases",
     );
+  }
+
+  get activities(): ActivityLoader {
+    return new ActivityLoader("User", this.get("id")!.toString(), "activities");
   }
 
   get totalUSDCEffect(): BigInt {
@@ -1976,6 +2136,19 @@ export class User extends Entity {
   set totalImpactPoints(value: BigInt) {
     this.set("totalImpactPoints", Value.fromBigInt(value));
   }
+
+  get totalStakedGlow(): BigInt {
+    let value = this.get("totalStakedGlow");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set totalStakedGlow(value: BigInt) {
+    this.set("totalStakedGlow", Value.fromBigInt(value));
+  }
 }
 
 export class EarlyLiquidityOrDonationTransactionHashNonceManager extends Entity {
@@ -1988,37 +2161,37 @@ export class EarlyLiquidityOrDonationTransactionHashNonceManager extends Entity 
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save EarlyLiquidityOrDonationTransactionHashNonceManager entity without an ID"
+      "Cannot save EarlyLiquidityOrDonationTransactionHashNonceManager entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type EarlyLiquidityOrDonationTransactionHashNonceManager must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type EarlyLiquidityOrDonationTransactionHashNonceManager must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set(
         "EarlyLiquidityOrDonationTransactionHashNonceManager",
         id.toString(),
-        this
+        this,
       );
     }
   }
 
   static loadInBlock(
-    id: string
+    id: string,
   ): EarlyLiquidityOrDonationTransactionHashNonceManager | null {
     return changetype<EarlyLiquidityOrDonationTransactionHashNonceManager | null>(
       store.get_in_block(
         "EarlyLiquidityOrDonationTransactionHashNonceManager",
-        id
-      )
+        id,
+      ),
     );
   }
 
   static load(
-    id: string
+    id: string,
   ): EarlyLiquidityOrDonationTransactionHashNonceManager | null {
     return changetype<EarlyLiquidityOrDonationTransactionHashNonceManager | null>(
-      store.get("EarlyLiquidityOrDonationTransactionHashNonceManager", id)
+      store.get("EarlyLiquidityOrDonationTransactionHashNonceManager", id),
     );
   }
 
@@ -2059,12 +2232,12 @@ export class EarlyLiquidityPurchase extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save EarlyLiquidityPurchase entity without an ID"
+      "Cannot save EarlyLiquidityPurchase entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type EarlyLiquidityPurchase must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type EarlyLiquidityPurchase must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("EarlyLiquidityPurchase", id.toString(), this);
     }
@@ -2072,13 +2245,13 @@ export class EarlyLiquidityPurchase extends Entity {
 
   static loadInBlock(id: string): EarlyLiquidityPurchase | null {
     return changetype<EarlyLiquidityPurchase | null>(
-      store.get_in_block("EarlyLiquidityPurchase", id)
+      store.get_in_block("EarlyLiquidityPurchase", id),
     );
   }
 
   static load(id: string): EarlyLiquidityPurchase | null {
     return changetype<EarlyLiquidityPurchase | null>(
-      store.get("EarlyLiquidityPurchase", id)
+      store.get("EarlyLiquidityPurchase", id),
     );
   }
 
@@ -2173,7 +2346,7 @@ export class Donation extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Donation must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Donation must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Donation", id.toString(), this);
     }
@@ -2291,7 +2464,7 @@ export class ProtocolFeeSum extends Entity {
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ProtocolFeeSum must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type ProtocolFeeSum must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("ProtocolFeeSum", id.toString(), this);
     }
@@ -2299,7 +2472,7 @@ export class ProtocolFeeSum extends Entity {
 
   static loadInBlock(id: string): ProtocolFeeSum | null {
     return changetype<ProtocolFeeSum | null>(
-      store.get_in_block("ProtocolFeeSum", id)
+      store.get_in_block("ProtocolFeeSum", id),
     );
   }
 
@@ -2344,12 +2517,12 @@ export class EarlyLiquidityPaymentsPerWeek extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save EarlyLiquidityPaymentsPerWeek entity without an ID"
+      "Cannot save EarlyLiquidityPaymentsPerWeek entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type EarlyLiquidityPaymentsPerWeek must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type EarlyLiquidityPaymentsPerWeek must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("EarlyLiquidityPaymentsPerWeek", id.toString(), this);
     }
@@ -2357,13 +2530,13 @@ export class EarlyLiquidityPaymentsPerWeek extends Entity {
 
   static loadInBlock(id: string): EarlyLiquidityPaymentsPerWeek | null {
     return changetype<EarlyLiquidityPaymentsPerWeek | null>(
-      store.get_in_block("EarlyLiquidityPaymentsPerWeek", id)
+      store.get_in_block("EarlyLiquidityPaymentsPerWeek", id),
     );
   }
 
   static load(id: string): EarlyLiquidityPaymentsPerWeek | null {
     return changetype<EarlyLiquidityPaymentsPerWeek | null>(
-      store.get("EarlyLiquidityPaymentsPerWeek", id)
+      store.get("EarlyLiquidityPaymentsPerWeek", id),
     );
   }
 
@@ -2394,162 +2567,6 @@ export class EarlyLiquidityPaymentsPerWeek extends Entity {
   }
 }
 
-export class ProtocolFeePaymentNonceManager extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(
-      id != null,
-      "Cannot save ProtocolFeePaymentNonceManager entity without an ID"
-    );
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type ProtocolFeePaymentNonceManager must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("ProtocolFeePaymentNonceManager", id.toString(), this);
-    }
-  }
-
-  static loadInBlock(id: string): ProtocolFeePaymentNonceManager | null {
-    return changetype<ProtocolFeePaymentNonceManager | null>(
-      store.get_in_block("ProtocolFeePaymentNonceManager", id)
-    );
-  }
-
-  static load(id: string): ProtocolFeePaymentNonceManager | null {
-    return changetype<ProtocolFeePaymentNonceManager | null>(
-      store.get("ProtocolFeePaymentNonceManager", id)
-    );
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get nextNonce(): BigInt {
-    let value = this.get("nextNonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set nextNonce(value: BigInt) {
-    this.set("nextNonce", Value.fromBigInt(value));
-  }
-}
-
-export class ProtocolFeePayment extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save ProtocolFeePayment entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type ProtocolFeePayment must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("ProtocolFeePayment", id.toString(), this);
-    }
-  }
-
-  static loadInBlock(id: string): ProtocolFeePayment | null {
-    return changetype<ProtocolFeePayment | null>(
-      store.get_in_block("ProtocolFeePayment", id)
-    );
-  }
-
-  static load(id: string): ProtocolFeePayment | null {
-    return changetype<ProtocolFeePayment | null>(
-      store.get("ProtocolFeePayment", id)
-    );
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get user(): string {
-    let value = this.get("user");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
-  }
-
-  set user(value: string) {
-    this.set("user", Value.fromString(value));
-  }
-
-  get amountPaid(): BigInt {
-    let value = this.get("amountPaid");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set amountPaid(value: BigInt) {
-    this.set("amountPaid", Value.fromBigInt(value));
-  }
-
-  get transactionHash(): Bytes {
-    let value = this.get("transactionHash");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set transactionHash(value: Bytes) {
-    this.set("transactionHash", Value.fromBytes(value));
-  }
-
-  get blockTimestamp(): BigInt {
-    let value = this.get("blockTimestamp");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set blockTimestamp(value: BigInt) {
-    this.set("blockTimestamp", Value.fromBigInt(value));
-  }
-}
-
 export class ProtocolFeePaymentsPerWeek extends Entity {
   constructor(id: string) {
     super();
@@ -2560,12 +2577,12 @@ export class ProtocolFeePaymentsPerWeek extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save ProtocolFeePaymentsPerWeek entity without an ID"
+      "Cannot save ProtocolFeePaymentsPerWeek entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ProtocolFeePaymentsPerWeek must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type ProtocolFeePaymentsPerWeek must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("ProtocolFeePaymentsPerWeek", id.toString(), this);
     }
@@ -2573,13 +2590,13 @@ export class ProtocolFeePaymentsPerWeek extends Entity {
 
   static loadInBlock(id: string): ProtocolFeePaymentsPerWeek | null {
     return changetype<ProtocolFeePaymentsPerWeek | null>(
-      store.get_in_block("ProtocolFeePaymentsPerWeek", id)
+      store.get_in_block("ProtocolFeePaymentsPerWeek", id),
     );
   }
 
   static load(id: string): ProtocolFeePaymentsPerWeek | null {
     return changetype<ProtocolFeePaymentsPerWeek | null>(
-      store.get("ProtocolFeePaymentsPerWeek", id)
+      store.get("ProtocolFeePaymentsPerWeek", id),
     );
   }
 
@@ -2620,12 +2637,12 @@ export class TotalGlowBurnedAggregate extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save TotalGlowBurnedAggregate entity without an ID"
+      "Cannot save TotalGlowBurnedAggregate entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type TotalGlowBurnedAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type TotalGlowBurnedAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("TotalGlowBurnedAggregate", id.toString(), this);
     }
@@ -2633,13 +2650,13 @@ export class TotalGlowBurnedAggregate extends Entity {
 
   static loadInBlock(id: string): TotalGlowBurnedAggregate | null {
     return changetype<TotalGlowBurnedAggregate | null>(
-      store.get_in_block("TotalGlowBurnedAggregate", id)
+      store.get_in_block("TotalGlowBurnedAggregate", id),
     );
   }
 
   static load(id: string): TotalGlowBurnedAggregate | null {
     return changetype<TotalGlowBurnedAggregate | null>(
-      store.get("TotalGlowBurnedAggregate", id)
+      store.get("TotalGlowBurnedAggregate", id),
     );
   }
 
@@ -2680,12 +2697,12 @@ export class Total_USDG_GCC_Pair_Aggregate extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save Total_USDG_GCC_Pair_Aggregate entity without an ID"
+      "Cannot save Total_USDG_GCC_Pair_Aggregate entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Total_USDG_GCC_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Total_USDG_GCC_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Total_USDG_GCC_Pair_Aggregate", id.toString(), this);
     }
@@ -2693,13 +2710,13 @@ export class Total_USDG_GCC_Pair_Aggregate extends Entity {
 
   static loadInBlock(id: string): Total_USDG_GCC_Pair_Aggregate | null {
     return changetype<Total_USDG_GCC_Pair_Aggregate | null>(
-      store.get_in_block("Total_USDG_GCC_Pair_Aggregate", id)
+      store.get_in_block("Total_USDG_GCC_Pair_Aggregate", id),
     );
   }
 
   static load(id: string): Total_USDG_GCC_Pair_Aggregate | null {
     return changetype<Total_USDG_GCC_Pair_Aggregate | null>(
-      store.get("Total_USDG_GCC_Pair_Aggregate", id)
+      store.get("Total_USDG_GCC_Pair_Aggregate", id),
     );
   }
 
@@ -2779,12 +2796,12 @@ export class Total_GLOW_USDG_Pair_Aggregate extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save Total_GLOW_USDG_Pair_Aggregate entity without an ID"
+      "Cannot save Total_GLOW_USDG_Pair_Aggregate entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Total_GLOW_USDG_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Total_GLOW_USDG_Pair_Aggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("Total_GLOW_USDG_Pair_Aggregate", id.toString(), this);
     }
@@ -2792,13 +2809,13 @@ export class Total_GLOW_USDG_Pair_Aggregate extends Entity {
 
   static loadInBlock(id: string): Total_GLOW_USDG_Pair_Aggregate | null {
     return changetype<Total_GLOW_USDG_Pair_Aggregate | null>(
-      store.get_in_block("Total_GLOW_USDG_Pair_Aggregate", id)
+      store.get_in_block("Total_GLOW_USDG_Pair_Aggregate", id),
     );
   }
 
   static load(id: string): Total_GLOW_USDG_Pair_Aggregate | null {
     return changetype<Total_GLOW_USDG_Pair_Aggregate | null>(
-      store.get("Total_GLOW_USDG_Pair_Aggregate", id)
+      store.get("Total_GLOW_USDG_Pair_Aggregate", id),
     );
   }
 
@@ -2878,12 +2895,12 @@ export class TotalImpactPointsAggregate extends Entity {
     let id = this.get("id");
     assert(
       id != null,
-      "Cannot save TotalImpactPointsAggregate entity without an ID"
+      "Cannot save TotalImpactPointsAggregate entity without an ID",
     );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type TotalImpactPointsAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type TotalImpactPointsAggregate must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
       );
       store.set("TotalImpactPointsAggregate", id.toString(), this);
     }
@@ -2891,13 +2908,13 @@ export class TotalImpactPointsAggregate extends Entity {
 
   static loadInBlock(id: string): TotalImpactPointsAggregate | null {
     return changetype<TotalImpactPointsAggregate | null>(
-      store.get_in_block("TotalImpactPointsAggregate", id)
+      store.get_in_block("TotalImpactPointsAggregate", id),
     );
   }
 
   static load(id: string): TotalImpactPointsAggregate | null {
     return changetype<TotalImpactPointsAggregate | null>(
-      store.get("TotalImpactPointsAggregate", id)
+      store.get("TotalImpactPointsAggregate", id),
     );
   }
 
@@ -3090,5 +3107,23 @@ export class EarlyLiquidityPurchaseLoader extends Entity {
   load(): EarlyLiquidityPurchase[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<EarlyLiquidityPurchase[]>(value);
+  }
+}
+
+export class ActivityLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Activity[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Activity[]>(value);
   }
 }

@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class Approval extends ethereum.Event {
@@ -204,7 +204,7 @@ export class GLOW__eip712DomainResult {
     value3: BigInt,
     value4: Address,
     value5: Bytes,
-    value6: Array<BigInt>
+    value6: Array<BigInt>,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -381,7 +381,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "DOMAIN_SEPARATOR",
       "DOMAIN_SEPARATOR():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -391,7 +391,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "DOMAIN_SEPARATOR",
       "DOMAIN_SEPARATOR():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -404,7 +404,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "EARLY_LIQUIDITY_ADDRESS",
       "EARLY_LIQUIDITY_ADDRESS():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -414,7 +414,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "EARLY_LIQUIDITY_ADDRESS",
       "EARLY_LIQUIDITY_ADDRESS():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -427,7 +427,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "EMERGENCY_COOLDOWN_PERIOD",
       "EMERGENCY_COOLDOWN_PERIOD():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -437,7 +437,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "EMERGENCY_COOLDOWN_PERIOD",
       "EMERGENCY_COOLDOWN_PERIOD():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -450,7 +450,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "GCA_AND_MINER_POOL_ADDRESS",
       "GCA_AND_MINER_POOL_ADDRESS():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -460,7 +460,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "GCA_AND_MINER_POOL_ADDRESS",
       "GCA_AND_MINER_POOL_ADDRESS():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -473,7 +473,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "GCA_AND_MINER_POOL_INFLATION_PER_SECOND",
       "GCA_AND_MINER_POOL_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -483,7 +483,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "GCA_AND_MINER_POOL_INFLATION_PER_SECOND",
       "GCA_AND_MINER_POOL_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -496,7 +496,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "GENESIS_TIMESTAMP",
       "GENESIS_TIMESTAMP():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -506,7 +506,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "GENESIS_TIMESTAMP",
       "GENESIS_TIMESTAMP():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -519,7 +519,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "GRANTS_TREASURY_ADDRESS",
       "GRANTS_TREASURY_ADDRESS():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -529,7 +529,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "GRANTS_TREASURY_ADDRESS",
       "GRANTS_TREASURY_ADDRESS():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -542,7 +542,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "GRANTS_TREASURY_INFLATION_PER_SECOND",
       "GRANTS_TREASURY_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -552,7 +552,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "GRANTS_TREASURY_INFLATION_PER_SECOND",
       "GRANTS_TREASURY_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -565,7 +565,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "MAX_UNSTAKES_BEFORE_EMERGENCY_COOLDOWN",
       "MAX_UNSTAKES_BEFORE_EMERGENCY_COOLDOWN():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -575,7 +575,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "MAX_UNSTAKES_BEFORE_EMERGENCY_COOLDOWN",
       "MAX_UNSTAKES_BEFORE_EMERGENCY_COOLDOWN():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -603,7 +603,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "VETO_COUNCIL_ADDRESS",
       "VETO_COUNCIL_ADDRESS():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -613,7 +613,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "VETO_COUNCIL_ADDRESS",
       "VETO_COUNCIL_ADDRESS():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -626,7 +626,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "VETO_COUNCIL_INFLATION_PER_SECOND",
       "VETO_COUNCIL_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -636,7 +636,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "VETO_COUNCIL_INFLATION_PER_SECOND",
       "VETO_COUNCIL_INFLATION_PER_SECOND():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -646,28 +646,26 @@ export class GLOW extends ethereum.SmartContract {
   }
 
   accountUnstakedPositionPointers(
-    account: Address
+    account: Address,
   ): GLOW__accountUnstakedPositionPointersResultValue0Struct {
     let result = super.call(
       "accountUnstakedPositionPointers",
       "accountUnstakedPositionPointers(address):((uint128,uint128))",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
 
     return changetype<GLOW__accountUnstakedPositionPointersResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_accountUnstakedPositionPointers(
-    account: Address
-  ): ethereum.CallResult<
-    GLOW__accountUnstakedPositionPointersResultValue0Struct
-  > {
+    account: Address,
+  ): ethereum.CallResult<GLOW__accountUnstakedPositionPointersResultValue0Struct> {
     let result = super.tryCall(
       "accountUnstakedPositionPointers",
       "accountUnstakedPositionPointers(address):((uint128,uint128))",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -675,8 +673,8 @@ export class GLOW extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<GLOW__accountUnstakedPositionPointersResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
@@ -684,7 +682,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)]
+      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)],
     );
 
     return result[0].toBigInt();
@@ -694,7 +692,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)]
+      [ethereum.Value.fromAddress(owner), ethereum.Value.fromAddress(spender)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -707,7 +705,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "allowlistedContracts",
       "allowlistedContracts(address):(bool)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBoolean();
@@ -717,7 +715,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "allowlistedContracts",
       "allowlistedContracts(address):(bool)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -729,7 +727,7 @@ export class GLOW extends ethereum.SmartContract {
   approve(spender: Address, value: BigInt): boolean {
     let result = super.call("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
 
     return result[0].toBoolean();
@@ -738,7 +736,7 @@ export class GLOW extends ethereum.SmartContract {
   try_approve(spender: Address, value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -749,7 +747,7 @@ export class GLOW extends ethereum.SmartContract {
 
   balanceOf(account: Address): BigInt {
     let result = super.call("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
 
     return result[0].toBigInt();
@@ -757,7 +755,7 @@ export class GLOW extends ethereum.SmartContract {
 
   try_balanceOf(account: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -770,7 +768,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "claimGLWFromGCAAndMinerPool",
       "claimGLWFromGCAAndMinerPool():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -780,7 +778,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "claimGLWFromGCAAndMinerPool",
       "claimGLWFromGCAAndMinerPool():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -793,7 +791,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "claimGLWFromGrantsTreasury",
       "claimGLWFromGrantsTreasury():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -803,7 +801,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "claimGLWFromGrantsTreasury",
       "claimGLWFromGrantsTreasury():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -816,7 +814,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "claimGLWFromVetoCouncil",
       "claimGLWFromVetoCouncil():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -826,7 +824,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "claimGLWFromVetoCouncil",
       "claimGLWFromVetoCouncil():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -856,8 +854,8 @@ export class GLOW extends ethereum.SmartContract {
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(requestedDecrease)
-      ]
+        ethereum.Value.fromUnsignedBigInt(requestedDecrease),
+      ],
     );
 
     return result[0].toBoolean();
@@ -865,15 +863,15 @@ export class GLOW extends ethereum.SmartContract {
 
   try_decreaseAllowance(
     spender: Address,
-    requestedDecrease: BigInt
+    requestedDecrease: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "decreaseAllowance",
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(requestedDecrease)
-      ]
+        ethereum.Value.fromUnsignedBigInt(requestedDecrease),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -886,7 +884,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
 
     return new GLOW__eip712DomainResult(
@@ -896,7 +894,7 @@ export class GLOW extends ethereum.SmartContract {
       result[3].toBigInt(),
       result[4].toAddress(),
       result[5].toBytes(),
-      result[6].toBigIntArray()
+      result[6].toBigIntArray(),
     );
   }
 
@@ -904,7 +902,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "eip712Domain",
       "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -918,8 +916,8 @@ export class GLOW extends ethereum.SmartContract {
         value[3].toBigInt(),
         value[4].toAddress(),
         value[5].toBytes(),
-        value[6].toBigIntArray()
-      )
+        value[6].toBigIntArray(),
+      ),
     );
   }
 
@@ -927,19 +925,19 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "emergencyLastUnstakeTimestamp",
       "emergencyLastUnstakeTimestamp(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return result[0].toBigInt();
   }
 
   try_emergencyLastUnstakeTimestamp(
-    param0: Address
+    param0: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "emergencyLastUnstakeTimestamp",
       "emergencyLastUnstakeTimestamp(address):(uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -952,7 +950,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "gcaAndMinerPoolLastClaimedTimestamp",
       "gcaAndMinerPoolLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -962,7 +960,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "gcaAndMinerPoolLastClaimedTimestamp",
       "gcaAndMinerPoolLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -975,13 +973,13 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "gcaInflationData",
       "gcaInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
 
     return new GLOW__gcaInflationDataResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toBigInt()
+      result[2].toBigInt(),
     );
   }
 
@@ -989,7 +987,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "gcaInflationData",
       "gcaInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -999,8 +997,8 @@ export class GLOW extends ethereum.SmartContract {
       new GLOW__gcaInflationDataResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toBigInt()
-      )
+        value[2].toBigInt(),
+      ),
     );
   }
 
@@ -1023,23 +1021,21 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "grantsTreasuryInflationData",
       "grantsTreasuryInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
 
     return new GLOW__grantsTreasuryInflationDataResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toBigInt()
+      result[2].toBigInt(),
     );
   }
 
-  try_grantsTreasuryInflationData(): ethereum.CallResult<
-    GLOW__grantsTreasuryInflationDataResult
-  > {
+  try_grantsTreasuryInflationData(): ethereum.CallResult<GLOW__grantsTreasuryInflationDataResult> {
     let result = super.tryCall(
       "grantsTreasuryInflationData",
       "grantsTreasuryInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1049,8 +1045,8 @@ export class GLOW extends ethereum.SmartContract {
       new GLOW__grantsTreasuryInflationDataResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toBigInt()
-      )
+        value[2].toBigInt(),
+      ),
     );
   }
 
@@ -1058,7 +1054,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "grantsTreasuryLastClaimedTimestamp",
       "grantsTreasuryLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -1068,7 +1064,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "grantsTreasuryLastClaimedTimestamp",
       "grantsTreasuryLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1083,8 +1079,8 @@ export class GLOW extends ethereum.SmartContract {
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(addedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1092,15 +1088,15 @@ export class GLOW extends ethereum.SmartContract {
 
   try_increaseAllowance(
     spender: Address,
-    addedValue: BigInt
+    addedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "increaseAllowance",
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(spender),
-        ethereum.Value.fromUnsignedBigInt(addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(addedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1126,7 +1122,7 @@ export class GLOW extends ethereum.SmartContract {
 
   nonces(owner: Address): BigInt {
     let result = super.call("nonces", "nonces(address):(uint256)", [
-      ethereum.Value.fromAddress(owner)
+      ethereum.Value.fromAddress(owner),
     ]);
 
     return result[0].toBigInt();
@@ -1134,7 +1130,7 @@ export class GLOW extends ethereum.SmartContract {
 
   try_nonces(owner: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("nonces", "nonces(address):(uint256)", [
-      ethereum.Value.fromAddress(owner)
+      ethereum.Value.fromAddress(owner),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1145,7 +1141,7 @@ export class GLOW extends ethereum.SmartContract {
 
   numStaked(param0: Address): BigInt {
     let result = super.call("numStaked", "numStaked(address):(uint256)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
 
     return result[0].toBigInt();
@@ -1153,7 +1149,7 @@ export class GLOW extends ethereum.SmartContract {
 
   try_numStaked(param0: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("numStaked", "numStaked(address):(uint256)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1181,7 +1177,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "permanentlyFreezeTransfers",
       "permanentlyFreezeTransfers():(bool)",
-      []
+      [],
     );
 
     return result[0].toBoolean();
@@ -1191,7 +1187,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "permanentlyFreezeTransfers",
       "permanentlyFreezeTransfers():(bool)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1233,7 +1229,7 @@ export class GLOW extends ethereum.SmartContract {
   transfer(to: Address, value: BigInt): boolean {
     let result = super.call("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
 
     return result[0].toBoolean();
@@ -1242,7 +1238,7 @@ export class GLOW extends ethereum.SmartContract {
   try_transfer(to: Address, value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(value)
+      ethereum.Value.fromUnsignedBigInt(value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1258,8 +1254,8 @@ export class GLOW extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(value),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1268,7 +1264,7 @@ export class GLOW extends ethereum.SmartContract {
   try_transferFrom(
     from: Address,
     to: Address,
-    value: BigInt
+    value: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "transferFrom",
@@ -1276,8 +1272,8 @@ export class GLOW extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(value),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1289,7 +1285,7 @@ export class GLOW extends ethereum.SmartContract {
   unstakedPositionsOf(
     account: Address,
     start: BigInt,
-    end: BigInt
+    end: BigInt,
   ): Array<GLOW__unstakedPositionsOfResultValue0Struct> {
     let result = super.call(
       "unstakedPositionsOf",
@@ -1297,19 +1293,17 @@ export class GLOW extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(account),
         ethereum.Value.fromUnsignedBigInt(start),
-        ethereum.Value.fromUnsignedBigInt(end)
-      ]
+        ethereum.Value.fromUnsignedBigInt(end),
+      ],
     );
 
-    return result[0].toTupleArray<
-      GLOW__unstakedPositionsOfResultValue0Struct
-    >();
+    return result[0].toTupleArray<GLOW__unstakedPositionsOfResultValue0Struct>();
   }
 
   try_unstakedPositionsOf(
     account: Address,
     start: BigInt,
-    end: BigInt
+    end: BigInt,
   ): ethereum.CallResult<Array<GLOW__unstakedPositionsOfResultValue0Struct>> {
     let result = super.tryCall(
       "unstakedPositionsOf",
@@ -1317,46 +1311,44 @@ export class GLOW extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(account),
         ethereum.Value.fromUnsignedBigInt(start),
-        ethereum.Value.fromUnsignedBigInt(end)
-      ]
+        ethereum.Value.fromUnsignedBigInt(end),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<GLOW__unstakedPositionsOfResultValue0Struct>()
+      value[0].toTupleArray<GLOW__unstakedPositionsOfResultValue0Struct>(),
     );
   }
 
   unstakedPositionsOf1(
-    account: Address
+    account: Address,
   ): Array<GLOW__unstakedPositionsOf1ResultValue0Struct> {
     let result = super.call(
       "unstakedPositionsOf",
       "unstakedPositionsOf(address):((uint192,uint64)[])",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
 
-    return result[0].toTupleArray<
-      GLOW__unstakedPositionsOf1ResultValue0Struct
-    >();
+    return result[0].toTupleArray<GLOW__unstakedPositionsOf1ResultValue0Struct>();
   }
 
   try_unstakedPositionsOf1(
-    account: Address
+    account: Address,
   ): ethereum.CallResult<Array<GLOW__unstakedPositionsOf1ResultValue0Struct>> {
     let result = super.tryCall(
       "unstakedPositionsOf",
       "unstakedPositionsOf(address):((uint192,uint64)[])",
-      [ethereum.Value.fromAddress(account)]
+      [ethereum.Value.fromAddress(account)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<GLOW__unstakedPositionsOf1ResultValue0Struct>()
+      value[0].toTupleArray<GLOW__unstakedPositionsOf1ResultValue0Struct>(),
     );
   }
 
@@ -1364,23 +1356,21 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "vetoCouncilInflationData",
       "vetoCouncilInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
 
     return new GLOW__vetoCouncilInflationDataResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toBigInt()
+      result[2].toBigInt(),
     );
   }
 
-  try_vetoCouncilInflationData(): ethereum.CallResult<
-    GLOW__vetoCouncilInflationDataResult
-  > {
+  try_vetoCouncilInflationData(): ethereum.CallResult<GLOW__vetoCouncilInflationDataResult> {
     let result = super.tryCall(
       "vetoCouncilInflationData",
       "vetoCouncilInflationData():(uint256,uint256,uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1390,8 +1380,8 @@ export class GLOW extends ethereum.SmartContract {
       new GLOW__vetoCouncilInflationDataResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toBigInt()
-      )
+        value[2].toBigInt(),
+      ),
     );
   }
 
@@ -1399,7 +1389,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.call(
       "vetoCouncilLastClaimedTimestamp",
       "vetoCouncilLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
 
     return result[0].toBigInt();
@@ -1409,7 +1399,7 @@ export class GLOW extends ethereum.SmartContract {
     let result = super.tryCall(
       "vetoCouncilLastClaimedTimestamp",
       "vetoCouncilLastClaimedTimestamp():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
