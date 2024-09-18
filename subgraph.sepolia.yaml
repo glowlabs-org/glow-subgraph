@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: schema.graphql
+  file: ./schema.graphql
 dataSources:
   - kind: ethereum
     name: GCC
@@ -18,13 +18,17 @@ dataSources:
         - User
       abis:
         - name: GCC
-          file: GCC/abis/GCC.json
+          file: ./abis/GCC.json
       eventHandlers:
-        - event: GCCCommitted(indexed address,indexed address,uint256,uint256,uint256,address)
+        - event:
+            GCCCommitted(indexed address,indexed
+            address,uint256,uint256,uint256,address)
           handler: handleGCCRetired
-        - event: USDCCommitted(indexed address,indexed address,uint256,uint256,address)
+        - event:
+            USDCCommitted(indexed address,indexed
+            address,uint256,uint256,address)
           handler: handleUSDCRetired
-      file: GCC/GCC.wasm
+      file: ./src/gcc.ts
   - kind: ethereum
     name: MinerPoolAndGCA
     network: sepolia
@@ -40,11 +44,11 @@ dataSources:
         - MinerPoolAndGCA
       abis:
         - name: MinerPoolAndGCA
-          file: MinerPoolAndGCA/abis/MinerPoolAndGCA.json
+          file: ./abis/MinerPoolAndGCA.json
       eventHandlers:
         - event: AmountDonatedToBucket(indexed uint256,uint256)
           handler: handleAmountDonated
-      file: MinerPoolAndGCA/MinerPoolAndGCA.wasm
+      file: ./src/minerPoolAndGCA.ts
   - kind: ethereum
     name: GLOW
     network: sepolia
@@ -60,7 +64,7 @@ dataSources:
         - GLOW
       abis:
         - name: GLOW
-          file: GLOW/abis/GLOW.json
+          file: ./abis/GLOW.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
@@ -68,7 +72,7 @@ dataSources:
           handler: handleStake
         - event: Unstake(indexed address,uint256)
           handler: handleUnstake
-      file: GLOW/GLOW.wasm
+      file: ./src/glow.ts
   - kind: ethereum
     name: GCC_USDG_UniswapV2Pair
     network: sepolia
@@ -84,11 +88,13 @@ dataSources:
         - GCC_USDG_PAIR
       abis:
         - name: UniswapV2Pair
-          file: GCC_USDG_UniswapV2Pair/abis/UniswapV2Pair.json
+          file: ./abis/UniswapV2Pair.json
       eventHandlers:
-        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+        - event:
+            Swap(indexed address,uint256,uint256,uint256,uint256,indexed
+            address)
           handler: handleSwap
-      file: GCC_USDG_UniswapV2Pair/GCC_USDG_UniswapV2Pair.wasm
+      file: ./src/gcc_usdg_pair.ts
   - kind: ethereum
     name: GLOW_USDG_UniswapV2Pair
     network: sepolia
@@ -104,11 +110,13 @@ dataSources:
         - GLOW_USDG_PAIR
       abis:
         - name: UniswapV2Pair
-          file: GLOW_USDG_UniswapV2Pair/abis/UniswapV2Pair.json
+          file: ./abis/UniswapV2Pair.json
       eventHandlers:
-        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+        - event:
+            Swap(indexed address,uint256,uint256,uint256,uint256,indexed
+            address)
           handler: handleSwap
-      file: GLOW_USDG_UniswapV2Pair/GLOW_USDG_UniswapV2Pair.wasm
+      file: ./src/glow_usdg_pair.ts
   - kind: ethereum
     name: EarlyLiquidity
     network: sepolia
@@ -124,43 +132,49 @@ dataSources:
         - EarlyLiquidity
       abis:
         - name: EarlyLiquidity
-          file: EarlyLiquidity/abis/EarlyLiquidity.json
+          file: ./abis/EarlyLiquidity.json
       eventHandlers:
         - event: Purchase(indexed address,uint256,uint256)
           handler: handlePurchase
-      file: EarlyLiquidity/EarlyLiquidity.wasm
+      file: ./src/earlyLiquidity.ts
   - kind: ethereum
     name: Governance
     network: sepolia
     source:
-      address: "0x8e58efaB32B098c34Db998A031e2C399F627D920"
+      address: "0x8e58efaB32B098c34Db998A031e2C399F627D920" # Replace with the Governance contract address
       abi: Governance
-      startBlock: 6716958
+      startBlock: 6716958 # Replace with the block number when the Governance contract was deployed
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Governance
+        - Governance # Add your entity here if it's not the same as an existing one
       abis:
         - name: Governance
-          file: Governance/abis/Governance.json
+          file: ./abis/Governance.json # Your Governance ABI file path
       eventHandlers:
-        - event: VetoCouncilElectionOrSlash(indexed uint256,indexed
+        - event:
+            VetoCouncilElectionOrSlash(indexed uint256,indexed
             address,address,address,bool,uint256)
           handler: vetoCouncilElectionOrSlashHandler
-        - event: GCACouncilElectionOrSlashCreation(indexed uint256,indexed
+        - event:
+            GCACouncilElectionOrSlashCreation(indexed uint256,indexed
             address,address[],address[],uint256,uint256)
           handler: gcaCouncilElectionOrSlashCreationHandler
-        - event: RFCProposalCreation(indexed uint256,indexed address,bytes32,uint256)
+        - event:
+            RFCProposalCreation(indexed uint256,indexed address,bytes32,uint256)
           handler: rfcProposalCreationHandler
-        - event: GrantsProposalCreation(indexed uint256,indexed
+        - event:
+            GrantsProposalCreation(indexed uint256,indexed
             address,address,uint256,bytes32,uint256)
           handler: grantsProposalCreationHandler
-        - event: ChangeGCARequirementsProposalCreation(indexed uint256,indexed
+        - event:
+            ChangeGCARequirementsProposalCreation(indexed uint256,indexed
             address,bytes32,uint256)
           handler: changeGCARequirementsProposalCreationHandler
-        - event: NominationsUsedOnProposal(indexed uint256,indexed address,uint256)
+        - event:
+            NominationsUsedOnProposal(indexed uint256,indexed address,uint256)
           handler: nominationsUsedOnProposalHandler
         - event: RatifyCast(indexed uint256,indexed address,uint256)
           handler: ratifyCastHandler
@@ -170,4 +184,15 @@ dataSources:
           handler: mostPopularProposalSetHandler
         - event: ProposalVetoed(indexed uint256,indexed address,uint256)
           handler: proposalVetoedHandler
-      file: Governance/Governance.wasm
+      file: ./src/governance.ts # The AssemblyScript file that will contain your event handler logic
+
+
+  # - ChangeGCARequirementsProposalCreation(indexed uint256,indexed address,bytes32,uint256)
+  # - EIP712DomainChanged()
+  # - GCACouncilElectionOrSlashCreation(indexed uint256,indexed address,address[],address[],uint256,uint256)
+  # - GrantsProposalCreation(indexed uint256,indexed address,address,uint256,bytes32,uint256)
+  # - NominationsUsedOnProposal(indexed uint256,indexed address,uint256)
+  # - ProposalVetoed(indexed uint256,indexed address,uint256)
+  # - RFCProposalCreation(indexed uint256,indexed address,bytes32,uint256)
+  # - RFCProposalExecuted(indexed uint256,bytes32)
+  # - VetoCouncilElectionOrSlash(indexed uint256,indexed address,address,address,bool,uint256)
